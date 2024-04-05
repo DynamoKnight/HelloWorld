@@ -1,0 +1,78 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Logic
+  - Bullet
+  - EnemyBullet
+  - Enemy
+  - GameManager
+  - Drop
+  - AlienAudio
+  - VolumeManager
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - Bird
+  - Water
+  - UI
+  - 
+  - 
+  - Blocking
+  - Actor
+  - Projectile
+  - Drop
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Background
+    uniqueID: 3139841063
+    locked: 0
+  - name: Ground
+    uniqueID: 3868927919
+    locked: 0
+  - name: Wall
+    uniqueID: 1032447907
+    locked: 0
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Interactable
+    uniqueID: 2219986083
+    locked: 0
+  - name: Actor
+    uniqueID: 3048205897
+    locked: 0
+  - name: Tool
+    uniqueID: 1693359289
+    locked: 0
+  - name: Projectile
+    uniqueID: 654424533
+    locked: 0
+  - name: Foreground
+    uniqueID: 2925272633
+    locked: 0
+  - name: Drop
+    uniqueID: 14360231
+    locked: 0
