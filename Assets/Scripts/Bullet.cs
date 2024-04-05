@@ -16,8 +16,8 @@ public class Bullet : MonoBehaviour
     private Rigidbody2D rb;
     private CapsuleCollider2D cc;
     private int bulletDamage = 1;
-    void Start()
-    {
+
+    void Start(){
         rb = GetComponent<Rigidbody2D>();
         cc = GetComponent<CapsuleCollider2D>(); // Throws MissingComponentException??
         // Ignores collision with the object that is shooting
@@ -37,6 +37,7 @@ public class Bullet : MonoBehaviour
         // Kills itself after lifeTime
         Destroy(gameObject, lifeTime);
     }
+    
     private void FixedUpdate(){
         // Moves forever right
         rb.velocity = transform.right * speed;

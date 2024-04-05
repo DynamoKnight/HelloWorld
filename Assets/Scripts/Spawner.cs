@@ -15,8 +15,7 @@ public class Spawner : MonoBehaviour
     public GameObject[] alienPrefabs;
 
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start(){
         StartCoroutine(Spawn());
     }
 
@@ -29,18 +28,21 @@ public class Spawner : MonoBehaviour
     }
 
    IEnumerator Spawn(){
-        // Gets players position
-        GameObject player =  GameObject.Find("Player");
-        if (player){
-            Vector2 spawnPos = player.transform.position;
-            // The position will be outside the radius of the player
-            spawnPos += Random.insideUnitCircle.normalized * spawnRadius;
-            // Spawns a random object
-            var alien = alienPrefabs[Random.Range(0, alienPrefabs.Length)];
-            Instantiate(alien, spawnPos, Quaternion.identity);
-            yield return new WaitForSeconds(spawnRate);
-            // Spawns again
-            StartCoroutine(Spawn());
+        // Will only spawn if game is functional
+        if (LevelManager.instance.isFunctional){
+            // Gets players position
+            GameObject player =  GameObject.Find("Player");
+            if (player){
+                Vector2 spawnPos = player.transform.position;
+                // The position will be outside the radius of the player
+                spawnPos += Random.insideUnitCircle.normalized * spawnRadius;
+                // Spawns a random object
+                var alien = alienPrefabs[Random.Range(0, alienPrefabs.Length)];
+                Instantiate(alien, spawnPos, Quaternion.identity);
+                yield return new WaitForSeconds(spawnRate);
+                // Spawns again
+                StartCoroutine(Spawn());
+            }
         }
    }
 

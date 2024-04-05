@@ -10,8 +10,7 @@ using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
-    // The GameManager dictates all
-    private GameManager gm;
+    // The GlobalManager.instance dictates all
 
     private Vector2 movement;
     private BoxCollider2D boxcollider;
@@ -35,11 +34,7 @@ public class Player : MonoBehaviour
     
 
     // Start is called before the first frame update
-    void Start()
-    {
-       
-
-        gm = GameObject.Find("GameManager").GetComponent<GameManager>();;
+    void Start(){
         boxcollider = GetComponent<BoxCollider2D>();
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
@@ -54,8 +49,8 @@ public class Player : MonoBehaviour
         freeze.volume = GameObject.FindGameObjectWithTag("VolumeManager").GetComponent<VolumeManager>().SFXVolumeMultplier;
 
 
-        // Only collects input if game is unpaused
-        if(!LevelManager.instance.isPaused){
+        // Only collects input if game is unpaused and player is allowed to move
+        if(!LevelManager.instance.isPaused && LevelManager.instance.isFunctional){
             movement.x = Input.GetAxisRaw("Horizontal");
             movement.y = Input.GetAxisRaw("Vertical");
 
@@ -83,6 +78,7 @@ public class Player : MonoBehaviour
                 SceneManager.LoadScene("NeptuneDialog");
             }
         }
+    
     }
 
     // Gets called every frame at a interval of time
@@ -117,7 +113,7 @@ public class Player : MonoBehaviour
         healthPoints = 0;
         UpdateHealth();
         Die();
-        gm.lastDeath = Time.time;
+        GlobalManager.instance.lastDeath = Time.time;
     }
 
     // Instant kills the Player, knows what did damage to it
@@ -126,7 +122,7 @@ public class Player : MonoBehaviour
         healthPoints = 0;
         UpdateHealth();
         Die();
-        gm.lastDeath = Time.time;
+        GlobalManager.instance.lastDeath = Time.time;
     }
     // Remove health points from the Player
     public void TakeDamage(GameObject sender, int damage){
@@ -140,7 +136,7 @@ public class Player : MonoBehaviour
         if (healthPoints <= 0){
             hurt.Play();
             Die();
-            gm.lastDeath = Time.time;
+            GlobalManager.instance.lastDeath = Time.time;
             //dieSounds.Play();
         }
         else{

@@ -11,7 +11,6 @@ public class Enemy : MonoBehaviour
     protected Rigidbody2D rb;
     protected RaycastHit2D hit;
     protected BoxCollider2D boxcollider;
-    protected GameManager gameManager;
 
     // The target object variables
     protected GameObject target;
@@ -23,7 +22,7 @@ public class Enemy : MonoBehaviour
     public int healthPoints;
     protected int touchDamage = 1;
 
-    //Drops
+    // Drops
     protected GameObject GameManager;
     protected Inventory inventory;
     public List<GameObject> Drops = new List<GameObject>();
@@ -35,7 +34,6 @@ public class Enemy : MonoBehaviour
         boxcollider = GetComponent<BoxCollider2D>();
 
         GameManager = GameObject.FindGameObjectWithTag("GameManager");
-        gameManager = GameManager.GetComponent<GameManager>();
         inventory = GameManager.GetComponent<Inventory>();
         availableIndexes = new List<int>();
         Drops = inventory.missionItemDrops;
@@ -112,7 +110,7 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(){
         Instantiate(GetDrop(), transform.position, transform.rotation);
         Destroy(gameObject);
-        gameManager.enemiesDefeated++;
+        GlobalManager.instance.enemiesDefeated++;
     }
 
     // Remove health points from the Enemy
@@ -128,7 +126,7 @@ public class Enemy : MonoBehaviour
             }
             hurt.Play();
             Destroy(gameObject);
-            gameManager.enemiesDefeated++;
+            GlobalManager.instance.enemiesDefeated++;
         }
     }
 

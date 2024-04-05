@@ -25,8 +25,7 @@ public class MainMenu : MonoBehaviour
         quitBtn.onClick.AddListener(QuitGame);
     }
 
-    public void PlayGame() 
-    {
+    public void PlayGame(){
         SceneManager.LoadScene("Cutscene");
         //stateManager.ChangeSceneByName("Cutscene");
         //SceneManager.LoadScene("Game");
@@ -39,8 +38,7 @@ public class MainMenu : MonoBehaviour
         }
     }
 
-    public void QuitGame()
-    {
+    public void QuitGame(){
         Debug.Log("QUIT!");
         Application.Quit();
     }

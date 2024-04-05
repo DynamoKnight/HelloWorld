@@ -56,21 +56,24 @@ public class Spaceship : MonoBehaviour
     }
 
     void Update(){        
-        // Calculate the distance between player and target object
-        float distance = Vector2.Distance(player.GetComponent<Rigidbody2D>().position, gameObject.GetComponent<Rigidbody2D>().position);
+        // Player should be alive first
+        if (player){
+            // Calculate the distance between player and target object
+            float distance = Vector2.Distance(player.GetComponent<Rigidbody2D>().position, gameObject.GetComponent<Rigidbody2D>().position);
 
-        // Check if the player is within the activation distance
-        if (distance <= activationDistance && inventory.missionItemsCollected){
-            if(!exited){
-                // Enable the button
-                leaveMenu.SetActive(true);
+            // Check if the player is within the activation distance
+            if (distance <= activationDistance && inventory.missionItemsCollected){
+                if(!exited){
+                    // Enable the button
+                    leaveMenu.SetActive(true);
+                }
+                
             }
-            
-        }
-        else{
-            // Disable the button
-            leaveMenu.SetActive(false);
-            exited = false;
+            else{
+                // Disable the button
+                leaveMenu.SetActive(false);
+                exited = false;
+            }
         }
     }
 

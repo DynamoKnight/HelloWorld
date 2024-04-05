@@ -16,7 +16,6 @@ public class Inventory : MonoBehaviour
     // Indicates whether closed or open
     private int imgIdx = 0;
 
-    public GameManager gameManager;
     [SerializeField] Player player; // Should player be the GameObject or the script?
 
     // Weapons & other Collectables
@@ -181,7 +180,7 @@ public class Inventory : MonoBehaviour
                 numberOfEachMissionItemCollected[i] += 1;
                 // Shows on screen
                 AddOneToItemCount(i);
-                gameManager.itemsCollected++;
+                GlobalManager.instance.itemsCollected++;
                 // All numbers of that item is collected
                 if(numberOfEachMissionItem[i] == numberOfEachMissionItemCollected[i]){
                     SetAsDone(i);

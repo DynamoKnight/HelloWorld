@@ -20,11 +20,6 @@ public class WinnerScreen : MonoBehaviour
         MainMenuButton.onClick.AddListener(LoadMenu);
     }
 
-    // Update is called once per frame
-    void Update(){
-        
-    }
-
     public void LoadMenu(){
         stateManager.ChangeSceneByName("TitlePage");
     }

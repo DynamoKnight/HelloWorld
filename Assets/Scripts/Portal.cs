@@ -16,12 +16,15 @@ public class Portal : Collidable
 
     protected override void Update(){
         base.Update();
-        if(spawnTimer >= spawnRate){
-            spawnAlien();
-            spawnTimer = 0f;
-        }
-        else{
-            spawnTimer += Time.deltaTime;
+        // Spawns only when game is unpaused and functional
+        if (!LevelManager.instance.isPaused && LevelManager.instance.isFunctional){
+            if(spawnTimer >= spawnRate){
+                SpawnAlien();
+                spawnTimer = 0f;
+            }
+            else{
+                spawnTimer += Time.deltaTime;
+            }
         }
     }
     protected override void OnCollide(Collider2D coll){
@@ -32,7 +35,7 @@ public class Portal : Collidable
         }
     }
 
-    private void spawnAlien(){
+    private void SpawnAlien(){
         var alien = alienPrefabs[Random.Range(0, alienPrefabs.Length)];
         // Creates an alien object
         Instantiate(alien, transform.position, transform.rotation);

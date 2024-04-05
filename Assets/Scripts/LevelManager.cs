@@ -15,6 +15,8 @@ public class LevelManager : MonoBehaviour
 
     // Indicates whether the game is paused
     public bool isPaused;
+    // Indicates whether the User can interact with the player
+    public bool isFunctional;
     // Indicates whether the current level is completed
     public bool levelComplete = false;
     // Planet level names
@@ -44,7 +46,6 @@ public class LevelManager : MonoBehaviour
 
     public Inventory inventory;
     public DeathPanel deathManager;
-    public GameManager gameManager;
 
     // Gets called when loading 
     private void Awake(){
@@ -65,6 +66,7 @@ public class LevelManager : MonoBehaviour
 
     void Start(){
         isPaused = false;
+        isFunctional = true;
     }
 
     void Update(){
@@ -75,21 +77,22 @@ public class LevelManager : MonoBehaviour
         }
 
         if (currentPlanet == "Pluto"){
-            gameManager.planetsDiscovered = 1;
+            GlobalManager.instance.planetsDiscovered = 1;
         }
         if (currentPlanet == "Neptune"){
-            gameManager.planetsDiscovered = 2;
+            GlobalManager.instance.planetsDiscovered = 2;
         }
         if (currentPlanet == "Uranus"){
-            gameManager.planetsDiscovered = 3;
+            GlobalManager.instance.planetsDiscovered = 3;
         }
     }
 
     // Hides the UI of the deathpanel
     public void GameOver(){
+        isFunctional = false;
         UIManager _ui = GetComponent<UIManager>();
         if (_ui){
-            deathManager.die();
+            deathManager.Die();
             _ui.ToggleDeathPanel();
         }
     }

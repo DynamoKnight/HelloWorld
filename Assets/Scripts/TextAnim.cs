@@ -20,14 +20,12 @@ public class TextAnim : MonoBehaviour
     private StateManager stateManager;
 
     int i = 0;
-    void Start()
-    {
+    void Start(){
         stateManager = gameManager.GetComponent<StateManager>();
         EndCheck();
     }
 
-    public void EndCheck()
-    {
+    public void EndCheck(){
         if (i < stringArray.Length)
         {
             _textMeshPro.text = stringArray[i];
@@ -38,8 +36,8 @@ public class TextAnim : MonoBehaviour
             stateManager.ChangeSceneByName(nextScene);
         }
     }
-    private IEnumerator TextVisible() 
-    {
+
+    private IEnumerator TextVisible() {
         _textMeshPro.ForceMeshUpdate();
         int totalVisibleCharacters = _textMeshPro.textInfo.characterCount;
         int counter = 0;

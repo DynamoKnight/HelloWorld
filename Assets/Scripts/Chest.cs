@@ -8,8 +8,7 @@ public class Chest : Collectable
     public int coinsAmount = 5;
 
     // Overrides the Parents OnCollide method
-    protected override void OnCollect()
-    {
+    protected override void OnCollect(){
         if (!collected){
             base.OnCollect();
             // Changes the image when collided

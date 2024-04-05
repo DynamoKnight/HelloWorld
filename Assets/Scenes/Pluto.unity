@@ -10299,17 +10299,17 @@ RectTransform:
   - {fileID: 1691717319}
   - {fileID: 594408300}
   - {fileID: 53665656}
-  - {fileID: 1955295098}
-  - {fileID: 81655658}
   - {fileID: 927418040}
+  - {fileID: 81655658}
   - {fileID: 1065969689}
   - {fileID: 271356755}
   - {fileID: 514747051}
-  - {fileID: 889454659}
+  - {fileID: 93689871}
   - {fileID: 2088666513}
   - {fileID: 304365682}
+  - {fileID: 1955295098}
+  - {fileID: 889454659}
   - {fileID: 1528835392}
-  - {fileID: 93689871}
   - {fileID: 1747280264}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -10693,7 +10693,6 @@ MonoBehaviour:
   inventoryImages:
   - {fileID: 21300000, guid: ff74dc0646ee6b94687e1a693b7e6a28, type: 3}
   - {fileID: 21300000, guid: 35f3fd765c6799942b2e19c17e3af43d, type: 3}
-  gameManager: {fileID: 901211900}
   player: {fileID: 1558715563}
   inventoryPanel: {fileID: 1065969688}
   sideInventoryPanel: {fileID: 514747050}
@@ -10762,12 +10761,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPaused: 0
+  isFunctional: 0
   levelComplete: 0
   levels: []
   currentPlanet: 
   inventory: {fileID: 901211894}
   deathManager: {fileID: 1955295101}
-  gameManager: {fileID: 901211900}
 --- !u!4 &901211898
 Transform:
   m_ObjectHideFlags: 0
@@ -136623,7 +136622,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.48235294}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.74509805}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -137442,7 +137441,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameManager: {fileID: 901211892}
-  gm: {fileID: 901211900}
   timePlayed: {fileID: 66206100}
   EnemiesDefeated: {fileID: 1544208887}
   PlanetsDiscoverd: {fileID: 868767772}

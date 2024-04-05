@@ -9,14 +9,15 @@ public class JournalManager : MonoBehaviour
     private GameObject journalPanel;
 
     void Start(){
-        journalPanel = GameObject.Find("Journal Panel");
         gm = GameObject.Find("GameManager");
     }
 
     void Update(){
-        // J key is shortcut
-        if (Input.GetKeyDown(KeyCode.J)){
-            ClickJournalBtn();
+        if (LevelManager.instance.isFunctional){
+            // J key is shortcut
+            if (Input.GetKeyDown(KeyCode.J)){
+                ClickJournalBtn();
+            }
         }
     }
 
