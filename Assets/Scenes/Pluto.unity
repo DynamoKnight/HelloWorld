@@ -1930,7 +1930,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 1
+  m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -10745,7 +10745,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathPanel: {fileID: 1955295097}
-  MissionText: {fileID: 2088666512}
   journalPanel: {fileID: 927418039}
   avatar: {fileID: 594408299}
   avatarImages: []
@@ -10763,12 +10762,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPaused: 0
+  levelComplete: 0
   levels: []
   currentPlanet: 
   inventory: {fileID: 901211894}
   deathManager: {fileID: 1955295101}
   gameManager: {fileID: 901211900}
-  levelComplete: 0
 --- !u!4 &901211898
 Transform:
   m_ObjectHideFlags: 0
