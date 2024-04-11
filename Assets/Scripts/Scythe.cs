@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class Scythe : Gun
 {
-    protected override void Update()
-    {
-        // Only collects input if game is unpaused
-        if(!LevelManager.instance.isPaused){
+    protected override void Start(){
+        base.Start();
+        gameObject.name = "Scythe";
+    }
+    
+    protected override void Update(){
+        // Only collects input if game is unpaused and functional
+        if(!LevelManager.instance.isPaused && LevelManager.instance.isFunctional){
             var scale = transform.localScale;
             mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
@@ -16,10 +20,10 @@ public class Scythe : Gun
             // Rotates in z direction
             transform.localRotation = Quaternion.Euler(0, 0, angle);
             if (angle > 90f || angle < -90f){
-                scale.y = (float)-25;
+                scale.y = -yscale;
             }
             else{
-                scale.y = (float)25;
+                scale.y = yscale;
             }
             transform.localScale = scale;
         
@@ -35,4 +39,5 @@ public class Scythe : Gun
             }
         }
     }
+
 }

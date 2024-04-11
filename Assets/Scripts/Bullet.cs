@@ -14,26 +14,13 @@ public class Bullet : MonoBehaviour
     [Range(1, 10)]
     [SerializeField] private float lifeTime = 2f;
     private Rigidbody2D rb;
-    private CapsuleCollider2D cc;
+    [SerializeField] private CapsuleCollider2D cc; // Needs to be initialized before Start
     private int bulletDamage = 1;
+    // Keeps track of who the bullet belongs to
+    public GameObject sender;
 
     void Start(){
-        rb = GetComponent<Rigidbody2D>();
-        cc = GetComponent<CapsuleCollider2D>(); // Throws MissingComponentException??
-        // Ignores collision with the object that is shooting
-        if(gameObject.tag == "Bullet"){
-            GameObject player = GameObject.Find("Player");     
-            Physics2D.IgnoreCollision(player.GetComponent<BoxCollider2D>(), cc);
-        }
-        else if (gameObject.tag == "EnemyBullet"){
-            // Since there are multiple enemies, each one has to be ignored
-            var enemies = GameObject.FindGameObjectsWithTag("Enemy");
-            foreach (var enemy in enemies){
-                Physics2D.IgnoreCollision(enemy.GetComponent<BoxCollider2D>(), cc);
-            } 
-            
-        }
-        
+        rb = GetComponent<Rigidbody2D>();      
         // Kills itself after lifeTime
         Destroy(gameObject, lifeTime);
     }
@@ -67,6 +54,11 @@ public class Bullet : MonoBehaviour
         Destroy(gameObject);
     }
     
-        
+    // Sets the sender of the bullet
+    public void SetSender(GameObject sender){
+        this.sender = sender;
+        // Ignores collision with the object shooting the bullet
+        Physics2D.IgnoreCollision(this.sender.GetComponent<BoxCollider2D>(), cc);
+    }
 
 }

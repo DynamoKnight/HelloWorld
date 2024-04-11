@@ -163,3 +163,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 50
   lifeTime: 2
+  cc: {fileID: 8182006271117045766}
+  sender: {fileID: 0}

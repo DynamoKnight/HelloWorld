@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class Gun : MonoBehaviour
 {
+    // The player
+    [SerializeField] private GameObject player;
+
     protected Vector2 mousePos;
     [SerializeField] protected GameObject bulletPrefab;
     // The place where the bullet comes from
@@ -12,21 +15,23 @@ public class Gun : MonoBehaviour
     [Range(0.1f, 2f)]
     [SerializeField] protected float fireRate = 0.5f;
     protected float fireTimer;
+    protected float yscale;
+
     public bool beingUsed;
-    private float yscale;
 
     public AudioSource blast;
 
-    void Start(){
+    protected virtual void Start(){
         // 2.45
         yscale = transform.localScale.y; 
+        gameObject.name = "Laser Blaster";
     }
 
     // Update is called once per frame
     protected virtual void Update(){
         blast.volume = GameObject.FindGameObjectWithTag("VolumeManager").GetComponent<VolumeManager>().SFXVolumeMultplier;
-        // Only collects input if game is unpaused
-        if(!LevelManager.instance.isPaused){
+        // Only collects input if game is unpaused and functional
+        if(!LevelManager.instance.isPaused && LevelManager.instance.isFunctional){
             var scale = transform.localScale;
             mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
@@ -42,7 +47,8 @@ public class Gun : MonoBehaviour
                 scale.y = yscale;
             }
             transform.localScale = scale;
-        
+            // Only fires when in use
+            // beingUsed is determine by WeaponSwitcher
             if(beingUsed){
                 // Left Mouse Button
                 if (Input.GetMouseButton(0) && fireTimer >= fireRate){
@@ -56,11 +62,15 @@ public class Gun : MonoBehaviour
                 }
             }
         }
+    
     }
     // Spawns a bullet
     protected virtual void Shoot(){
         // Creates a bullet object
         blast.Play();
-        Instantiate(bulletPrefab, firingPoint.position, firingPoint.rotation);
+        // Keeps track of the bullet shot
+        Bullet bulletFired = Instantiate(bulletPrefab, firingPoint.position, firingPoint.rotation).GetComponent<Bullet>();
+        // Tells the bullet that this is the sender
+        bulletFired.SetSender(player);
     }
 }

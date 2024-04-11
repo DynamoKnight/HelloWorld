@@ -41,7 +41,10 @@ public class RangedEnemy : Enemy
 
     private void Shoot(){
         if (timeToFire >= fireRate){
-            Instantiate(bulletPrefab, firingPoint.position, firingPoint.rotation);
+            // Keeps track of the bullet shot
+            Bullet bulletFired = Instantiate(bulletPrefab, firingPoint.position, firingPoint.rotation).GetComponent<Bullet>();
+            // Tells the bullet that this is the sender
+            bulletFired.SetSender(gameObject);
             timeToFire = 0f;
         }
         else{

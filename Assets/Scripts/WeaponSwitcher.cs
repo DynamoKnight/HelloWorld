@@ -7,130 +7,83 @@ using UnityEngine;
 public class WeaponSwitcher : MonoBehaviour
 {
     public Inventory inventory;
-
     public GameObject player;
 
-    public GameObject LaserGun;
-    private Gun laserGunScript;
-
-    [SerializeField]
-    public GameObject Scythe;
-    private Scythe scytheScript;
-
-    public GameObject FrostGun;
-
-    List<string> weaponList = new();
-
-    private string currentWeapon;
-    private string pastWeapon;
-    private int currentInd;
+    // The current weapons from the inventory
+    private List<GameObject> weaponList = new();
+    // Keeps track of the weapon in use
+    private GameObject currentWeapon;
+    private GameObject previousWeapon;
+    private int currentIdx;
     
     void Start(){
-        // Better way to get the script
-        laserGunScript = LaserGun.GetComponent<Gun>();
-        scytheScript = Scythe.GetComponent<Scythe>();
-
+        // Sets the weapons in use based on the inventory
         weaponList = inventory.GetWeaponList();
         currentWeapon = weaponList[0];
-        currentInd = 0;
+        currentIdx = 0;
     }
 
     void Update(){
-        // Only collects input if game is unpaused
-        if(!LevelManager.instance.isPaused){
-            //if trying to go up the list but on last index, resets back to 0
+        // Only collects input if game is unpaused and functional
+        if(!LevelManager.instance.isPaused && LevelManager.instance.isFunctional){
+            // Scroll wheel goes up to change weapon
             if(Input.mouseScrollDelta.y > 0){
-                if(currentInd == weaponList.Count-1){
-                    pastWeapon = currentWeapon;
+                // If trying to go up the list but on last index, resets back to 0
+                if(currentIdx == weaponList.Count-1){
+                    previousWeapon = currentWeapon;
                     currentWeapon = weaponList[0];
-                    currentInd = 0;
+                    currentIdx = 0;
                     SwitchWeapon();
                 }
+                // Goes to the next weapon on the list
                 else {
-                    //goes up one on the list
-                    pastWeapon = currentWeapon;
-                    currentWeapon = weaponList[currentInd + 1];
-                    currentInd++;
+                    previousWeapon = currentWeapon;
+                    currentWeapon = weaponList[currentIdx + 1];
+                    currentIdx++;
                     SwitchWeapon();
                 }
+                // Shows the border around the current weapon
+                inventory.HighlightSlot(currentIdx);
             }
-
+            // Scroll wheel goes down to change weapon
             else if(Input.mouseScrollDelta.y < 0){
                 // If trying to go down list but it is at 0, goes to the top of the list
-                if(currentInd == 0){
-                    pastWeapon = currentWeapon;
+                if(currentIdx == 0){
+                    previousWeapon = currentWeapon;
                     currentWeapon = weaponList[weaponList.Count - 1];
-                    currentInd = weaponList.Count - 1;
+                    currentIdx = weaponList.Count - 1;
                     SwitchWeapon();
                 }
+                // Goes to the previous weapon on the list
                 else {
-                    // Goes one down on list
-                    pastWeapon = currentWeapon;
-                    currentWeapon = weaponList[currentInd - 1];
-                    currentInd--;
+                    previousWeapon = currentWeapon;
+                    currentWeapon = weaponList[currentIdx - 1];
+                    currentIdx--;
                     SwitchWeapon();
                 }
+                // Shows the border around the current weapon
+                inventory.HighlightSlot(currentIdx);
             }
         }
+
     }
-    //switches the weapon on the screen
-    private void SwitchWeapon()
-    {
-        nameToObject(pastWeapon).GetComponent<SpriteRenderer>().enabled = false;
-        nameToObject(currentWeapon).GetComponent<SpriteRenderer>().enabled = true;
-        EnableAndDisable(pastWeapon, currentWeapon);
+
+    // Enables/Disables the weapons in use
+    private void SwitchWeapon(){
+        previousWeapon.GetComponent<SpriteRenderer>().enabled = false;
+        // Every weapon class is a child of the Gun script
+        previousWeapon.GetComponent<Gun>().beingUsed = false;
+
+        currentWeapon.GetComponent<SpriteRenderer>().enabled = true;       
+        currentWeapon.GetComponent<Gun>().beingUsed = true;
+
     }
-    //converts the name of the object to the game object
-    private GameObject nameToObject(string name){
-        if(name == "LaserGun"){
-            return LaserGun;
-        }
 
-        else if(name == "Scythe"){
-            return Scythe;
-        }
-
-        else if(name == "FrostGun"){
-            return FrostGun;
-        }
-        else{
-            return null;
-        }
+    // Returns the current index of the weapon list
+    public int GetCurrentIndex(){
+        return currentIdx;
     }
-    // Disables previous weapon and enables current weapon 
-    private void EnableAndDisable(string pastName, string currentName){
 
-        // Disables previous weapon (implement other weapon scripts)
-        if(pastName == "LaserGun")
-        {
-            laserGunScript.beingUsed = false;
-        }
 
-        else if(pastName == "Scythe")
-        {
-            scytheScript.beingUsed = false;
-        }
-
-        else if(pastName == "FrostGun")
-        {
-            //laserGunScript.beingUsed = false;
-        }
-
-        // Enables current weapon (implement other weapon scripts)
-        if(currentName == "LaserGun")
-        {
-            laserGunScript.beingUsed = true;
-        }
-
-        else if(currentName == "Scythe")
-        {
-            scytheScript.beingUsed = true;
-        }
-
-        else if(currentName == "FrostGun")
-        {
-            //laserGunScript.beingUsed = false;
-        }
-    }
 
 }

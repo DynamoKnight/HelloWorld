@@ -241,6 +241,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51fcc6206405b0a41b64d3c4e5632134, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 4376453724380956340}
   bulletPrefab: {fileID: 2107687055432393610, guid: 124eb91bd7053d14e83aec383b883cc7, type: 3}
   firingPoint: {fileID: 4454715761533150122}
   fireRate: 1
@@ -653,6 +654,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3248ea9cde38dd641ad7e7af2d80dfd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 4376453724380956340}
   bulletPrefab: {fileID: 1208489731143660641, guid: f584d1a5fa25c8a469a1f4b3da9caad1, type: 3}
   firingPoint: {fileID: 8764520464648651649}
   fireRate: 0.75
