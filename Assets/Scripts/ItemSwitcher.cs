@@ -23,7 +23,8 @@ using UnityEngine;
 public class ItemSwitcher : MonoBehaviour
 {
 
-    public Inventory inventory;
+    private GameObject gameManager;
+    private Inventory inventory;
     
     public GameObject AntiFrostBoots;
 
@@ -35,15 +36,16 @@ public class ItemSwitcher : MonoBehaviour
 
 
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start(){
+        gameManager = GameObject.FindGameObjectWithTag("GameManager");
+        inventory = gameManager.GetComponent<Inventory>();
+
         currentItem = itemList[0];
         currentInd = 0;
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update(){
         //if on the last item in the list, resets back to the first index
         if(Input.GetKeyDown("E")){
             if(currentInd == itemList.Count-1){

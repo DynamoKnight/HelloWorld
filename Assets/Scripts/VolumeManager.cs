@@ -10,8 +10,7 @@ public class VolumeManager : MonoBehaviour
     [Range(0.0f, 1.0f)]public float SFXVolumeMultplier;
 
 
-    void Awake()
-    {
+    void Awake(){
         // Makes sure there is 1 instance of this
         if (VolumeManager.instance == null){
             instance = this;

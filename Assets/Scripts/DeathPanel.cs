@@ -8,24 +8,29 @@ using UnityEngine.UI;
 
 public class DeathPanel : MonoBehaviour
 {
-    public GameObject gameManager;
+    private GameObject gm;
+    private StateManager stateManager;
 
     public GameObject timePlayed;
     public GameObject EnemiesDefeated;
     public GameObject PlanetsDiscoverd;
     public GameObject ItemsCollected;
-
+    // Options once dead
     private Button retryBtn;
     private Button backBtn;
 
     void Start(){
-        retryBtn = gameObject.transform.GetChild(1).GetComponent<Button>();
-        backBtn = gameObject.transform.GetChild(2).GetComponent<Button>();
+        gm = GameObject.Find("GameManager");
+        stateManager = gm.GetComponent<StateManager>();
+        // Death panel buttons
+        retryBtn = gameObject.transform.GetChild(0).GetComponent<Button>();
+        backBtn = gameObject.transform.GetChild(1).GetComponent<Button>();
 
-        retryBtn.onClick.AddListener(RetryLevel);
+        retryBtn.onClick.AddListener(RestartLevel);
         backBtn.onClick.AddListener(BackToMenu);
     }
 
+    // Shows the statistics for the level
     public void Die(){
         float i = GlobalManager.instance.timePlayed;
         int minute = Convert.ToInt32(Math.Floor(i/60f));
@@ -37,13 +42,13 @@ public class DeathPanel : MonoBehaviour
         ItemsCollected.GetComponent<TextMeshProUGUI>().text = GlobalManager.instance.itemsCollected.ToString();
     }
 
-    void BackToMenu(){
-        StateManager sm = gameManager.GetComponent<StateManager>();
-        sm.ChangeSceneByName("TitlePage");
+    // Returns to the menu screen
+    public void BackToMenu(){
+        stateManager.ChangeSceneByName("TitlePage");
     }
 
     // Resets current level
-    void RetryLevel(){
+    public void RestartLevel(){
         StateManager.ReloadCurrentScene();
     }
 }

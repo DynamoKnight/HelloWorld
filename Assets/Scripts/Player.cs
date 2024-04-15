@@ -18,23 +18,30 @@ public class Player : MonoBehaviour
     private RaycastHit2D hit;
     private Animator animator;
 
-    public float moveSpeed;
+    [SerializeField] private float moveSpeed;
     private bool isSprinting = false;
 
     public int healthPoints;
     [SerializeField] private Image[] hearts;
+    // The explosion particle system
+    [SerializeField] private GameObject explosion; 
 
-    public GameObject player;
+    private GameObject gm;
     private Inventory inventory;
 
-    public AudioSource hurt;
-    public AudioSource dieSounds;
-    public AudioSource walk;
-    public AudioSource freeze;
+    // Audio sounds
+    [SerializeField] private AudioSource hurt;
+    [SerializeField] private AudioSource dieSounds;
+    [SerializeField] private AudioSource walk;
+    [SerializeField] private AudioSource freeze;
     
 
     // Start is called before the first frame update
     void Start(){
+        // The inventory is within the game manager
+        gm = GameObject.Find("GameManager");
+        inventory = gm.GetComponent<Inventory>();
+
         boxcollider = GetComponent<BoxCollider2D>();
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
@@ -82,8 +89,7 @@ public class Player : MonoBehaviour
     }
 
     // Gets called every frame at a interval of time
-    void FixedUpdate()
-    {
+    void FixedUpdate(){
         // Casts a box around character, and returns the collider that the target vector will contact
         // It will only work for objects in a specfic layer.
         // Y
@@ -118,11 +124,9 @@ public class Player : MonoBehaviour
 
     // Instant kills the Player, knows what did damage to it
     public void TakeDamage(GameObject sender){
-        hurt.Play();
         healthPoints = 0;
         UpdateHealth();
         Die();
-        GlobalManager.instance.lastDeath = Time.time;
     }
     // Remove health points from the Player
     public void TakeDamage(GameObject sender, int damage){
@@ -134,21 +138,21 @@ public class Player : MonoBehaviour
         healthPoints -= damage;
         UpdateHealth();
         if (healthPoints <= 0){
-            hurt.Play();
-            Die();
-            GlobalManager.instance.lastDeath = Time.time;
-            //dieSounds.Play();
+            TakeDamage();
         }
-        else{
-            hurt.Play();
-        }
+        hurt.Play();
     }
 
     // What happens upon death
     public void Die(){
+        // Records time of death
+        GlobalManager.instance.lastDeath = Time.time;
         // Calls the GameOver method from LevelManager
         LevelManager.instance.GameOver();
-        gameObject.SetActive(false);
+        // Creates the particle effect, slightly higher
+        Instantiate(explosion, new Vector3(transform.position.x, transform.position.y + 0.3f, transform.position.z), transform.rotation);
+        // Destroys player
+        Destroy(gameObject);
     }
 
     public void UpdateHealth(){

@@ -30,6 +30,7 @@ public class Gun : MonoBehaviour
     // Update is called once per frame
     protected virtual void Update(){
         blast.volume = GameObject.FindGameObjectWithTag("VolumeManager").GetComponent<VolumeManager>().SFXVolumeMultplier;
+        
         // Only collects input if game is unpaused and functional
         if(!LevelManager.instance.isPaused && LevelManager.instance.isFunctional){
             var scale = transform.localScale;

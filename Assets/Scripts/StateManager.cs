@@ -11,9 +11,6 @@ public class StateManager : MonoBehaviour
     private float loadingTime = 10f;
     public string nextScene;
 
-    void Start(){
-    }
-
     // Loads the Current Scene
     public static void ReloadCurrentScene(){
         // Uses index of scene, but can also use the name

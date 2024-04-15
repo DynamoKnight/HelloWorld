@@ -6,7 +6,8 @@ using UnityEngine;
 
 public class WeaponSwitcher : MonoBehaviour
 {
-    public Inventory inventory;
+    private GameObject gm;
+    private Inventory inventory;
     public GameObject player;
 
     // The current weapons from the inventory
@@ -17,6 +18,9 @@ public class WeaponSwitcher : MonoBehaviour
     private int currentIdx;
     
     void Start(){
+        gm = GameObject.Find("GameManager");
+        inventory = gm.GetComponent<Inventory>();
+
         // Sets the weapons in use based on the inventory
         weaponList = inventory.GetWeaponList();
         currentWeapon = weaponList[0];

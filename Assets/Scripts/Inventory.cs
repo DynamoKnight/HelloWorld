@@ -48,7 +48,7 @@ public class Inventory : MonoBehaviour
 
     private float cooldown;
     private float time;
-    private float pickupDistance = 0.2f;
+    [SerializeField] private float pickupDistance = 0.1f;
 
     // Awake is called even before Start
     void Awake(){
@@ -218,7 +218,8 @@ public class Inventory : MonoBehaviour
         missionText.SetActive(true);
         // Sets arrow active to find ship
         player.GetArrow().SetActive(true);
-        Invoke("turnOffMissionHeader", 7);
+        // Hides mission text after 7 seconds
+        Invoke("TurnOffMissionHeader", 7);
     }
 
     // Allows level to be finished in Inspector
@@ -267,7 +268,7 @@ public class Inventory : MonoBehaviour
         return weapons;
     }
 
-    // Turns off the mission header when needed. 
+    // Turns off the mission complete text when needed. 
     public void TurnOffMissionHeader(){
         missionText.SetActive(false);
     }

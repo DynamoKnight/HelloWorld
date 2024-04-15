@@ -3,12 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // Extends the Enemy object
-public class RangedEnemy : Enemy
+public class EnemyRanged : Enemy
 {
+    // Different variations of the sprite when hit
+    [SerializeField] private Sprite[] damage_sprites;
+
     public float distanceToShoot = 20f;
 
     public float fireRate;
-    public float timeToFire;
+    // Keeps track of the time until it equals fireRate
+    private float timeToFire;
     public Transform firingPoint;
     [SerializeField] private GameObject bulletPrefab;
 
@@ -62,5 +66,17 @@ public class RangedEnemy : Enemy
         firingPoint.transform.localRotation = Quaternion.Slerp(firingPoint.localRotation, q, rotateSpeed);
 
     }
+
+    public override void TakeDamage(GameObject sender, int damage){
+        base.TakeDamage(sender, damage);
+        // Appears damaged
+        if (healthPoints == 2){
+            gameObject.GetComponent<SpriteRenderer>().sprite = damage_sprites[0];
+        }
+        if (healthPoints == 1){
+            gameObject.GetComponent<SpriteRenderer>().sprite = damage_sprites[1];
+        }
+    }
+
 
 }

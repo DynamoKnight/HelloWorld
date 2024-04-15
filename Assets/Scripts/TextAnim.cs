@@ -16,12 +16,14 @@ public class TextAnim : MonoBehaviour
 
     [SerializeField] private string nextScene;
 
-    [SerializeField] GameObject gameManager;
+    private GameObject gm;
     private StateManager stateManager;
 
     int i = 0;
     void Start(){
-        stateManager = gameManager.GetComponent<StateManager>();
+        gm = GameObject.Find("GameManager");
+        stateManager = gm.GetComponent<StateManager>();
+        
         EndCheck();
     }
 

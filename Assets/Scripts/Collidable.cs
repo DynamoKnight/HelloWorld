@@ -11,15 +11,15 @@ public class Collidable : MonoBehaviour
     // An array of every object it collided with in a frame
     private Collider2D[] hits = new Collider2D[10];
 
-    private GameObject gameManager;
+    private GameObject gm;
 
     [HideInInspector]
     public Inventory inventory;
 
     protected virtual void Start(){
         boxCollider = GetComponent<BoxCollider2D>();
-        gameManager = GameObject.FindWithTag("GameManager");
-        inventory = gameManager.GetComponent<Inventory>();
+        gm = GameObject.Find("GameManager");
+        inventory = gm.GetComponent<Inventory>();
     }
 
     protected virtual void Update(){

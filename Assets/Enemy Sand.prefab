@@ -12,10 +12,10 @@ GameObject:
   - component: {fileID: 8836051719669768153}
   - component: {fileID: 3158974162465552285}
   - component: {fileID: 958834159848057713}
-  - component: {fileID: -6960037039568147700}
+  - component: {fileID: 3811715945519963731}
   - component: {fileID: -1863090136947475954}
   m_Layer: 9
-  m_Name: Enemy
+  m_Name: Enemy Sand
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -77,12 +77,12 @@ SpriteRenderer:
   m_SortingLayerID: -1246761399
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: -212436119, guid: 43fc0613450401a4f972f58432b461fc, type: 3}
+  m_Sprite: {fileID: -738409578, guid: 43fc0613450401a4f972f58432b461fc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.68, y: 2.33}
+  m_Size: {x: 1.68, y: 2.32}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -149,10 +149,10 @@ BoxCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: -0.0040053725, y: -0.012866259}
   m_SpriteTilingProperty:
-    border: {x: 0, y: 0.01, z: 0, w: 0}
+    border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.68, y: 2.33}
-    newSize: {x: 1.68, y: 2.33}
+    oldSize: {x: 1.68, y: 2.32}
+    newSize: {x: 1.68, y: 2.32}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -160,7 +160,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.564737, y: 2.2341094}
   m_EdgeRadius: 0
---- !u!114 &-6960037039568147700
+--- !u!114 &3811715945519963731
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -169,15 +169,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 3552441501452786106}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd1f14fa0d4f4b24d8312ad84c6ba09f, type: 3}
+  m_Script: {fileID: 11500000, guid: e34f9895673b0774b96cb3f51a63753d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
   rotateSpeed: 0.005
   explosion: {fileID: 5489810620829596463, guid: 0c10a1530e387704f8510c363dabcc80, type: 3}
-  healthPoints: 1
+  healthPoints: 6
   drops: []
-  hurt: {fileID: 2717479605548848625, guid: 32608e26af04c7041b42475061cb8f29, type: 3}
+  hurt: {fileID: 0}
+  damage_sprites:
+  - {fileID: -571389375, guid: 43fc0613450401a4f972f58432b461fc, type: 3}
+  - {fileID: 515052629, guid: 43fc0613450401a4f972f58432b461fc, type: 3}
 --- !u!114 &-1863090136947475954
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -195,7 +198,7 @@ MonoBehaviour:
   OnBegin:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: -6960037039568147700}
+      - m_Target: {fileID: 3811715945519963731}
         m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
         m_MethodName: set_enabled
         m_Mode: 6
@@ -210,7 +213,7 @@ MonoBehaviour:
   OnDone:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: -6960037039568147700}
+      - m_Target: {fileID: 3811715945519963731}
         m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
         m_MethodName: set_enabled
         m_Mode: 6

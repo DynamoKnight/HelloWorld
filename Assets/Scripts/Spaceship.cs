@@ -6,8 +6,8 @@ using UnityEngine.UI;
 
 public class Spaceship : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject gameManager;
+    private GameObject gm;
+    private Inventory inventory;
 
     [SerializeField]
     private Player player;
@@ -26,9 +26,10 @@ public class Spaceship : MonoBehaviour
 
     private bool exited = false;
 
-    public Inventory inventory;
-
     void Start(){
+        gm = GameObject.Find("GameManager");
+        inventory = gm.GetComponent<Inventory>();
+
         leaveBtn = leaveMenu.transform.GetChild(1).GetComponent<Button>();
         backBtn = leaveMenu.transform.GetChild(2).GetComponent<Button>();
         // Goes to new level
@@ -42,7 +43,7 @@ public class Spaceship : MonoBehaviour
     public void LeaveGame(){
         if (LevelManager.instance.levelComplete == true){
             // Pauses game so no spawning or anything happens
-            StateManager sm = gameManager.GetComponent<StateManager>();
+            StateManager sm = gm.GetComponent<StateManager>();
             if (destination == "WinnerScreen"){
                 // Shows the winner screen
                 winnerScreen.SetActive(true);

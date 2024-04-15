@@ -7,6 +7,9 @@ using UnityEngine.UI;
 // Manages what UI is shown
 public class UIManager : MonoBehaviour
 {
+    GameObject gm;
+    private StateManager stateManager;
+    
     [SerializeField] GameObject deathPanel;
     [SerializeField] GameObject journalPanel;
     [SerializeField] GameObject avatar;
@@ -20,11 +23,15 @@ public class UIManager : MonoBehaviour
     private Button backBtn;
 
     void Start(){
+        gm = GameObject.FindGameObjectWithTag("GameManager");
+        stateManager = gm.GetComponent<StateManager>();
+        
         // If the current scene is a planet, it will have escape buttons
         if(LevelManager.instance.levels.Contains(SceneManager.GetActiveScene().name)){
+            // Pause menu buttons
             quitBtn = pauseMenu.transform.GetChild(0).GetComponent<Button>();
             backBtn = pauseMenu.transform.GetChild(1).GetComponent<Button>();
-            // Pause meny buttons
+            // Adds functions to it
             backBtn.onClick.AddListener(TogglePauseMenu);
             quitBtn.onClick.AddListener(LevelManager.instance.QuitGame);
         }

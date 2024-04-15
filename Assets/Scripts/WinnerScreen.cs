@@ -11,12 +11,14 @@ public class WinnerScreen : MonoBehaviour
 
     public AudioSource winsound;
 
-    [SerializeField] private GameObject gameManager;
+    private GameObject gm;
     private StateManager stateManager;
 
     // Start is called before the first frame update
     void Start(){
-        stateManager = gameManager.GetComponent<StateManager>();
+        gm = GameObject.Find("GameManager");
+        stateManager = gm.GetComponent<StateManager>();
+        
         MainMenuButton.onClick.AddListener(LoadMenu);
     }
 

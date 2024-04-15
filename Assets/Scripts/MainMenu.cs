@@ -6,15 +6,16 @@ using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject gameManager;
+    private GameObject gm;
     private StateManager stateManager;
     private Button playBtn;
     private Button optionsBtn;
     private Button quitBtn;
 
     void Start(){
-        stateManager = gameManager.GetComponent<StateManager>();
+        gm = GameObject.Find("GameManager");
+        stateManager = gm.GetComponent<StateManager>();
+        
         // Gets children buttons
         playBtn = gameObject.transform.GetChild(0).GetComponent<Button>();
         optionsBtn = gameObject.transform.GetChild(1).GetComponent<Button>();

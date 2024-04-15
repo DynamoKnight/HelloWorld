@@ -3,8 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FrostEnemy : Enemy
+public class EnemyFrost : Enemy
 {
+    // Different variations of the sprite when hit
+    [SerializeField] private Sprite[] damage_sprites;
 
     protected override void Start(){
         base.Start();
@@ -36,6 +38,14 @@ public class FrostEnemy : Enemy
             player.ApplyAffect("freeze");
             player.TakeDamage(gameObject, touchDamage);
             target = null;
+        }
+    }
+
+    public override void TakeDamage(GameObject sender, int damage){
+        base.TakeDamage(sender, damage);
+        // Appears damaged
+        if (healthPoints == 1){
+            gameObject.GetComponent<SpriteRenderer>().sprite = damage_sprites[0];
         }
     }
 

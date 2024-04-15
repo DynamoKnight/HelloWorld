@@ -11,6 +11,8 @@ public class Enemy : MonoBehaviour
     protected Rigidbody2D rb;
     protected RaycastHit2D hit;
     protected BoxCollider2D boxcollider;
+    // The explosion particle system
+    [SerializeField] protected GameObject explosion;
 
     // The target object variables
     protected GameObject target;
@@ -19,13 +21,14 @@ public class Enemy : MonoBehaviour
     
 
     // Health and damage
-    public int healthPoints;
+    [SerializeField] protected int healthPoints = 1;
+    // The damage it deals
     protected int touchDamage = 1;
 
     // Drops
     protected GameObject GameManager;
     protected Inventory inventory;
-    public List<GameObject> Drops = new List<GameObject>();
+    public List<GameObject> drops = new();
 
     public AudioSource hurt;
 
@@ -36,7 +39,8 @@ public class Enemy : MonoBehaviour
         GameManager = GameObject.FindGameObjectWithTag("GameManager");
         inventory = GameManager.GetComponent<Inventory>();
         availableIndexes = new List<int>();
-        Drops = inventory.missionItemDrops;
+        drops = inventory.missionItemDrops;
+        //
         List<AudioSource> a = FindObjectsOfType<AudioSource>().ToList();
         foreach (AudioSource i in a){
             if(i.tag == "AlienAudio"){
@@ -108,28 +112,31 @@ public class Enemy : MonoBehaviour
 
     // Instant kills the Enemy
     public void TakeDamage(){
-        Instantiate(GetDrop(), transform.position, transform.rotation);
+        // Drops the drop
+        GameObject drop = GetDrop();
+        if(drop != null){
+            Instantiate(drop, transform.position, transform.rotation);
+        }
+        // Creates the particle effect, slightly higher
+        Instantiate(explosion, new Vector3(transform.position.x, transform.position.y + 0.3f, transform.position.z), transform.rotation);
+        // Death
         Destroy(gameObject);
         GlobalManager.instance.enemiesDefeated++;
     }
 
     // Remove health points from the Enemy
-    public void TakeDamage(GameObject sender, int damage){
+    public virtual void TakeDamage(GameObject sender, int damage){
         // Does knockback to enemy
         Knockback knockback = GetComponent<Knockback>();
         knockback.PlayFeedback(sender);
         healthPoints -= damage;
         if (healthPoints <= 0){
-            GameObject drop = GetDrop();
-            if(drop != null){
-                Instantiate(drop, transform.position, transform.rotation);
-            }
-            hurt.Play();
-            Destroy(gameObject);
-            GlobalManager.instance.enemiesDefeated++;
+            TakeDamage();
         }
+        hurt.Play();
     }
 
+    // Returns a needed drop
     public GameObject GetDrop(){
         UpdateDrops();
         GameObject final = null;
@@ -137,20 +144,22 @@ public class Enemy : MonoBehaviour
     
         availableIndexes.Clear();
 
-        for(int i = 0; i < inventory.numberOfEachMissionItem.Count; i++){
+        for (int i = 0; i < inventory.numberOfEachMissionItem.Count; i++){
             if(inventory.numberOfEachMissionItem[i] > inventory.numberOfEachMissionItemCollected[i]){
                 availableIndexes.Add(i);
             }
         }
-        if(availableIndexes.Count == 0) return final;
-        if(rnd.Next(0, 11) >= 4 ){
-            final = Drops[availableIndexes[rnd.Next(0,availableIndexes.Count)]];
+        if (availableIndexes.Count == 0){
+            return final;
+        }
+        if (rnd.Next(0, 11) >= 4 ){
+            final = drops[availableIndexes[rnd.Next(0,availableIndexes.Count)]];
         }
         return final;
     }
-
+    // 
     public void UpdateDrops(){
-        Drops = inventory.missionItemDrops;
+        drops = inventory.missionItemDrops;
     }
 
 }
