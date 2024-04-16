@@ -28,8 +28,8 @@ public class Spawner : MonoBehaviour
     }
 
    IEnumerator Spawn(){
-        // Will only spawn if game is functional
-        if (LevelManager.instance.isFunctional){
+        // Will only spawn if game is unpaused and functional
+        if (!LevelManager.instance.isPaused && LevelManager.instance.isFunctional){
             // Gets players position
             GameObject player =  GameObject.Find("Player");
             if (player){

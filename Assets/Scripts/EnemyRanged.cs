@@ -24,8 +24,8 @@ public class EnemyRanged : Enemy
 
     protected override void Update(){
         // Only if target exists
-        // Only shoots if unpaused
-        if(!LevelManager.instance.isPaused){
+        // Only shoots if unpaused and functional
+        if(!LevelManager.instance.isPaused && LevelManager.instance.isFunctional){
             if (target){
                 // Rotate and shoot if within range of player
                 RotateTowardsTarget();

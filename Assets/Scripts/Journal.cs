@@ -8,8 +8,9 @@ using System.Linq;
 
 public class Journal : MonoBehaviour
 {
-    [SerializeField] private Sprite[] images;
-    Dictionary<string, string> infos;
+    private GameObject gm;
+    private Dictionary<string, string[]> infos;
+    private Sprite[] images;
 
     private Transform journalInfo;
     private Button nextBtn;
@@ -22,19 +23,10 @@ public class Journal : MonoBehaviour
     private int idx;
     // Start is called before the first frame update
     void Start(){
-        // Array with key-value pairs
-        infos = new Dictionary<string, string>
-        {
-            { "Pluto", "Pluto is a dwarf planet that used to be considered part of the Solar System." },
-            { "Neptune", "Neptune has 14 known moons, the largest of which is Triton, which is believed to be a captured Kuiper Belt object." },
-            { "Uranus", "Uranus is the only planet in the solar system that rotates on its side" },
-            { "Saturn", "Saturn's density is so low that if there were a large enough body of water, it would float in it" },
-            { "Jupiter", "Jupiter's Great Red Spot is a massive storm that has been raging for at least 400 years and is large enough to engulf Earth two or three times over." },
-            { "Mars", "Mars has the largest volcano and canyon in the solar system, Olympus Mons and Valles Marineris respectively" },
-            { "The Moon", "One small step for man. One giant leap for mankind." },
-            { "Earth", "The home of the advanced species classified as Humans." }
-            
-        };
+        gm = GameObject.Find("GameManager");
+
+        infos = GlobalManager.instance.GetPlanets();
+        images = GlobalManager.instance.GetImages();
         // MAKE SURE THE ORDER IS RIGHT IN THE HIERARCHY
         // Gets 1st child of the journal panel
         journalInfo = gameObject.transform.GetChild(0);
@@ -88,7 +80,7 @@ public class Journal : MonoBehaviour
             image.color = Color.white;
             planet.text = infos.Keys.ToList()[index]; // Gets ith key
             day.text = "Day " + index;
-            info.text = infos[planet.text];
+            info.text = infos[planet.text][2];
         }
         
     }

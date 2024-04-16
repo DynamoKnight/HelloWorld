@@ -50,8 +50,8 @@ public class Enemy : MonoBehaviour
     }
 
     protected virtual void Update(){
-        // Only sets target if unpaused
-        if(!LevelManager.instance.isPaused){
+        // Only sets target if unpaused and functional
+        if(!LevelManager.instance.isPaused && LevelManager.instance.isFunctional){
             if (!target){
                 SetTarget();
             }
@@ -61,25 +61,27 @@ public class Enemy : MonoBehaviour
 
     protected virtual void FixedUpdate(){
         var step = moveSpeed * Time.deltaTime;
-        if (target){
-            targetPosition = target.GetComponent<Rigidbody2D>().transform.position;
-            var movement = Vector2.MoveTowards(rb.position, targetPosition, step);
-            // Move towards the target
-            hit = Physics2D.BoxCast(rb.position, boxcollider.size, 0, new Vector2(0, movement.y), Math.Abs(movement.y * Time.deltaTime), LayerMask.GetMask("Actor", "Blocking"));
-            // If something was hit, do not move
-            if (hit.collider != null && hit.collider.tag != "Drop"){
-                return;
-            }
-            // Moves enemy in the y direction
-            rb.position = movement;
+        if(!LevelManager.instance.isPaused && LevelManager.instance.isFunctional){
+            if (target){
+                targetPosition = target.GetComponent<Rigidbody2D>().transform.position;
+                var movement = Vector2.MoveTowards(rb.position, targetPosition, step);
+                // Move towards the target
+                hit = Physics2D.BoxCast(rb.position, boxcollider.size, 0, new Vector2(0, movement.y), Math.Abs(movement.y * Time.deltaTime), LayerMask.GetMask("Actor", "Blocking"));
+                // If something was hit, do not move
+                if (hit.collider != null && hit.collider.tag != "Drop"){
+                    return;
+                }
+                // Moves enemy in the y direction
+                rb.position = movement;
 
-            hit = Physics2D.BoxCast(rb.position, boxcollider.size, 0, new Vector2(movement.x, 0), Math.Abs(movement.x * Time.deltaTime), LayerMask.GetMask("Actor", "Blocking"));
-            // If something was hit, do not move
-            if (hit.collider != null && hit.collider.tag != "Drop"){
-                return;
+                hit = Physics2D.BoxCast(rb.position, boxcollider.size, 0, new Vector2(movement.x, 0), Math.Abs(movement.x * Time.deltaTime), LayerMask.GetMask("Actor", "Blocking"));
+                // If something was hit, do not move
+                if (hit.collider != null && hit.collider.tag != "Drop"){
+                    return;
+                }
+                // Moves enemy in the x direction
+                rb.position = movement;
             }
-            // Moves enemy in the x direction
-            rb.position = movement;
         }
     }
 

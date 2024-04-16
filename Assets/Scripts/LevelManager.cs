@@ -23,27 +23,6 @@ public class LevelManager : MonoBehaviour
     public List<string> levels;
     public string currentPlanet;
 
-    /*public List<MissionItemList> MissionItemsByPlanet;
-    public List<int> amountofEachItem;
-    public List<MissionItemImageList> MissionItemImagesByPlanet;
-    public List<MissionItemDropList> MissionItemDropsByPlanet;
-
-    // Allows inspector input to be a list of lists
-    [System.Serializable]
-    public class MissionItemList{
-        public List<string> MissionItems;
-    }
-
-    [System.Serializable]
-    public class MissionItemImageList{
-        public List<Sprite> MissionItemImages;
-    }
-
-    [System.Serializable]
-    public class MissionItemDropList{
-        public List<GameObject> MissionItemDrops;
-    }*/
-
     public Inventory inventory;
     public DeathPanel deathManager;
 
@@ -58,15 +37,12 @@ public class LevelManager : MonoBehaviour
         }
         levels = new List<string> {"Pluto","Neptune","Uranus","Saturn","Jupiter","Mars","The Moon","Earth"};
         // if current scene is pluto
-        if (SceneManager.GetActiveScene().name == "Pluto") {
-            ToPlanet(0);
-        }
-        
-    }
+        currentPlanet = levels[0];
 
-    void Start(){
+        // Initial conditions
         isPaused = false;
-        isFunctional = true;
+        isFunctional = false;
+        
     }
 
     void Update(){
@@ -122,29 +98,6 @@ public class LevelManager : MonoBehaviour
         int idx = levels.IndexOf(currentPlanet); 
         string nextPlanet = levels[idx + 1];
         return nextPlanet;
-    }
-
-    // Reconfigures the inventory for the next level
-    public void ToPlanet(int index){
-        /*
-        ClearAmount();
-        inventory.missionItemsCollected = false;
-        gameManager.planetsDiscovered += 1;
-        for(int i = 0; i < MissionItemsByPlanet[index].MissionItems.Count; i++){
-            inventory.missionItems = MissionItemsByPlanet[index].MissionItems;
-            inventory.missionImages = MissionItemImagesByPlanet[index].MissionItemImages;
-            inventory.missionItemDrops = MissionItemDropsByPlanet[index].MissionItemDrops;
-            inventory.numberOfEachMissionItem[i] = amountofEachItem[i];
-        }
-        inventory.SetMissionItems();
-        */
-    }
-
-    // Resets the items collected
-    public void ClearAmount(){
-        for(int i = 0; i < inventory.numberOfEachMissionItem.Count; i++){
-            inventory.numberOfEachMissionItemCollected[i] = 0;
-        }
     }
 
 }
