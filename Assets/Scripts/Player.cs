@@ -29,6 +29,11 @@ public class Player : MonoBehaviour
     private GameObject gm;
     private Inventory inventory;
 
+    // Goes toward magnetic field
+    private bool isAttracted;
+    private Vector3 magnetPosition;
+    private float magnetStrength;
+
     // Audio sounds
     [SerializeField] private AudioSource hurt;
     [SerializeField] private AudioSource dieSounds;
@@ -95,38 +100,48 @@ public class Player : MonoBehaviour
         // Y
         hit = Physics2D.BoxCast(rb.position, boxcollider.size, 0, new Vector2(0, movement.y), Math.Abs(movement.y * Time.deltaTime), LayerMask.GetMask("Actor", "Blocking"));
         // If nothing was hit, then move
+        // Skips collision with drop cause its not actual collider
         if (hit.collider == null || hit.collider.tag == "Drop"){
             // Moves player in the y direction
-            // The reason there is weird movement glitches is because Transform bypasses physics. Thats why we must use Rigidbody.
-            rb.MovePosition(rb.position + (movement * moveSpeed * Time.deltaTime));
-            walk.Play();
+            Move();
         }
-
         // X
         hit = Physics2D.BoxCast(rb.position, boxcollider.size, 0, new Vector2(movement.x, 0), Math.Abs(movement.x * Time.deltaTime), LayerMask.GetMask("Actor", "Blocking"));
         if (hit.collider == null || hit.collider.tag == "Drop"){
             // Moves player in the x direction
-            rb.MovePosition(rb.position + (movement * moveSpeed * Time.deltaTime));
-            walk.Play();
+            Move();
+        }
+        
+        // Moves toward magnetic field
+        if (isAttracted){
+            Vector2 magnetDirection = (magnetPosition - transform.position).normalized;
+            rb.velocity = magnetDirection * magnetStrength;
         }
     
+    }
+
+    // Moves the player based on the given input from Update
+    private void Move(){
+        // The reason there is weird movement glitches is because Transform bypasses physics. Thats why we must use Rigidbody.
+        // If player is attracted to a magnetic field, they can't move
+        if (!isAttracted){
+            rb.MovePosition(rb.position + (moveSpeed * Time.deltaTime * movement));
+        }
+        walk.Play();
     }
 
     [ContextMenu("Kill Player")]
     // Instant kills the Player just because...
     public void TakeDamage(){
         hurt.Play();
+        //oof.play();
         healthPoints = 0;
         UpdateHealth();
         Die();
-        GlobalManager.instance.lastDeath = Time.time;
     }
-
     // Instant kills the Player, knows what did damage to it
     public void TakeDamage(GameObject sender){
-        healthPoints = 0;
-        UpdateHealth();
-        Die();
+        TakeDamage();
     }
     // Remove health points from the Player
     public void TakeDamage(GameObject sender, int damage){
@@ -137,10 +152,15 @@ public class Player : MonoBehaviour
         // Hurts player
         healthPoints -= damage;
         UpdateHealth();
+        // Player dies
         if (healthPoints <= 0){
             TakeDamage();
         }
-        hurt.Play();
+        // Player is just hurt
+        else{
+            hurt.Play();
+        }
+        
     }
 
     // What happens upon death
@@ -170,7 +190,7 @@ public class Player : MonoBehaviour
     public void ApplyAffect(string affect){
         if (affect == "freeze"){
             freeze.Play();
-            StopCoroutine(Damage());
+            StopAllCoroutines();
             StartCoroutine(Freeze());
         }
         else if (affect == "damage"){
@@ -178,7 +198,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    IEnumerator Freeze(){
+    public IEnumerator Freeze(){
         // Blue-ish
         float green = 150f/255f;
         float red = 0f;
@@ -216,6 +236,22 @@ public class Player : MonoBehaviour
     // Returns the arrow
     public GameObject GetArrow(){
         return gameObject.transform.GetChild(2).gameObject;
+    }
+
+    // Sets the position for the player to move towards
+    public void SetMagnet(Vector3 magnetPosition, float magnetStrength){
+        this.magnetPosition = magnetPosition;
+        this.magnetStrength = magnetStrength;
+        isAttracted = true;
+    }
+
+    // Stops the magnet effect
+    public void StopMagnet(){
+        rb.velocity = Vector3.zero;
+        isAttracted = false;
+        magnetPosition = Vector3.zero;
+        magnetStrength = 0;
+        
     }
 
 }

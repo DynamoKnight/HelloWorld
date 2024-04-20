@@ -14,11 +14,9 @@ public class Enemy : MonoBehaviour
     // The explosion particle system
     [SerializeField] protected GameObject explosion;
 
-    // The target object variables
+    // The target object variables (player)
     protected GameObject target;
     protected Vector3 targetPosition;
-    List<int> availableIndexes;
-    
 
     // Health and damage
     [SerializeField] protected int healthPoints = 1;
@@ -29,12 +27,20 @@ public class Enemy : MonoBehaviour
     protected GameObject GameManager;
     protected Inventory inventory;
     public List<GameObject> drops = new();
+    // The index of what drops it can drop
+    private List<int> availableIndexes;
+    // The chance out of 10 to drop an item when killed
+    public int dropChance = 7;
 
+    // Audio
     public AudioSource hurt;
 
     protected virtual void Start(){
         rb = GetComponent<Rigidbody2D>();
-        boxcollider = GetComponent<BoxCollider2D>();
+        // For the magnetic enemy
+        if (boxcollider == null){
+            boxcollider = GetComponent<BoxCollider2D>();
+        }
 
         GameManager = GameObject.FindGameObjectWithTag("GameManager");
         inventory = GameManager.GetComponent<Inventory>();
@@ -61,28 +67,32 @@ public class Enemy : MonoBehaviour
 
     protected virtual void FixedUpdate(){
         var step = moveSpeed * Time.deltaTime;
+        // Game must be unpaused and functional
         if(!LevelManager.instance.isPaused && LevelManager.instance.isFunctional){
             if (target){
                 targetPosition = target.GetComponent<Rigidbody2D>().transform.position;
-                var movement = Vector2.MoveTowards(rb.position, targetPosition, step);
-                // Move towards the target
+                Vector2 movement = Vector2.MoveTowards(rb.position, targetPosition, step);
+                // Move towards the target in y direction
                 hit = Physics2D.BoxCast(rb.position, boxcollider.size, 0, new Vector2(0, movement.y), Math.Abs(movement.y * Time.deltaTime), LayerMask.GetMask("Actor", "Blocking"));
-                // If something was hit, do not move
-                if (hit.collider != null && hit.collider.tag != "Drop"){
-                    return;
+                // If it hit nothing, then move
+                if (hit.collider == null || hit.collider.tag == "Drop"){
+                    Move(movement);
                 }
-                // Moves enemy in the y direction
-                rb.position = movement;
-
+                
+                // Move towards the target in X direction
                 hit = Physics2D.BoxCast(rb.position, boxcollider.size, 0, new Vector2(movement.x, 0), Math.Abs(movement.x * Time.deltaTime), LayerMask.GetMask("Actor", "Blocking"));
-                // If something was hit, do not move
-                if (hit.collider != null && hit.collider.tag != "Drop"){
-                    return;
+                if (hit.collider == null || hit.collider.tag == "Drop"){
+                    Move(movement);
                 }
-                // Moves enemy in the x direction
-                rb.position = movement;
             }
         }
+
+    }
+
+    // Moves the enemy to the position
+    protected void Move(Vector2 movement){
+        // Moves enemy in a direction
+        rb.position = movement;
     }
 
     // Sets the target to the Player object. Default value is Player
@@ -120,9 +130,11 @@ public class Enemy : MonoBehaviour
             Instantiate(drop, transform.position, transform.rotation);
         }
         // Creates the particle effect, slightly higher
-        Instantiate(explosion, new Vector3(transform.position.x, transform.position.y + 0.3f, transform.position.z), transform.rotation);
+        GameObject particles = Instantiate(explosion, new Vector3(transform.position.x, transform.position.y + 0.3f, transform.position.z), transform.rotation);
         // Death
         Destroy(gameObject);
+        // Destroys particles after 5 seconds
+        Destroy(particles, 5f);
         GlobalManager.instance.enemiesDefeated++;
     }
 
@@ -141,25 +153,29 @@ public class Enemy : MonoBehaviour
     // Returns a needed drop
     public GameObject GetDrop(){
         UpdateDrops();
+        // The drop gameobject
         GameObject final = null;
         System.Random rnd = new System.Random();
-    
+        // Clears the list
         availableIndexes.Clear();
-
+        // If the player hasn't collected all the mission items, then the enemy can still drop them
         for (int i = 0; i < inventory.numberOfEachMissionItem.Count; i++){
-            if(inventory.numberOfEachMissionItem[i] > inventory.numberOfEachMissionItemCollected[i]){
+            if(inventory.numberOfEachMissionItemCollected[i] < inventory.numberOfEachMissionItem[i]){
                 availableIndexes.Add(i);
             }
         }
+        // No drops available because all have been collected
         if (availableIndexes.Count == 0){
             return final;
         }
-        if (rnd.Next(0, 11) >= 4 ){
+        // Has a specific chance out of 10 to drop something
+        if (rnd.Next(0, 11) <= dropChance){
+            // Gets a random drop from the available drops
             final = drops[availableIndexes[rnd.Next(0,availableIndexes.Count)]];
         }
         return final;
     }
-    // 
+    // Sets the possible drops to those from the level's mission items
     public void UpdateDrops(){
         drops = inventory.missionItemDrops;
     }

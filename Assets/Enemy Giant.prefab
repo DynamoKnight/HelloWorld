@@ -101,7 +101,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 1000000
+  m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -195,8 +195,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 280c768b9202ad241a913d391689d884, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  strength: 6
-  delay: 0.15
+  strength: 1
+  delay: 0.05
   OnBegin:
     m_PersistentCalls:
       m_Calls:

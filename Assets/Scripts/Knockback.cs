@@ -23,9 +23,9 @@ public class Knockback : MonoBehaviour
     }
 
     void Update(){
-        // Sets velocity to zero if its not knocked
+        // Sets velocity to zero if its not knocked or is an enemy
         // FIXES THE BUG AFTER FOREVER!!!!
-        if (!isKnocked){
+        if (!isKnocked && gameObject.tag == "Enemy"){
             rb.velocity = Vector2.zero;
         }
     }

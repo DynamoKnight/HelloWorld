@@ -106,6 +106,7 @@ public class UIManager : MonoBehaviour
         quote.text = infos[currentPlanet][1];
         info.text = infos[currentPlanet][2];
         enemy_info.text = "Enemies: " + infos[currentPlanet][3];
+        
         // The button to escape start screen
         Button startBtn = startScreen.transform.GetChild(1).GetComponent<Button>();
         startBtn.onClick.AddListener(StartLevel);

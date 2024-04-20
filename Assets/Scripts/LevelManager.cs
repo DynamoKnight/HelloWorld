@@ -19,6 +19,8 @@ public class LevelManager : MonoBehaviour
     public bool isFunctional;
     // Indicates whether the current level is completed
     public bool levelComplete = false;
+    // Indicates if enemies can spawn
+    public bool spawnEnemies;
     // Planet level names
     public List<string> levels;
     public string currentPlanet;
@@ -42,6 +44,7 @@ public class LevelManager : MonoBehaviour
         // Initial conditions
         isPaused = false;
         isFunctional = false;
+        spawnEnemies = true;
         
     }
 
