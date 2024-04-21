@@ -15,9 +15,10 @@ public class Bullet : MonoBehaviour
     [SerializeField] private float lifeTime = 2f;
     private Rigidbody2D rb;
     [SerializeField] private CapsuleCollider2D cc; // Needs to be initialized before Start
-    private int bulletDamage = 1;
+    [SerializeField] private int bulletDamage = 1;
     // Keeps track of who the bullet belongs to
     public GameObject sender;
+    public GameObject weapon;
 
     void Start(){
         rb = GetComponent<Rigidbody2D>();      
@@ -42,6 +43,8 @@ public class Bullet : MonoBehaviour
             Player player = coll.gameObject.GetComponent<Player>();
             if (player){
                 player.TakeDamage(gameObject, bulletDamage);
+                // Does knockback to player
+                 player.GetComponent<Knockback>().PlayFeedback(sender);
             }
         }
         // Hits enemy
@@ -49,14 +52,24 @@ public class Bullet : MonoBehaviour
             Enemy enemy = coll.gameObject.GetComponent<Enemy>();
             if (enemy){
                 enemy.TakeDamage(gameObject, bulletDamage);
+                // Does knockback to enemy with scythe values
+                if (weapon.name == "Scythe"){
+                    enemy.GetComponent<Knockback>().PlayFeedback(sender, weapon.GetComponent<Scythe>().GetStrength(), weapon.GetComponent<Scythe>().GetDuration());
+                }
+                // Default knockback
+                else{
+                    enemy.GetComponent<Knockback>().PlayFeedback(sender);
+                }
+                
             }
         }
         Destroy(gameObject);
     }
     
     // Sets the sender of the bullet
-    public void SetSender(GameObject sender){
+    public void SetSender(GameObject sender, GameObject weapon){
         this.sender = sender;
+        this.weapon = weapon;
         // Ignores collision with the object shooting the bullet
         Physics2D.IgnoreCollision(this.sender.GetComponent<BoxCollider2D>(), cc);
     }

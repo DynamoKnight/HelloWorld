@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,6 +29,9 @@ public class UIManager : MonoBehaviour
     private Button quitBtn;
     private Button backBtn;
 
+    // Timer
+    [SerializeField] private GameObject gameTime; 
+
     void Start(){
         player = GameObject.Find("Player");
         gm = GameObject.FindGameObjectWithTag("GameManager");
@@ -56,13 +60,27 @@ public class UIManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape)){
             TogglePauseMenu();
         }
+        // Game must be unpaused an functional
+        if (!LevelManager.instance.isPaused && LevelManager.instance.isFunctional){
+            // Changes avatar image breifly
+            if(timer >= avatarAnimTime){
+                timer = 0f;
+            }
+            else{
+                timer += Time.deltaTime;
+            }
 
-        // Changes avatar image breifly
-        if(timer >= avatarAnimTime){
-            timer = 0f;
-        }
-        else{
-            timer += Time.deltaTime;
+            // Updates the time
+            float i = GlobalManager.instance.timePlayed;
+            int minute = Convert.ToInt32(Math.Floor(i/60f));
+            int seconds = Convert.ToInt32(i - minute*60);
+            // Adds 0 if needed
+            if (seconds < 10){
+                gameTime.GetComponent<TMP_Text>().text = minute + ":0" + seconds;
+            }
+            else{
+                gameTime.GetComponent<TMP_Text>().text = minute + ":" + seconds;
+            }
         }
     }
 

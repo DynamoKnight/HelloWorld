@@ -23,49 +23,73 @@ public class GlobalManager : MonoBehaviour
                 "Easy",
                 "The Dwarf Planet",
                 "The icy terrain and rocky landscape make it hard to navigate. While it's cold environment provides a challenge, the aliens settlers have made the planet a bit more bearable... ",
-                "They have adapted to the cold climate and are not kind to intruders..."
+                "They have adapted to the cold climate and are not kind to intruders...",
+                "-375"
                 } },
             { "Neptune", new string[] {
                 "Easy",
                 "The Blue Giant",
                 "Neptune has 14 known moons, the largest of which is Triton, which is believed to be a captured Kuiper Belt object.",
-                "Frost bites "
+                "Frost bites ",
+                "-330"
                 } },
             { "Uranus", new string[] {
                 "Medium",
                 "The Bull's Eye Planet",
                 "Uranus is the only planet in the solar system that rotates on its side",
-                "Shoots balls"
+                "Shoots balls",
+                "-320"
                 } },
             { "Saturn", new string[] {
                 "Medium",
                 "The Ringed Planet",
                 "Saturn's density is so low that if there were a large enough body of water, it would float in it",
-                "Magnetic fields"
+                "Magnetic fields",
+                "-220"
                 } },
             { "Jupiter", new string[] {
                 "Hard",
                 "The Gas Giant",
                 "Jupiter's Great Red Spot is a massive storm that has been raging for at least 400 years and is large enough to engulf Earth two or three times over.",
-                "Big boys"
+                "Big boys",
+                "-166"
                 } },
             { "Mars", new string[] {
                 "Hard",
                 "The Red Planet",
                 "Mars has the largest volcano and canyon in the solar system, Olympus Mons and Valles Marineris respectively",
-                "Sand attacks"
+                "Sand attacks",
+                "-85"
                 } },
             { "The Moon", new string[] {
                 "Extreme",
                 "Luna Selene",
                 "One small step for man. One giant leap for mankind.",
-                "Everybody"
+                "Everybody",
+                "0"
                 } },
             { "Earth", new string[] {
                 "Boss",
                 "The Blue Planet",
                 "The home of the advanced species classified as Humans.",
-                "Boss is here"} }
+                "Boss is here",
+                "59"
+                } },
+            { "Venus", new string[] {
+                "Extreme",
+                "The Morning Star",
+                "Hot.",
+                "Robots",
+                "867"
+                } },
+            { "Mercury", new string[] {
+                "Extreme",
+                "The Swift Planet",
+                "Close to Sun.",
+                "Firey",
+                "333"
+                } }
+
             
         };
 

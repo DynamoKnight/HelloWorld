@@ -15,15 +15,14 @@ public class Gun : MonoBehaviour
     [Range(0.1f, 2f)]
     [SerializeField] protected float fireRate = 0.5f;
     protected float fireTimer;
-    protected float yscale;
+    protected SpriteRenderer spriteRenderer;
 
     public bool beingUsed;
 
     public AudioSource blast;
 
     protected virtual void Start(){
-        // 2.45
-        yscale = transform.localScale.y; 
+        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         gameObject.name = "Laser Blaster";
     }
 
@@ -33,21 +32,19 @@ public class Gun : MonoBehaviour
         
         // Only collects input if game is unpaused and functional
         if(!LevelManager.instance.isPaused && LevelManager.instance.isFunctional){
-            var scale = transform.localScale;
             mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
             // Gets the angle of the character by using arctangent of the delta position
             float angle = Mathf.Atan2(mousePos.y - transform.position.y, mousePos.x - transform.position.x) * Mathf.Rad2Deg;
             // Rotates in z direction
-            // yscale needs to match with the y scale
+            // Flips along the y-axis
             transform.localRotation = Quaternion.Euler(0, 0, angle);
             if (angle > 90f || angle < -90f){
-                scale.y = -yscale;
+                spriteRenderer.flipY = true;
             }
             else{
-                scale.y = yscale;
+                spriteRenderer.flipY = false;
             }
-            transform.localScale = scale;
             // Only fires when in use
             // beingUsed is determine by WeaponSwitcher
             if(beingUsed){
@@ -72,6 +69,6 @@ public class Gun : MonoBehaviour
         // Keeps track of the bullet shot
         Bullet bulletFired = Instantiate(bulletPrefab, firingPoint.position, firingPoint.rotation).GetComponent<Bullet>();
         // Tells the bullet that this is the sender
-        bulletFired.SetSender(player);
+        bulletFired.SetSender(player, gameObject);
     }
 }

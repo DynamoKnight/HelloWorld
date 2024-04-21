@@ -111,7 +111,7 @@ public class Player : MonoBehaviour
             // Moves player in the x direction
             Move();
         }
-        
+
         // Moves toward magnetic field
         if (isAttracted){
             Vector2 magnetDirection = (magnetPosition - transform.position).normalized;
@@ -146,9 +146,6 @@ public class Player : MonoBehaviour
     // Remove health points from the Player
     public void TakeDamage(GameObject sender, int damage){
         ApplyAffect("damage");
-        // Does knockback to player
-        Knockback knockback = GetComponent<Knockback>();
-        knockback.PlayFeedback(sender);
         // Hurts player
         healthPoints -= damage;
         UpdateHealth();

@@ -48,6 +48,45 @@ public class Knockback : MonoBehaviour
         knockbackCoroutine = StartCoroutine(Reset());
     }
 
+    // Knocksback with overriden values
+    public void PlayFeedback(GameObject sender, float strength, float delay){
+        // Stores original values
+        var tempDelay = this.delay;
+        this.delay = delay;
+        var tempStrength = this.strength;
+        this.strength = strength;
+
+        PlayFeedback(sender);
+        // Sets back to original
+        this.delay = tempDelay;
+        this.strength = tempStrength;
+    }
+
+    // Applies knockback in a random direction to the object
+    public void RandomKnockback(float strength, float delay){
+        // So that original delay won't be lost
+        var tempDelay = this.delay;
+        this.delay = delay;
+
+        // Stop the previous knockback coroutine if it's running
+        if (knockbackCoroutine != null){
+            StopCoroutine(knockbackCoroutine);
+        }
+        // Invokes the function attached to the OnBegin event
+        OnBegin?.Invoke();
+        // Sends to a random direction
+        float randomX = Random.Range(-1, 1);
+        float randomY = Random.Range(-1, 1);
+        Vector2 direction = new Vector2(randomX, randomY);
+        // Applies force that will not be stopped until the Reset function
+        rb.AddForce(direction * strength, ForceMode2D.Impulse);
+        isKnocked = true;
+        // Start the new knockback coroutine
+        knockbackCoroutine = StartCoroutine(Reset());
+
+        this.delay = tempDelay;
+    }
+
     // A Coroutine is a enumeratable method
     // Stops the Knockback working on the rigidbody
     private IEnumerator Reset(){

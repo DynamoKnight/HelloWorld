@@ -48,7 +48,7 @@ public class EnemyRanged : Enemy
             // Keeps track of the bullet shot
             Bullet bulletFired = Instantiate(bulletPrefab, firingPoint.position, firingPoint.rotation).GetComponent<Bullet>();
             // Tells the bullet that this is the sender
-            bulletFired.SetSender(gameObject);
+            bulletFired.SetSender(gameObject, gameObject);
             timeToFire = 0f;
         }
         else{

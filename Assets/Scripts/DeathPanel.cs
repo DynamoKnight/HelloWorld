@@ -32,14 +32,21 @@ public class DeathPanel : MonoBehaviour
 
     // Shows the statistics for the level
     public void Die(){
+        // Rewrites for better format
         float i = GlobalManager.instance.timePlayed;
         int minute = Convert.ToInt32(Math.Floor(i/60f));
         int seconds = Convert.ToInt32(i - minute*60);
-
-        timePlayed.GetComponent<TextMeshProUGUI>().text = minute + ":" + seconds;
-        EnemiesDefeated.GetComponent<TextMeshProUGUI>().text = GlobalManager.instance.enemiesDefeated.ToString();
-        PlanetsDiscoverd.GetComponent<TextMeshProUGUI>().text = GlobalManager.instance.planetsDiscovered.ToString();
-        ItemsCollected.GetComponent<TextMeshProUGUI>().text = GlobalManager.instance.itemsCollected.ToString();
+        // Adds 0 if needed
+        if (seconds < 10){
+            timePlayed.GetComponent<TMP_Text>().text = minute + ":0" + seconds;
+        }
+        else{
+            timePlayed.GetComponent<TMP_Text>().text = minute + ":" + seconds;
+        }
+        
+        EnemiesDefeated.GetComponent<TMP_Text>().text = GlobalManager.instance.enemiesDefeated.ToString();
+        PlanetsDiscoverd.GetComponent<TMP_Text>().text = GlobalManager.instance.planetsDiscovered.ToString();
+        ItemsCollected.GetComponent<TMP_Text>().text = GlobalManager.instance.itemsCollected.ToString();
     }
 
     // Returns to the menu screen

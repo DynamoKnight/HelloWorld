@@ -140,9 +140,6 @@ public class Enemy : MonoBehaviour
 
     // Remove health points from the Enemy
     public virtual void TakeDamage(GameObject sender, int damage){
-        // Does knockback to enemy
-        Knockback knockback = GetComponent<Knockback>();
-        knockback.PlayFeedback(sender);
         healthPoints -= damage;
         if (healthPoints <= 0){
             TakeDamage();
