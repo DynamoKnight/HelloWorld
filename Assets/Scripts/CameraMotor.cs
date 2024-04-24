@@ -10,7 +10,7 @@ public class CameraMotor : MonoBehaviour
     public float boundX = 1f;
     public float boundY = 0.5f;
 
-    // Gets called after everything else
+    // Gets called after Update
     private void LateUpdate(){
         // (0, 0, 0)
         Vector3 delta = Vector3.zero;

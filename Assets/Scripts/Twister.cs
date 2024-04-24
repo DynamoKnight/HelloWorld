@@ -46,6 +46,7 @@ public class Twister : MonoBehaviour
     public void Push(Collider2D coll){
         // Does knockback to player
         Knockback knockback = coll.GetComponent<Knockback>();
-        knockback.RandomKnockback(strength, duration);
+        // Random direction push
+        knockback.PlayFeedback(gameObject, strength, duration, true);
     }
 }

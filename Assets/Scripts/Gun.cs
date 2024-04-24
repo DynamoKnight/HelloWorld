@@ -6,7 +6,7 @@ using UnityEngine;
 public class Gun : MonoBehaviour
 {
     // The player
-    [SerializeField] private GameObject player;
+    [SerializeField] protected GameObject player;
 
     protected Vector2 mousePos;
     [SerializeField] protected GameObject bulletPrefab;
@@ -28,7 +28,7 @@ public class Gun : MonoBehaviour
 
     // Update is called once per frame
     protected virtual void Update(){
-        blast.volume = GameObject.FindGameObjectWithTag("VolumeManager").GetComponent<VolumeManager>().SFXVolumeMultplier;
+        blast.volume = GameObject.Find("VolumeManager").GetComponent<VolumeManager>().SFXVolumeMultplier;
         
         // Only collects input if game is unpaused and functional
         if(!LevelManager.instance.isPaused && LevelManager.instance.isFunctional){

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Enemy : MonoBehaviour
 {
@@ -31,6 +32,7 @@ public class Enemy : MonoBehaviour
     private List<int> availableIndexes;
     // The chance out of 10 to drop an item when killed
     public int dropChance = 7;
+    public bool hasDrops = true;
 
     // Audio
     public AudioSource hurt;
@@ -43,14 +45,21 @@ public class Enemy : MonoBehaviour
         }
 
         GameManager = GameObject.FindGameObjectWithTag("GameManager");
-        inventory = GameManager.GetComponent<Inventory>();
-        availableIndexes = new List<int>();
-        drops = inventory.missionItemDrops;
-        //
-        List<AudioSource> a = FindObjectsOfType<AudioSource>().ToList();
-        foreach (AudioSource i in a){
-            if(i.tag == "AlienAudio"){
-                hurt = i;
+        if (SceneManager.GetActiveScene().name == "Multiplayer"){
+            hasDrops = false;
+            
+        }
+        else{
+            inventory = GameManager.GetComponent<Inventory>();
+            availableIndexes = new List<int>();
+            drops = inventory.missionItemDrops;
+        }
+        
+        // Finds the alien audio by looking through all audios
+        List<AudioSource> audios = FindObjectsOfType<AudioSource>().ToList();
+        foreach (AudioSource audio in audios){
+            if(audio.tag == "AlienAudio"){
+                hurt = audio;
             }
         }
     }
@@ -116,8 +125,9 @@ public class Enemy : MonoBehaviour
         Player player = coll.gameObject.GetComponent<Player>();
         // If player is null, then coll was not a player object
         if (player != null){
-            // Kills player
+            // Hurts player
             player.TakeDamage(gameObject, touchDamage);
+            player.GetComponent<Knockback>().PlayFeedback(gameObject, false);
             target = null;
         }
     }
@@ -149,6 +159,9 @@ public class Enemy : MonoBehaviour
 
     // Returns a needed drop
     public GameObject GetDrop(){
+        if (hasDrops == false){
+            return null;
+        }
         UpdateDrops();
         // The drop gameobject
         GameObject final = null;

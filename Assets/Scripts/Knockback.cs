@@ -23,7 +23,7 @@ public class Knockback : MonoBehaviour
     }
 
     void Update(){
-        // Sets velocity to zero if its not knocked or is an enemy
+        // Sets velocity to zero if its not knocked and is an enemy
         // FIXES THE BUG AFTER FOREVER!!!!
         if (!isKnocked && gameObject.tag == "Enemy"){
             rb.velocity = Vector2.zero;
@@ -32,7 +32,7 @@ public class Knockback : MonoBehaviour
 
     // The sender is the object that hits the object
     // so that it can calculate the direction to knockback the object
-    public void PlayFeedback(GameObject sender){
+    public void PlayFeedback(GameObject sender, bool isRandom){
         // Stop the previous knockback coroutine if it's running
         if (knockbackCoroutine != null){
             StopCoroutine(knockbackCoroutine);
@@ -40,58 +40,45 @@ public class Knockback : MonoBehaviour
         // Invokes the function attached to the OnBegin event
         // In this case, it disables the movement script
         OnBegin?.Invoke();
-        Vector2 direction = (transform.position - sender.transform.position).normalized;
+        Vector2 direction;
+        // Sends to a random direction
+        if (isRandom){
+            // From -1 to 1
+            float randomX = Random.Range(-1, 1);
+            float randomY = Random.Range(-1, 1);
+            direction = new Vector2(randomX, randomY);
+        }
+        // Sends in the direction the sender was moving
+        else{
+            direction = (transform.position - sender.transform.position).normalized;
+        }
         // Applies force that will not be stopped until the Reset function
         rb.AddForce(direction * strength, ForceMode2D.Impulse);
         isKnocked = true;
-        // Start the new knockback coroutine
-        knockbackCoroutine = StartCoroutine(Reset());
+        // Start the new knockback coroutine, allows parameter
+        IEnumerator coroutine = StopKnockback(delay);
+        knockbackCoroutine = StartCoroutine(coroutine);
     }
 
-    // Knocksback with overriden values
-    public void PlayFeedback(GameObject sender, float strength, float delay){
+    // Knockback with overriden values
+    public void PlayFeedback(GameObject sender, float strength, float delay, bool isRandom){
         // Stores original values
         var tempDelay = this.delay;
         this.delay = delay;
         var tempStrength = this.strength;
         this.strength = strength;
 
-        PlayFeedback(sender);
+        PlayFeedback(sender, isRandom);
         // Sets back to original
         this.delay = tempDelay;
         this.strength = tempStrength;
     }
 
-    // Applies knockback in a random direction to the object
-    public void RandomKnockback(float strength, float delay){
-        // So that original delay won't be lost
-        var tempDelay = this.delay;
-        this.delay = delay;
-
-        // Stop the previous knockback coroutine if it's running
-        if (knockbackCoroutine != null){
-            StopCoroutine(knockbackCoroutine);
-        }
-        // Invokes the function attached to the OnBegin event
-        OnBegin?.Invoke();
-        // Sends to a random direction
-        float randomX = Random.Range(-1, 1);
-        float randomY = Random.Range(-1, 1);
-        Vector2 direction = new Vector2(randomX, randomY);
-        // Applies force that will not be stopped until the Reset function
-        rb.AddForce(direction * strength, ForceMode2D.Impulse);
-        isKnocked = true;
-        // Start the new knockback coroutine
-        knockbackCoroutine = StartCoroutine(Reset());
-
-        this.delay = tempDelay;
-    }
-
     // A Coroutine is a enumeratable method
     // Stops the Knockback working on the rigidbody
-    private IEnumerator Reset(){
+    private IEnumerator StopKnockback(float duration){
         // Waits delay seconds before stopping
-        yield return new WaitForSeconds(delay);
+        yield return new WaitForSeconds(duration);
         // Stops the knockback
         rb.velocity = Vector2.zero;
         rb.AddForce(Vector2.zero);
@@ -100,4 +87,5 @@ public class Knockback : MonoBehaviour
         // In this case, it enables the movement script
         OnDone?.Invoke();
     }
+
 }

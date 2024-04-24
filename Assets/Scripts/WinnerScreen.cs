@@ -6,24 +6,57 @@ using UnityEngine.UI;
 
 public class WinnerScreen : MonoBehaviour
 {
-
-    public Button MainMenuButton;
-
-    public AudioSource winsound;
-
     private GameObject gm;
     private StateManager stateManager;
 
-    // Start is called before the first frame update
-    void Start(){
+    private Image planetImage;
+    private Button menuBtn;
+    private Button nextBtn;
+    // Stats panel texts
+    private GameObject statsPanel;
+
+    // The next level 
+    [SerializeField] private string destination;
+
+    public AudioSource winsound;
+
+    // OnEnable is called right when it is set active
+    void OnEnable(){
         gm = GameObject.Find("GameManager");
         stateManager = gm.GetComponent<StateManager>();
-        
-        MainMenuButton.onClick.AddListener(LoadMenu);
+
+        planetImage = transform.GetChild(0).GetComponent<Image>();
+        menuBtn = transform.GetChild(1).GetComponent<Button>();
+        nextBtn = transform.GetChild(2).GetComponent<Button>();
+        statsPanel = transform.GetChild(4).gameObject;
+
+        // Sets the image to the planet that was completed
+        planetImage.sprite = GlobalManager.instance.GetImages()[GlobalManager.instance.GetIdxOfCurrentPlanet()]; 
+        menuBtn.onClick.AddListener(LoadMenu);
+        nextBtn.onClick.AddListener(NextLevel);
+
+        winsound.volume = GameObject.Find("VolumeManager").GetComponent<VolumeManager>().SFXVolumeMultplier;
     }
 
+    // Sets itself active and records the stats
+    public void ShowScreen(){
+        // Pauses game so no spawning or anything happens
+        LevelManager.instance.isFunctional = false;
+
+        gameObject.SetActive(true);
+        GlobalManager.instance.WriteStats(statsPanel);
+        winsound.Play();
+    }
+
+    // Goes back home
     public void LoadMenu(){
         stateManager.ChangeSceneByName("TitlePage");
+    }
+
+    // Goes to the desired planet
+    public void NextLevel(){
+        // Loads the instructions scene for the planet
+        stateManager.LoadInstructions(destination);
     }
 
 }

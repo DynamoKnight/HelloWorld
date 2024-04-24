@@ -1,5 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using TMPro;
 using UnityEngine;
 
 public class GlobalManager : MonoBehaviour
@@ -13,10 +16,13 @@ public class GlobalManager : MonoBehaviour
     public int itemsCollected;
 
     public float lastDeath;
+    public float gameStart;
+
     // Images of each planet
     [SerializeField] private Sprite[] images;
     // Every planet with information about it
     // Array with key-value pairs
+    // Planet, [Difficulty, Nickname, Info, Enemies, Temperature]
     public Dictionary<string, string[]> infos = new Dictionary<string, string[]>
         {
             { "Pluto", new string[] {
@@ -92,7 +98,7 @@ public class GlobalManager : MonoBehaviour
 
             
         };
-
+    
     void Awake(){
         // Makes sure there is 1 instance of this
         if (GlobalManager.instance == null){
@@ -111,7 +117,11 @@ public class GlobalManager : MonoBehaviour
     }
 
     void Update(){
-        timePlayed = Time.time - lastDeath;
+        // Updates time when game is active
+        if (!LevelManager.instance.isPaused && LevelManager.instance.isFunctional){
+            timePlayed = Time.time - gameStart;
+        }
+        
     }
     
     // Returns the dictionary of planet information
@@ -121,5 +131,44 @@ public class GlobalManager : MonoBehaviour
     // Returns the Planet Images
     public Sprite[] GetImages(){
         return images;
+    }
+    // Returns the Index of the Planet
+    public int GetIdxOfPlanet(string planet){
+        return infos.Keys.ToList().IndexOf(planet);
+    }
+    // Returns the Index of the Current Planet
+    public int GetIdxOfCurrentPlanet(){
+        return GetIdxOfPlanet(LevelManager.instance.currentPlanet);
+    }
+
+    // Writes the stats into these game objects and saves them
+    public void WriteStats(GameObject statsPanel){
+        // Gets the text objects (inside the label object)
+        GameObject timePlayedText = statsPanel.transform.GetChild(0).GetChild(0).gameObject;
+        GameObject enemiesDefeatedText = statsPanel.transform.GetChild(1).GetChild(0).gameObject;
+        GameObject planetsDiscoveredText = statsPanel.transform.GetChild(2).GetChild(0).gameObject;
+        GameObject itemsCollectedText = statsPanel.transform.GetChild(3).GetChild(0).gameObject;
+
+        // Rewrites for better format
+        float i = timePlayed;
+        int minute = Convert.ToInt32(Math.Floor(i/60f));
+        int seconds = Convert.ToInt32(i - minute*60);
+        // Adds 0 if needed
+        if (seconds < 10){
+            timePlayedText.GetComponent<TMP_Text>().text = minute + ":0" + seconds;
+        }
+        else{
+            timePlayedText.GetComponent<TMP_Text>().text = minute + ":" + seconds;
+        }
+        
+        enemiesDefeatedText.GetComponent<TMP_Text>().text = enemiesDefeated.ToString();
+        planetsDiscoveredText.GetComponent<TMP_Text>().text = planetsDiscovered.ToString();
+        itemsCollectedText.GetComponent<TMP_Text>().text = itemsCollected.ToString();
+
+        // Saves the data to the data of the current planet
+        //Find best time played for the specific planet
+        //Add enemies defeated to the total of all planets
+        //Don't store planets discovered
+        //Don't store items collected
     }
 }

@@ -44,7 +44,7 @@ public class Bullet : MonoBehaviour
             if (player){
                 player.TakeDamage(gameObject, bulletDamage);
                 // Does knockback to player
-                 player.GetComponent<Knockback>().PlayFeedback(sender);
+                 player.GetComponent<Knockback>().PlayFeedback(sender, false);
             }
         }
         // Hits enemy
@@ -54,11 +54,11 @@ public class Bullet : MonoBehaviour
                 enemy.TakeDamage(gameObject, bulletDamage);
                 // Does knockback to enemy with scythe values
                 if (weapon.name == "Scythe"){
-                    enemy.GetComponent<Knockback>().PlayFeedback(sender, weapon.GetComponent<Scythe>().GetStrength(), weapon.GetComponent<Scythe>().GetDuration());
+                    enemy.GetComponent<Knockback>().PlayFeedback(sender, weapon.GetComponent<Scythe>().GetStrength(), weapon.GetComponent<Scythe>().GetDuration(), false);
                 }
                 // Default knockback
                 else{
-                    enemy.GetComponent<Knockback>().PlayFeedback(sender);
+                    enemy.GetComponent<Knockback>().PlayFeedback(sender, false);
                 }
                 
             }

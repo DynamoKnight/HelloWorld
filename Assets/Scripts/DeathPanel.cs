@@ -11,42 +11,29 @@ public class DeathPanel : MonoBehaviour
     private GameObject gm;
     private StateManager stateManager;
 
-    public GameObject timePlayed;
-    public GameObject EnemiesDefeated;
-    public GameObject PlanetsDiscoverd;
-    public GameObject ItemsCollected;
+    private GameObject statsPanel;
     // Options once dead
     private Button retryBtn;
     private Button backBtn;
 
-    void Start(){
+    void OnEnable(){
         gm = GameObject.Find("GameManager");
         stateManager = gm.GetComponent<StateManager>();
-        // Death panel buttons
-        retryBtn = gameObject.transform.GetChild(0).GetComponent<Button>();
-        backBtn = gameObject.transform.GetChild(1).GetComponent<Button>();
 
-        retryBtn.onClick.AddListener(RestartLevel);
+        // Death panel buttons
+        backBtn = transform.GetChild(0).GetComponent<Button>();
+        retryBtn = transform.GetChild(1).GetComponent<Button>();
+        // Make sure order is right
+        statsPanel = transform.GetChild(4).gameObject;
+        
         backBtn.onClick.AddListener(BackToMenu);
+        retryBtn.onClick.AddListener(RestartLevel);
     }
 
     // Shows the statistics for the level
     public void Die(){
-        // Rewrites for better format
-        float i = GlobalManager.instance.timePlayed;
-        int minute = Convert.ToInt32(Math.Floor(i/60f));
-        int seconds = Convert.ToInt32(i - minute*60);
-        // Adds 0 if needed
-        if (seconds < 10){
-            timePlayed.GetComponent<TMP_Text>().text = minute + ":0" + seconds;
-        }
-        else{
-            timePlayed.GetComponent<TMP_Text>().text = minute + ":" + seconds;
-        }
-        
-        EnemiesDefeated.GetComponent<TMP_Text>().text = GlobalManager.instance.enemiesDefeated.ToString();
-        PlanetsDiscoverd.GetComponent<TMP_Text>().text = GlobalManager.instance.planetsDiscovered.ToString();
-        ItemsCollected.GetComponent<TMP_Text>().text = GlobalManager.instance.itemsCollected.ToString();
+        // Writes the current stats into these game objects
+        GlobalManager.instance.WriteStats(statsPanel);
     }
 
     // Returns to the menu screen

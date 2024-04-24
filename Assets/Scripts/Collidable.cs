@@ -13,8 +13,7 @@ public class Collidable : MonoBehaviour
 
     private GameObject gm;
 
-    [HideInInspector]
-    public Inventory inventory;
+    [HideInInspector] public Inventory inventory;
 
     protected virtual void Start(){
         boxCollider = GetComponent<BoxCollider2D>();

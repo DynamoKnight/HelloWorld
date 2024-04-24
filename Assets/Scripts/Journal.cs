@@ -66,7 +66,7 @@ public class Journal : MonoBehaviour
     // Styles the journal page based on planet
     public void SetPage(int index){
         // Darkens planet if level isn't reached
-        int currentPlanetIdx = infos.Keys.ToList().IndexOf(LevelManager.instance.currentPlanet);
+        int currentPlanetIdx = GlobalManager.instance.GetIdxOfCurrentPlanet();
         if (index > currentPlanetIdx){
             image.sprite = images[index];
             image.color = new Color(0.15f,0.15f,0.15f);

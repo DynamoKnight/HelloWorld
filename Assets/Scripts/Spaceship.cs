@@ -8,23 +8,19 @@ public class Spaceship : MonoBehaviour
 {
     private GameObject gm;
     private Inventory inventory;
+    [SerializeField] private Player player;
 
-    [SerializeField]
-    private Player player;
-    [SerializeField]
-    private float activationDistance = 5f;
-    [SerializeField]
-    private GameObject leaveMenu;
+    // Distance until the leave text appears
+    [SerializeField] private float activationDistance = 5f;
+    // Once aall resources are collected, this will appear
+    [SerializeField] private GameObject leaveMenu;
     private Button leaveBtn;
     private Button backBtn;
-
-    [SerializeField]
-    private GameObject winnerScreen;
-
-    [SerializeField]
-    private string destination;
-
+    // Indicates whether the leave menu is canceled
     private bool exited = false;
+
+    // Level complete menu
+    [SerializeField] private GameObject winnerScreen;
 
     void Start(){
         gm = GameObject.Find("GameManager");
@@ -42,17 +38,8 @@ public class Spaceship : MonoBehaviour
     // Goes to the next level if all mission tasks are fulfilled
     public void LeaveGame(){
         if (LevelManager.instance.levelComplete == true){
-            // Pauses game so no spawning or anything happens
-            StateManager sm = gm.GetComponent<StateManager>();
-            if (destination == "WinnerScreen"){
-                // Shows the winner screen
-                winnerScreen.SetActive(true);
-            }
-            else{
-                // Loads the instructions scene
-                sm.LoadInstructions(destination);
-            }
-            
+            LeaveScreen();
+            winnerScreen.GetComponent<WinnerScreen>().ShowScreen();
         }
     }
 

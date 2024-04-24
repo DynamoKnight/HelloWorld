@@ -12,41 +12,44 @@ public class Player : MonoBehaviour
 {
     // The GlobalManager.instance dictates all
 
-    private Vector2 movement;
-    private BoxCollider2D boxcollider;
-    private Rigidbody2D rb;
-    private RaycastHit2D hit;
-    private Animator animator;
+    protected Vector2 movement;
+    protected BoxCollider2D boxcollider;
+    protected Rigidbody2D rb;
+    protected RaycastHit2D hit;
+    protected Animator animator;
 
-    [SerializeField] private float moveSpeed;
-    private bool isSprinting = false;
+    [SerializeField] protected float moveSpeed;
+    protected bool isSprinting = false;
 
-    public int healthPoints;
-    [SerializeField] private Image[] hearts;
+    protected int healthPoints;
+    [SerializeField] protected Image[] hearts;
     // The explosion particle system
-    [SerializeField] private GameObject explosion; 
+    [SerializeField] protected GameObject explosion;
+    // Default color
+    protected Color spriteColor = Color.white;
 
-    private GameObject gm;
-    private Inventory inventory;
+    protected GameObject gm;
+    protected Inventory inventory;
 
     // Goes toward magnetic field
-    private bool isAttracted;
-    private Vector3 magnetPosition;
-    private float magnetStrength;
+    protected bool isAttracted;
+    protected Vector3 magnetPosition;
+    protected float magnetStrength;
 
     // Audio sounds
-    [SerializeField] private AudioSource hurt;
-    [SerializeField] private AudioSource dieSounds;
-    [SerializeField] private AudioSource walk;
-    [SerializeField] private AudioSource freeze;
+    [SerializeField] protected AudioSource hurt;
+    [SerializeField] protected AudioSource dieSounds;
+    [SerializeField] protected AudioSource walk;
+    [SerializeField] protected AudioSource freeze;
     
 
     // Start is called before the first frame update
-    void Start(){
+    protected virtual void Start(){
         // The inventory is within the game manager
         gm = GameObject.Find("GameManager");
         inventory = gm.GetComponent<Inventory>();
 
+        healthPoints = hearts.Length;
         boxcollider = GetComponent<BoxCollider2D>();
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
@@ -55,11 +58,10 @@ public class Player : MonoBehaviour
 
     // Gets called every frame
     // All inputs should be initialized here
-    void Update(){
-
+    protected virtual void Update(){
+        // Sets volume
         hurt.volume = GameObject.FindGameObjectWithTag("VolumeManager").GetComponent<VolumeManager>().SFXVolumeMultplier;
         freeze.volume = GameObject.FindGameObjectWithTag("VolumeManager").GetComponent<VolumeManager>().SFXVolumeMultplier;
-
 
         // Only collects input if game is unpaused and player is allowed to move
         if(!LevelManager.instance.isPaused && LevelManager.instance.isFunctional){
@@ -86,15 +88,12 @@ public class Player : MonoBehaviour
                 moveSpeed -= 10;
                 isSprinting = false;
             }
-            if (Input.GetKeyUp(KeyCode.Y)) {
-                SceneManager.LoadScene("NeptuneDialog");
-            }
         }
     
     }
 
     // Gets called every frame at a interval of time
-    void FixedUpdate(){
+    protected virtual void FixedUpdate(){
         // Casts a box around character, and returns the collider that the target vector will contact
         // It will only work for objects in a specfic layer.
         // Y
@@ -121,7 +120,7 @@ public class Player : MonoBehaviour
     }
 
     // Moves the player based on the given input from Update
-    private void Move(){
+    protected virtual void Move(){
         // The reason there is weird movement glitches is because Transform bypasses physics. Thats why we must use Rigidbody.
         // If player is attracted to a magnetic field, they can't move
         if (!isAttracted){
@@ -140,11 +139,11 @@ public class Player : MonoBehaviour
         Die();
     }
     // Instant kills the Player, knows what did damage to it
-    public void TakeDamage(GameObject sender){
+    public virtual void TakeDamage(GameObject sender){
         TakeDamage();
     }
     // Remove health points from the Player
-    public void TakeDamage(GameObject sender, int damage){
+    public virtual void TakeDamage(GameObject sender, int damage){
         ApplyAffect("damage");
         // Hurts player
         healthPoints -= damage;
@@ -161,9 +160,9 @@ public class Player : MonoBehaviour
     }
 
     // What happens upon death
-    public void Die(){
+    public virtual void Die(){
         // Records time of death
-        GlobalManager.instance.lastDeath = Time.time;
+        GlobalManager.instance.lastDeath = GlobalManager.instance.timePlayed;
         // Calls the GameOver method from LevelManager
         LevelManager.instance.GameOver();
         // Creates the particle effect, slightly higher
@@ -172,9 +171,10 @@ public class Player : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public void UpdateHealth(){
+    // Shows the number of hearts
+    public virtual void UpdateHealth(){
         for (int i = 0; i < hearts.Length; i++){
-            // Displays regular or black heart
+            // Displays regular or black heart based on health
             if (i < healthPoints){
                 hearts[i].color = Color.white;
             }
@@ -184,7 +184,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void ApplyAffect(string affect){
+    public virtual void ApplyAffect(string affect){
         if (affect == "freeze"){
             freeze.Play();
             StopAllCoroutines();
@@ -195,7 +195,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    public IEnumerator Freeze(){
+    public virtual IEnumerator Freeze(){
         // Blue-ish
         float green = 150f/255f;
         float red = 0f;
@@ -216,39 +216,53 @@ public class Player : MonoBehaviour
         // Ends the frost effect
         moveSpeed += 5;
         animator.speed = 1f;
-        gameObject.GetComponent<SpriteRenderer>().color = Color.white;
+        gameObject.GetComponent<SpriteRenderer>().color = spriteColor;
     }
 
-    public IEnumerator Damage(){
-        // Flashing damage
+    public virtual IEnumerator Damage(){
+        // Flashes damage twice
         gameObject.GetComponent<SpriteRenderer>().color = new Color(1f, 0.4f, 0.4f);
         yield return new WaitForSeconds(0.2f);
-        gameObject.GetComponent<SpriteRenderer>().color = Color.white;
+        gameObject.GetComponent<SpriteRenderer>().color = spriteColor;
         yield return new WaitForSeconds(0.1f);
         gameObject.GetComponent<SpriteRenderer>().color = new Color(1f, 0.4f, 0.4f);
         yield return new WaitForSeconds(0.5f);
-        gameObject.GetComponent<SpriteRenderer>().color = Color.white;
+        gameObject.GetComponent<SpriteRenderer>().color = spriteColor;
     }
 
     // Returns the arrow
-    public GameObject GetArrow(){
+    public virtual GameObject GetArrow(){
         return gameObject.transform.GetChild(2).gameObject;
     }
 
     // Sets the position for the player to move towards
-    public void SetMagnet(Vector3 magnetPosition, float magnetStrength){
+    public virtual void SetMagnet(Vector3 magnetPosition, float magnetStrength){
         this.magnetPosition = magnetPosition;
         this.magnetStrength = magnetStrength;
         isAttracted = true;
     }
 
     // Stops the magnet effect
-    public void StopMagnet(){
+    public virtual void StopMagnet(){
         rb.velocity = Vector3.zero;
         isAttracted = false;
         magnetPosition = Vector3.zero;
         magnetStrength = 0;
         
+    }
+
+    // Returns the number of health points
+    public virtual int GetHearts(){
+        return healthPoints;
+    }
+    // Returns the max health
+    public virtual int GetMaxHealth(){
+        return hearts.Length;
+    }
+    // Adds hearts
+    public virtual void AddHeart(int heart = 1){
+        healthPoints += heart;
+        UpdateHealth();
     }
 
 }

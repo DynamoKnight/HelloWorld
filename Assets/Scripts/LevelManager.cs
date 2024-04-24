@@ -37,7 +37,7 @@ public class LevelManager : MonoBehaviour
         else{
             Destroy(gameObject);
         }
-        levels = new List<string> {"Pluto","Neptune","Uranus","Saturn","Jupiter","Mars","The Moon","Earth"};
+        levels = new List<string> {"Pluto","Neptune","Uranus","Saturn","Jupiter","Mars","The Moon","Earth","Venus","Mercury","Multiplayer"};
         // if current scene is pluto
         currentPlanet = levels[0];
 
@@ -71,8 +71,8 @@ public class LevelManager : MonoBehaviour
         isFunctional = false;
         UIManager _ui = GetComponent<UIManager>();
         if (_ui){
-            deathManager.Die();
             _ui.ToggleDeathPanel();
+            deathManager.Die();
         }
     }
 

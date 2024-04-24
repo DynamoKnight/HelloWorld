@@ -18,7 +18,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject startScreen;
 
     // Avatar
-    private GameObject player;
+    private GameObject[] players;
     [SerializeField] GameObject avatar;
     [SerializeField] Sprite[] avatarImages;
     private float avatarAnimTime = 5f;
@@ -33,11 +33,14 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject gameTime; 
 
     void Start(){
-        player = GameObject.Find("Player");
+        players = GameObject.FindGameObjectsWithTag("Player");
         gm = GameObject.FindGameObjectWithTag("GameManager");
         stateManager = gm.GetComponent<StateManager>();
-
-        player.SetActive(false);
+        // To handle multiple players
+        foreach (GameObject player in players){
+            player.SetActive(false);
+        }
+        
         
         // If the current scene is a planet, it will have escape buttons
         if(LevelManager.instance.levels.Contains(SceneManager.GetActiveScene().name)){
@@ -87,43 +90,51 @@ public class UIManager : MonoBehaviour
     // Shows the start screen and initializes values
     public void StartScreen(){
         startScreen.SetActive(true);
-        Dictionary<string, string[]> infos = GlobalManager.instance.GetPlanets();
-        Sprite[] images = GlobalManager.instance.GetImages();
-        // Make sure hierarchy is in order!
-        Image image = startScreen.transform.GetChild(0).GetChild(0).GetComponent<Image>();
-        TMP_Text planet = startScreen.transform.GetChild(0).GetChild(1).GetComponent<TMP_Text>();
-        TMP_Text difficulty = startScreen.transform.GetChild(0).GetChild(2).GetComponent<TMP_Text>();
-        TMP_Text quote = startScreen.transform.GetChild(0).GetChild(3).GetComponent<TMP_Text>();
-        TMP_Text info = startScreen.transform.GetChild(0).GetChild(4).GetComponent<TMP_Text>();
-        TMP_Text enemy_info = startScreen.transform.GetChild(0).GetChild(5).GetComponent<TMP_Text>();
 
-        // Gets the index of the current planet
-        string currentPlanet = LevelManager.instance.currentPlanet;
-        int currentPlanetIdx = infos.Keys.ToList().IndexOf(currentPlanet);
-        // Sets values based on the planet
-        image.sprite = images[currentPlanetIdx];
-        planet.text = currentPlanet;
-        difficulty.text = infos[currentPlanet][0];
-        if (difficulty.text == "Easy"){
-            difficulty.color = Color.green;
+        // Multiplayer start screen is different
+        if (SceneManager.GetActiveScene().name == "Multiplayer"){
+            
         }
-        if (difficulty.text == "Medium"){
-            difficulty.color = Color.yellow;
+        // Regular level start screen
+        else{
+            Dictionary<string, string[]> infos = GlobalManager.instance.GetPlanets();
+            Sprite[] images = GlobalManager.instance.GetImages();
+            // Make sure hierarchy is in order!
+            Image image = startScreen.transform.GetChild(0).GetChild(0).GetComponent<Image>();
+            TMP_Text planet = startScreen.transform.GetChild(0).GetChild(1).GetComponent<TMP_Text>();
+            TMP_Text difficulty = startScreen.transform.GetChild(0).GetChild(2).GetComponent<TMP_Text>();
+            TMP_Text quote = startScreen.transform.GetChild(0).GetChild(3).GetComponent<TMP_Text>();
+            TMP_Text info = startScreen.transform.GetChild(0).GetChild(4).GetComponent<TMP_Text>();
+            TMP_Text enemy_info = startScreen.transform.GetChild(0).GetChild(5).GetComponent<TMP_Text>();
+
+            // Gets the index of the current planet
+            string currentPlanet = LevelManager.instance.currentPlanet;
+            int currentPlanetIdx = infos.Keys.ToList().IndexOf(currentPlanet);
+            // Sets values based on the planet
+            image.sprite = images[currentPlanetIdx];
+            planet.text = currentPlanet;
+            difficulty.text = infos[currentPlanet][0];
+            if (difficulty.text == "Easy"){
+                difficulty.color = Color.green;
+            }
+            if (difficulty.text == "Medium"){
+                difficulty.color = Color.yellow;
+            }
+            else if (difficulty.text == "Hard"){
+                // Orange
+                difficulty.color = new Color(1, 0.4f, 0);
+            }
+            else if (difficulty.text == "Extreme"){
+                difficulty.color = Color.red;
+            }
+            else if (difficulty.text == "Boss"){
+                // Purple
+                difficulty.color = new Color(0.76f, 1, 0.4f);
+            }
+            quote.text = infos[currentPlanet][1];
+            info.text = infos[currentPlanet][2];
+            enemy_info.text = "Enemies: " + infos[currentPlanet][3];
         }
-        else if (difficulty.text == "Hard"){
-            // Orange
-            difficulty.color = new Color(1, 0.4f, 0);
-        }
-        else if (difficulty.text == "Extreme"){
-            difficulty.color = Color.red;
-        }
-        else if (difficulty.text == "Boss"){
-            // Purple
-            difficulty.color = new Color(0.76f, 1, 0.4f);
-        }
-        quote.text = infos[currentPlanet][1];
-        info.text = infos[currentPlanet][2];
-        enemy_info.text = "Enemies: " + infos[currentPlanet][3];
         
         // The button to escape start screen
         Button startBtn = startScreen.transform.GetChild(1).GetComponent<Button>();
@@ -133,8 +144,13 @@ public class UIManager : MonoBehaviour
     // Disables the startScreen and enables player
     public void StartLevel(){
         startScreen.SetActive(false);
-        player.SetActive(true);
+        foreach (GameObject player in players){
+            player.SetActive(true);
+        }
         LevelManager.instance.isFunctional = true;
+        // Restarts time and indicates the start time
+        GlobalManager.instance.timePlayed = 0;
+        GlobalManager.instance.gameStart = Time.time;
     }
 
     // Shows/hides the pause menu

@@ -38,6 +38,6 @@ public class Portal : Collidable
     private void SpawnAlien(){
         var alien = alienPrefabs[Random.Range(0, alienPrefabs.Length)];
         // Creates an alien object
-        Instantiate(alien, transform.position, transform.rotation);
+        Instantiate(alien, transform.position, Quaternion.identity);
     }
 }
