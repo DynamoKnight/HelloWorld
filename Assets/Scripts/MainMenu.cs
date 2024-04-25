@@ -9,7 +9,9 @@ public class MainMenu : MonoBehaviour
     private GameObject gm;
     private StateManager stateManager;
     private Button playBtn;
+    private Button mpBtn;
     private Button optionsBtn;
+    private Button infoBtn;
     private Button quitBtn;
 
     void Start(){
@@ -18,18 +20,23 @@ public class MainMenu : MonoBehaviour
         
         // Gets children buttons
         playBtn = gameObject.transform.GetChild(0).GetComponent<Button>();
-        optionsBtn = gameObject.transform.GetChild(1).GetComponent<Button>();
-        quitBtn = gameObject.transform.GetChild(2).GetComponent<Button>();
+        mpBtn = gameObject.transform.GetChild(1).GetComponent<Button>();
+        optionsBtn = gameObject.transform.GetChild(2).GetComponent<Button>();
+        infoBtn = gameObject.transform.GetChild(3).GetComponent<Button>();
+        quitBtn = gameObject.transform.GetChild(4).GetComponent<Button>();
 
         // Adds event listeners
         playBtn.onClick.AddListener(PlayGame);
+        mpBtn.onClick.AddListener(PlayMultiplayer);
         quitBtn.onClick.AddListener(QuitGame);
     }
 
     public void PlayGame(){
-        SceneManager.LoadScene("Cutscene");
-        //stateManager.ChangeSceneByName("Cutscene");
-        //SceneManager.LoadScene("Game");
+        stateManager.ChangeSceneByName("LevelSelection");
+    }
+
+    public void PlayMultiplayer(){
+        stateManager.ChangeSceneByName("Multiplayer");
     }
 
     void Update(){

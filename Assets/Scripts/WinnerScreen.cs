@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class WinnerScreen : MonoBehaviour
@@ -50,11 +52,14 @@ public class WinnerScreen : MonoBehaviour
 
     // Goes back home
     public void LoadMenu(){
-        stateManager.ChangeSceneByName("TitlePage");
+        LevelManager.instance.UpdateStats();
+        stateManager.ChangeSceneByName("LevelSelection");
+        
     }
 
     // Goes to the desired planet
     public void NextLevel(){
+        LevelManager.instance.UpdateStats();
         // Loads the instructions scene for the planet
         stateManager.LoadInstructions(destination);
     }

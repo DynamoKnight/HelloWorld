@@ -28,13 +28,11 @@ public class TextAnim : MonoBehaviour
     }
 
     public void EndCheck(){
-        if (i < stringArray.Length)
-        {
+        if (i < stringArray.Length){
             _textMeshPro.text = stringArray[i];
             StartCoroutine(TextVisible());
         }
-        else
-        {
+        else{
             stateManager.ChangeSceneByName(nextScene);
         }
     }

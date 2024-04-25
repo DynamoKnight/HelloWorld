@@ -35,22 +35,22 @@ public class GlobalManager : MonoBehaviour
             { "Neptune", new string[] {
                 "Easy",
                 "The Blue Giant",
-                "Neptune has 14 known moons, the largest of which is Triton, which is believed to be a captured Kuiper Belt object.",
-                "Frost bites ",
+                "Neptune has 14 known moons, the largest of which is Triton, which is believed to be a captured Kuiper Belt object. Using your jetpack, you are able to float above the gas giant...",
+                "Due to the harsh climate, they unleash frost bite attacks which will freeze anyone it touches...",
                 "-330"
                 } },
             { "Uranus", new string[] {
                 "Medium",
                 "The Bull's Eye Planet",
-                "Uranus is the only planet in the solar system that rotates on its side",
-                "Shoots balls",
+                "Uranus is the only planet in the solar system that rotates on its side. It has an extremely powerful atmospheric pressure that makes movement laborious...",
+                "They have harnessed the gases abundant in the atmosphere to release ionized projectiles....",
                 "-320"
                 } },
             { "Saturn", new string[] {
                 "Medium",
                 "The Ringed Planet",
-                "Saturn's density is so low that if there were a large enough body of water, it would float in it",
-                "Magnetic fields",
+                "Saturn's density is so low that if there were a large enough body of water, it would float in it. Swirling clouds and powerful winds make it a challenging planet to traverse...",
+                "The planets strong magnetic fields have been exploited by the enemies...",
                 "-220"
                 } },
             { "Jupiter", new string[] {
@@ -110,7 +110,7 @@ public class GlobalManager : MonoBehaviour
         // Statistics
         timePlayed = 0;
         enemiesDefeated = 0;
-        planetsDiscovered = 0;
+        planetsDiscovered = PlayerStats.PlanetsDiscovered;
         itemsCollected = 0;
 
         lastDeath = 0;
@@ -141,7 +141,7 @@ public class GlobalManager : MonoBehaviour
         return GetIdxOfPlanet(LevelManager.instance.currentPlanet);
     }
 
-    // Writes the stats into these game objects and saves them
+    // Writes the stats into these game objects
     public void WriteStats(GameObject statsPanel){
         // Gets the text objects (inside the label object)
         GameObject timePlayedText = statsPanel.transform.GetChild(0).GetChild(0).gameObject;
@@ -149,26 +149,30 @@ public class GlobalManager : MonoBehaviour
         GameObject planetsDiscoveredText = statsPanel.transform.GetChild(2).GetChild(0).gameObject;
         GameObject itemsCollectedText = statsPanel.transform.GetChild(3).GetChild(0).gameObject;
 
-        // Rewrites for better format
-        float i = timePlayed;
-        int minute = Convert.ToInt32(Math.Floor(i/60f));
-        int seconds = Convert.ToInt32(i - minute*60);
-        // Adds 0 if needed
-        if (seconds < 10){
-            timePlayedText.GetComponent<TMP_Text>().text = minute + ":0" + seconds;
-        }
-        else{
-            timePlayedText.GetComponent<TMP_Text>().text = minute + ":" + seconds;
-        }
-        
+        timePlayedText.GetComponent<TMP_Text>().text = FormatTime(timePlayed);
         enemiesDefeatedText.GetComponent<TMP_Text>().text = enemiesDefeated.ToString();
         planetsDiscoveredText.GetComponent<TMP_Text>().text = planetsDiscovered.ToString();
         itemsCollectedText.GetComponent<TMP_Text>().text = itemsCollected.ToString();
+    }
 
-        // Saves the data to the data of the current planet
-        //Find best time played for the specific planet
-        //Add enemies defeated to the total of all planets
-        //Don't store planets discovered
-        //Don't store items collected
+    // Rewrites for better format
+    public string FormatTime(float time){
+        int minute = Convert.ToInt32(Math.Floor(time/60f));
+        int seconds = Convert.ToInt32(time - minute*60);
+        // Adds 0 if needed
+        if (seconds < 10){
+            return minute + ":0" + seconds;
+        }
+        else{
+            return minute + ":" + seconds;
+        }
+    }
+
+    // Resets current level data
+    public void ResetStats(){
+        timePlayed = 0;
+        enemiesDefeated = 0;
+        itemsCollected = 0;
+        lastDeath = 0;
     }
 }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Random = UnityEngine.Random;
 
 public class Enemy : MonoBehaviour
 {
@@ -106,7 +107,8 @@ public class Enemy : MonoBehaviour
 
     // Sets the target to the Player object. Default value is Player
     protected void SetTarget(string tag="Player"){
-        GameObject tagObject = GameObject.FindGameObjectWithTag(tag);
+        GameObject[] tagObjects = GameObject.FindGameObjectsWithTag(tag);
+        GameObject tagObject = tagObjects[Random.Range(0, tagObjects.Length)];
         // Checks if the object is not null before setting it as the target
         if (tagObject != null){
             target = tagObject;

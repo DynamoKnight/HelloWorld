@@ -8,6 +8,8 @@ public class Gun : MonoBehaviour
     // The player
     [SerializeField] protected GameObject player;
 
+    protected Rigidbody2D rb;
+
     protected Vector2 mousePos;
     [SerializeField] protected GameObject bulletPrefab;
     // The place where the bullet comes from

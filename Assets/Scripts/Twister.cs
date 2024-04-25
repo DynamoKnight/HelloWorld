@@ -12,7 +12,7 @@ public class Twister : MonoBehaviour
     private SpriteRenderer spriteRenderer;
 
     // For knockback
-    private float strength = 60f;
+    private float strength = 30f;
     private float duration = 0.3f;
 
     void Start(){

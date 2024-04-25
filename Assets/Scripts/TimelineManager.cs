@@ -8,6 +8,7 @@ public class TimelineManager : MonoBehaviour
  {
     private GameObject gm;
     private UIManager uiManager;
+    private StateManager stateManager;
     // A component of a timeline gameobject
     private PlayableDirector playableDirector;
     // The keyframe position to go to
@@ -19,6 +20,7 @@ public class TimelineManager : MonoBehaviour
     void Start(){
         gm = GameObject.Find("GameManager");
         uiManager = gm.GetComponent<UIManager>();
+        stateManager = gm.GetComponent<StateManager>();
 
         playableDirector = gameObject.GetComponent<PlayableDirector>();
     }
@@ -49,6 +51,10 @@ public class TimelineManager : MonoBehaviour
             
         } 
            
+    }
+
+    public float GetTime(){
+        return (float)playableDirector.time;
     }
 
 }

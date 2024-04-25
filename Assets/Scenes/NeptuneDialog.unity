@@ -682,8 +682,7 @@ MonoBehaviour:
   - Good luck!
   timeBtwnChars: 0.05
   timeBtwnWords: 1
-  nextScene: Neptune
-  gameManager: {fileID: 1828769659}
+  nextScene: NeptuneCutscene
 --- !u!114 &1194861185
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -995,7 +994,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cutsceneTime: 0
-  nextScene: 
+  nextScene: NeptuneCutscene
+  infoScreen: {fileID: 0}
+  timelineManager: {fileID: 0}
 --- !u!114 &1828769661
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1009,56 +1010,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPaused: 0
+  isFunctional: 0
+  levelComplete: 0
+  spawnEnemies: 0
   levels:
   - 
   - 
   - 
   currentPlanet: 
-  MissionItemsByPlanet:
-  - MissionItems:
-    - Plutonian Crystal
-    - Tank of Nitrogen
-    - Platinum
-  - MissionItems:
-    - Neptunian Crystal
-    - Tank of Hydrogen
-    - Magnesium
-  - MissionItems:
-    - Uranian Crystal
-    - Tank of Helium
-    - Iron
-  amountofEachItem: 030000000400000008000000
-  MissionItemImagesByPlanet:
-  - MissionItemImages:
-    - {fileID: -1440838167, guid: e6993566b245a64478097b6d13ca79f8, type: 3}
-    - {fileID: -587720702, guid: e6993566b245a64478097b6d13ca79f8, type: 3}
-    - {fileID: -552224696, guid: e6993566b245a64478097b6d13ca79f8, type: 3}
-  - MissionItemImages:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-  - MissionItemImages:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-  MissionItemDropsByPlanet:
-  - MissionItemDrops:
-    - {fileID: 3290309955611502108, guid: 55326220c1c8e3440b4c8d0ba992765a, type: 3}
-    - {fileID: 183664107201739624, guid: a0f76f9494b74f046a958259da83b1b7, type: 3}
-    - {fileID: 3701949876141180453, guid: 934d023ac0717134488628b5c8de411f, type: 3}
-  - MissionItemDrops:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-  - MissionItemDrops:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
   inventory: {fileID: 0}
   deathManager: {fileID: 0}
-  gameManager: {fileID: 0}
-  levelComplete: 0
-  pauseMenu: {fileID: 0}
 --- !u!4 &1828769662
 Transform:
   m_ObjectHideFlags: 0

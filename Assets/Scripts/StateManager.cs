@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 // Manages the State of the Scene
 public class StateManager : MonoBehaviour
@@ -10,6 +11,12 @@ public class StateManager : MonoBehaviour
     public float cutsceneTime;
     private float loadingTime = 10f;
     public string nextScene;
+    // Tutorial page
+    public GameObject infoScreen;
+    private Button startBtn;
+
+    [SerializeField] private TimelineManager timelineManager;
+    private bool cutsceneEnded = false;
 
     // Loads the Current Scene
     public static void ReloadCurrentScene(){
@@ -30,21 +37,31 @@ public class StateManager : MonoBehaviour
     }
 
     public void LoadInstructions(string planet){
+        Debug.Log(planet + "Dialog");
         ChangeSceneByName(planet + "Dialog");
     }
 
     void Update(){
         if (!LevelManager.instance.isPaused){
             // Time until cutscene ends
-            if(SceneManager.GetActiveScene().name == "Cutscene"){
-                cutsceneTime -= Time.deltaTime;
-                // Once the cutscene ends, the scene changes
-                if(cutsceneTime <= 0){
+            if (SceneManager.GetActiveScene().name == "Cutscene"){
+                if (timelineManager.GetTime() >= cutsceneTime && !cutsceneEnded){
+                    cutsceneEnded = true;
+                    // Once the cutscene ends, the scene changes
+                    infoScreen.SetActive(true);
+                    startBtn = infoScreen.transform.GetChild(0).GetComponent<Button>();
+                    startBtn.onClick.AddListener(() => ChangeSceneByName(nextScene));
+                }
+            }
+            if (SceneManager.GetActiveScene().name == "NeptuneCutscene"){
+                if (timelineManager.GetTime() >= cutsceneTime && !cutsceneEnded){
+                    cutsceneEnded = true;
+                    // Once the cutscene ends, the scene changes
                     ChangeSceneByName(nextScene);
                 }
             }
             // Time until cutscene ends
-            if(SceneManager.GetActiveScene().name == "Loading"){
+            if (SceneManager.GetActiveScene().name == "Loading"){
                 loadingTime -= Time.deltaTime;
                 // Once the cutscene ends, the scene changes
                 if(loadingTime <= 0){
@@ -53,5 +70,7 @@ public class StateManager : MonoBehaviour
                 }
             }
         }
+        
     }
+
 }

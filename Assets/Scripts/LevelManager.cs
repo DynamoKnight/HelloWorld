@@ -30,7 +30,7 @@ public class LevelManager : MonoBehaviour
 
     // Gets called when loading 
     private void Awake(){
-        // Makes sure there is 1 instance of this
+        // Makes sure there is 1 instance of this (in a scene)
         if (LevelManager.instance == null){
             instance = this;
         }
@@ -39,7 +39,13 @@ public class LevelManager : MonoBehaviour
         }
         levels = new List<string> {"Pluto","Neptune","Uranus","Saturn","Jupiter","Mars","The Moon","Earth","Venus","Mercury","Multiplayer"};
         // if current scene is pluto
-        currentPlanet = levels[0];
+        currentPlanet = PlayerStats.CurrentPlanet;
+        // Makes sure correct planet
+        string level = SceneManager.GetActiveScene().name;
+        Debug.Log(level);
+        if (level != currentPlanet && levels.Contains(level)){
+            currentPlanet = level;
+        }
 
         // Initial conditions
         isPaused = false;
@@ -48,27 +54,12 @@ public class LevelManager : MonoBehaviour
         
     }
 
-    void Update(){
-        // The currentPlanet updates only when the scene is a planet
-        string currentScene = SceneManager.GetActiveScene().name;
-        if (levels.Contains(currentScene)){
-            currentPlanet = currentScene;
-        }
-
-        if (currentPlanet == "Pluto"){
-            GlobalManager.instance.planetsDiscovered = 1;
-        }
-        if (currentPlanet == "Neptune"){
-            GlobalManager.instance.planetsDiscovered = 2;
-        }
-        if (currentPlanet == "Uranus"){
-            GlobalManager.instance.planetsDiscovered = 3;
-        }
-    }
 
     // Hides the UI of the deathpanel
     public void GameOver(){
         isFunctional = false;
+        PlayerStats.TotalViolations += 1;
+        PlayerStats.EnemiesDefeated += GlobalManager.instance.enemiesDefeated;
         UIManager _ui = GetComponent<UIManager>();
         if (_ui){
             _ui.ToggleDeathPanel();
@@ -101,6 +92,24 @@ public class LevelManager : MonoBehaviour
         int idx = levels.IndexOf(currentPlanet); 
         string nextPlanet = levels[idx + 1];
         return nextPlanet;
+    }
+
+    // Saves data to know before changing scenes
+    public void UpdateStats(){
+        PlayerStats.CurrentPlanet = NextPlanet();
+        PlayerStats.PlanetsDiscovered += 1;
+        PlayerStats.EnemiesDefeated += GlobalManager.instance.enemiesDefeated;
+
+        // Gets the best time
+        float bestTime = PlayerStats.BestTimes[GlobalManager.instance.GetIdxOfCurrentPlanet()];
+        float currentTime = GlobalManager.instance.timePlayed;
+        // Changes best time to whichever was fastest
+        if (currentTime < bestTime || bestTime == 0){
+            bestTime = currentTime;
+        }
+        // Sets new best time
+        PlayerStats.BestTimes[GlobalManager.instance.GetIdxOfCurrentPlanet()] = bestTime;
+        Debug.Log(PlayerStats.BestTimes[GlobalManager.instance.GetIdxOfCurrentPlanet()]);
     }
 
 }

@@ -27,6 +27,7 @@ public class UIManager : MonoBehaviour
     // Pause Menu
     [SerializeField] private GameObject pauseMenu;
     private Button quitBtn;
+    private Button homeBtn;
     private Button backBtn;
 
     // Timer
@@ -46,10 +47,12 @@ public class UIManager : MonoBehaviour
         if(LevelManager.instance.levels.Contains(SceneManager.GetActiveScene().name)){
             // Pause menu buttons
             quitBtn = pauseMenu.transform.GetChild(0).GetComponent<Button>();
-            backBtn = pauseMenu.transform.GetChild(1).GetComponent<Button>();
+            homeBtn = pauseMenu.transform.GetChild(1).GetComponent<Button>();
+            backBtn = pauseMenu.transform.GetChild(2).GetComponent<Button>();
             // Adds functions to it
-            backBtn.onClick.AddListener(TogglePauseMenu);
             quitBtn.onClick.AddListener(LevelManager.instance.QuitGame);
+            homeBtn.onClick.AddListener(ReturnHome);
+            backBtn.onClick.AddListener(TogglePauseMenu);
 
             // Shows start screen
             StartScreen();
@@ -151,6 +154,11 @@ public class UIManager : MonoBehaviour
         // Restarts time and indicates the start time
         GlobalManager.instance.timePlayed = 0;
         GlobalManager.instance.gameStart = Time.time;
+    }
+
+    // Goes back home without saving progress
+    public void ReturnHome(){
+        stateManager.ChangeSceneByName("TitlePage");
     }
 
     // Shows/hides the pause menu

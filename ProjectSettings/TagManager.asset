@@ -12,6 +12,7 @@ TagManager:
   - Drop
   - AlienAudio
   - VolumeManager
+  - Levels
   layers:
   - Default
   - TransparentFX

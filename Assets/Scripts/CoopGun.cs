@@ -6,11 +6,12 @@ using UnityEngine;
 public class CoopGun : Gun
 {
     // How fast the gun rotates
-    private float rotationSpeed = 100f;
+    private float rotationSpeed = 200f;
 
     protected override void Start(){
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         gameObject.name = "Laser Blaster";
+        rb = gameObject.GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -41,6 +42,12 @@ public class CoopGun : Gun
         // Check if clockwise key is pressed
         else if (Input.GetKey(clockwiseKey)){
             transform.Rotate(Vector3.forward, -rotationSpeed * Time.deltaTime);
+        }
+        if (rb.rotation > 90 || rb.rotation < -90){
+            spriteRenderer.flipY = true;
+        }
+        else{
+            spriteRenderer.flipY = false;
         }
     }
 
