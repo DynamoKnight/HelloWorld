@@ -277,7 +277,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Can you take on this heroic mission to save FBLA from bankruptcy?
+  m_text: Keep your score has high as possible for the best endings. Good Luck!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
   m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
@@ -523,8 +523,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e32c266ee6204b21a427753cb0694c81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  label01: Astro encounters friendly aliens and evil robots. You will need to sell
-    items from the robots to make some cash...
+  label01: You must defeat evil robots and sell the items to the friendly aliens...
   startTime: 17.5
 --- !u!1 &550922568
 GameObject:
@@ -695,8 +694,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e32c266ee6204b21a427753cb0694c81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  label01: Losing too much health causes a violation to be filed, which will end
-    FBLA...
+  label01: Losing too much health causes a violation to be filed against the FBLA,
+    which decreases your score...
   startTime: 25.5
 --- !u!1 &559426731
 GameObject:
@@ -1642,8 +1641,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e32c266ee6204b21a427753cb0694c81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  label01: You are Astro, a brave fundraising astronaut who is traveling across the
-    Solar System...
+  label01: You are Astro, a brave fundraising astronaut. Traverse across the Solar
+    System to make some cash...
   startTime: 9.5
 --- !u!1 &1639155054
 GameObject:

@@ -32,7 +32,7 @@ public class Enemy : MonoBehaviour
     // The index of what drops it can drop
     private List<int> availableIndexes;
     // The chance out of 10 to drop an item when killed
-    public int dropChance = 7;
+    protected int dropChance = 7;
     public bool hasDrops = true;
 
     // Audio

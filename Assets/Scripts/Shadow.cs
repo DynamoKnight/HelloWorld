@@ -12,8 +12,7 @@ public class ShadowScript : MonoBehaviour
 
 
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start(){
         shadow = new GameObject("Shadow");
         shadow.transform.parent = transform;
 
@@ -30,8 +29,7 @@ public class ShadowScript : MonoBehaviour
     }
 
     // Update is called once per frame
-    void LateUpdate()
-    {
+    void LateUpdate(){
         shadow.transform.localPosition = offset;
     }
 

@@ -7,6 +7,12 @@ public class EnemyGiant : Enemy
     // Different variations of the sprite when hit
     [SerializeField] private Sprite[] damage_sprites;
 
+    protected override void Start(){
+        // Pity drop
+        dropChance = 10;
+        base.Start();
+    }
+
     public override void TakeDamage(GameObject sender, int damage){
         base.TakeDamage(sender, damage);
         // Appears damaged

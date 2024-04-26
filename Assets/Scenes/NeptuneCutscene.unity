@@ -833,7 +833,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e32c266ee6204b21a427753cb0694c81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  label01: You must keep travelling to find a venue to sell your resources...
+  label01: ...
   startTime: 9.5
 --- !u!1 &1639155054
 GameObject:

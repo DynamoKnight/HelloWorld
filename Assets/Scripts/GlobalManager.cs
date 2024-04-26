@@ -29,7 +29,7 @@ public class GlobalManager : MonoBehaviour
                 "Easy",
                 "The Dwarf Planet",
                 "The icy terrain and rocky landscape make it hard to navigate. While it's cold environment provides a challenge, the aliens settlers have made the planet a bit more bearable... ",
-                "They have adapted to the cold climate and are not kind to intruders...",
+                "Touching the evil robots, their attacks, or other hazardous materials deal damage. They have adapted to the cold climate and are not kind to intruders...",
                 "-375"
                 } },
             { "Neptune", new string[] {
