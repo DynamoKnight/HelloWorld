@@ -41,6 +41,10 @@ public class StateManager : MonoBehaviour
         ChangeSceneByName(planet + "Dialog");
     }
 
+    public void LoadNextScene(){
+        ChangeSceneByName(nextScene);
+    }
+
     void Update(){
         if (!LevelManager.instance.isPaused){
             // Time until cutscene ends

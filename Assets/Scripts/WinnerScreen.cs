@@ -60,8 +60,7 @@ public class WinnerScreen : MonoBehaviour
     // Goes to the desired planet
     public void NextLevel(){
         LevelManager.instance.UpdateStats();
-        // Loads the instructions scene for the planet
-        stateManager.LoadInstructions(destination);
+        stateManager.LoadNextScene();
     }
 
 }
