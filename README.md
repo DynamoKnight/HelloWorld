@@ -1,5 +1,5 @@
 # Instructions for Developers
-This document provides a guide on how to modify  2D game in Unity. We'll cover setting up the UI, adding music, implementing animations, and organizing C# scripts effectively.
+This document provides a guide on how to modify our 2D game in Unity. We'll cover setting up the UI, adding music, implementing animations, and organizing C# scripts effectively.
 
 ## Setting Up UI
 
