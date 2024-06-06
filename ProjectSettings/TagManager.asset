@@ -13,6 +13,7 @@ TagManager:
   - AlienAudio
   - VolumeManager
   - Levels
+  - Weapon
   layers:
   - Default
   - TransparentFX

@@ -35,7 +35,7 @@ public class UIManager : MonoBehaviour
 
     void Start(){
         players = GameObject.FindGameObjectsWithTag("Player");
-        gm = GameObject.FindGameObjectWithTag("GameManager");
+        gm = gameObject;
         stateManager = gm.GetComponent<StateManager>();
         // To handle multiple players
         foreach (GameObject player in players){

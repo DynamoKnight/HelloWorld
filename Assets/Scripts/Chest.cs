@@ -27,11 +27,11 @@ public class Chest : Collectable
             // Changes the image when collided
             gameObject.GetComponent<SpriteRenderer>().sprite = emptyChest;
             // Rewards Player
-            //inventory.AddCoins(coinsAmount);
-            //Debug.Log("You gained " + coinsAmount + " coins");
+            Inventory.CollectCredits(coinsAmount);
+            Debug.Log("You gained " + coinsAmount + " coins");
 
             // Gives the player the drop
-            inventory.CollectItem(drop.name);
+            inventoryManager.CollectItem(drop);
             chestDrop.SetActive(false);
         }
         

@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class Spaceship : MonoBehaviour
 {
     private GameObject gm;
-    private Inventory inventory;
+    private InventoryManager inventoryManager;
     [SerializeField] private Player player;
 
     // Distance until the leave text appears
@@ -24,7 +24,7 @@ public class Spaceship : MonoBehaviour
 
     void Start(){
         gm = GameObject.Find("GameManager");
-        inventory = gm.GetComponent<Inventory>();
+        inventoryManager = gm.GetComponent<InventoryManager>();
 
         leaveBtn = leaveMenu.transform.GetChild(1).GetComponent<Button>();
         backBtn = leaveMenu.transform.GetChild(2).GetComponent<Button>();
@@ -50,7 +50,7 @@ public class Spaceship : MonoBehaviour
             float distance = Vector2.Distance(player.GetComponent<Rigidbody2D>().position, gameObject.GetComponent<Rigidbody2D>().position);
 
             // Check if the player is within the activation distance
-            if (distance <= activationDistance && inventory.missionItemsCollected){
+            if (distance <= activationDistance && inventoryManager.missionItemsCollected){
                 if(!exited){
                     // Enable the button
                     leaveMenu.SetActive(true);

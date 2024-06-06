@@ -13,12 +13,12 @@ public class Collidable : MonoBehaviour
 
     private GameObject gm;
 
-    [HideInInspector] public Inventory inventory;
+    [HideInInspector] public InventoryManager inventoryManager;
 
     protected virtual void Start(){
         boxCollider = GetComponent<BoxCollider2D>();
         gm = GameObject.Find("GameManager");
-        inventory = gm.GetComponent<Inventory>();
+        inventoryManager = gm.GetComponent<InventoryManager>();
     }
 
     protected virtual void Update(){
@@ -43,7 +43,14 @@ public class Collidable : MonoBehaviour
     // virtual means that the method can be overriden
     // This OnCollide method is a custom method written by me
     protected virtual void OnCollide(Collider2D coll){
-        Debug.Log(coll.name);
+        //Debug.Log(coll.name);
+        // Allows it to be knocked back by bullet
+        if (coll.gameObject.CompareTag("Bullet")){
+            GameObject bullet = coll.gameObject;
+            Destroy(bullet);
+            /*Knockback knockback = gameObject.GetComponent<Knockback>();
+            knockback.PlayFeedback(bullet);*/
+        }
     }
     
 

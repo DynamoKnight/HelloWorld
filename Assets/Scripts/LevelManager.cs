@@ -25,7 +25,8 @@ public class LevelManager : MonoBehaviour
     public List<string> levels;
     public string currentPlanet;
 
-    public Inventory inventory;
+    private GameObject gm;
+    private InventoryManager inventoryManager;
     public DeathPanel deathManager;
 
     // Gets called when loading 
@@ -52,6 +53,8 @@ public class LevelManager : MonoBehaviour
         isFunctional = false;
         spawnEnemies = true;
         
+        gm = gameObject;
+        inventoryManager = gm.GetComponent<InventoryManager>();
     }
 
 

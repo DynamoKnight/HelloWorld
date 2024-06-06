@@ -9,15 +9,14 @@ public class CoopGun : Gun
     private float rotationSpeed = 200f;
 
     protected override void Start(){
-        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+        WeaponStart();
         gameObject.name = "Laser Blaster";
         rb = gameObject.GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     protected override void Update(){
-        blast.volume = GameObject.Find("VolumeManager").GetComponent<VolumeManager>().SFXVolumeMultplier;
-
+        WeaponUpdate();
         // Only collects input if game is unpaused and functional
         if (!LevelManager.instance.isPaused && LevelManager.instance.isFunctional){
             // Rotates the gun based on key press

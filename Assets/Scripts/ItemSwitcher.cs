@@ -1,94 +1,97 @@
-
-// UNUSED
-// UNUSED
-// UNUSED
-// UNUSED
-// UNUSED
-// UNUSED
-// UNUSED
-// UNUSED
-// UNUSED
-// UNUSED
-// UNUSED
-// UNUSED
-// UNUSED
-// UNUSED
-// UNUSED
-// UNUSED
-// UNUSED
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ItemSwitcher : MonoBehaviour
 {
+    private GameObject gm;
+    private InventoryManager inventoryManager;
+    public GameObject player;
 
-    private GameObject gameManager;
-    private Inventory inventory;
+    // The current items from the inventory
+    private List<GameObject> itemList = new();
+    // Keeps track of the item in use
+    private GameObject currentItem;
+    private GameObject previousItem;
+    private int currentIdx;
     
-    public GameObject AntiFrostBoots;
-
-    List<string> itemList = new List<string>();
-
-    private string currentItem;
-    private string pastItem;
-    private int currentInd;
-
-
-    // Start is called before the first frame update
     void Start(){
-        gameManager = GameObject.FindGameObjectWithTag("GameManager");
-        inventory = gameManager.GetComponent<Inventory>();
+        gm = gameObject;
+        inventoryManager = gm.GetComponent<InventoryManager>();
 
+        // Sets the items in use based on the inventory
+        itemList = inventoryManager.GetItemList();
         currentItem = itemList[0];
-        currentInd = 0;
+        currentIdx = 0;
     }
 
-    // Update is called once per frame
     void Update(){
-        //if on the last item in the list, resets back to the first index
-        if(Input.GetKeyDown("E")){
-            if(currentInd == itemList.Count-1){
-                pastItem = currentItem;
-                currentItem = itemList[0];
-                currentInd = 0;
-                switchItem();
+        // Only collects input if game is unpaused and functional
+        if(!LevelManager.instance.isPaused && LevelManager.instance.isFunctional){
+            // Scroll wheel goes up to change item
+            if(Input.mouseScrollDelta.y > 0){
+                // If trying to go up the list but on last index, resets back to 0
+                if(currentIdx == itemList.Count - 1){
+                    previousItem = currentItem;
+                    currentItem = itemList[0];
+                    currentIdx = 0;
+                    SwitchItem();
+                }
+                // Goes to the next item on the list
+                else {
+                    previousItem = currentItem;
+                    currentItem = itemList[currentIdx + 1];
+                    currentIdx++;
+                    SwitchItem();
+                }
+                // Shows the border around the current item
+                inventoryManager.HighlightSlot(currentIdx);
             }
-            //
-            else {
-                pastItem = currentItem;
-                currentItem = itemList[currentInd + 1];
-                currentInd++;
-                switchItem();
+            // Scroll wheel goes down to change item
+            else if(Input.mouseScrollDelta.y < 0){
+                // If trying to go down list but it is at 0, goes to the top of the list
+                if(currentIdx == 0){
+                    previousItem = currentItem;
+                    currentItem = itemList[itemList.Count - 1];
+                    currentIdx = itemList.Count - 1;
+                    SwitchItem();
+                }
+                // Goes to the previous item on the list
+                else {
+                    previousItem = currentItem;
+                    currentItem = itemList[currentIdx - 1];
+                    currentIdx--;
+                    SwitchItem();
+                }
+                // Shows the border around the current item
+                inventoryManager.HighlightSlot(currentIdx);
             }
         }
 
-        else if(Input.GetKeyDown("E")){
-            if(currentInd == 0){
-                pastItem = currentItem;
-                currentItem = itemList[itemList.Count - 1];
-                currentInd = itemList.Count - 1;
-                switchItem();
-            }
-            else {
-                pastItem = currentItem;
-                currentItem = itemList[currentInd - 1];
-                currentInd--;
-                switchItem();
-            }
-        }
-    }
-    //switches item shown on screen
-    private void switchItem(){
-        nameToObject(pastItem).GetComponent<SpriteRenderer>().enabled = false;
-        nameToObject(currentItem).GetComponent<SpriteRenderer>().enabled = true;
     }
 
-    //UNUSED
-    private GameObject nameToObject(string name){
-        if(name == "AntiFrostBoots"){
-            return AntiFrostBoots;
+    // Enables/Disables the items in use
+    private void SwitchItem(){
+        previousItem.GetComponent<SpriteRenderer>().enabled = false;
+        currentItem.GetComponent<SpriteRenderer>().enabled = true;
+        // Enables/Disables Weapon script
+        if (previousItem.GetComponent<Weapon>() != null){
+            // Every weapon class is a child of the Weapon script
+            previousItem.GetComponent<Weapon>().beingUsed = false;
         }
-        else return null;
+        if (currentItem.GetComponent<Weapon>() != null){
+            currentItem.GetComponent<Weapon>().beingUsed = true;
+        }
+
     }
+
+    // Returns the current index of the item list
+    public int GetCurrentIndex(){
+        return currentIdx;
+    }
+
+
+
 }

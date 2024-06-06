@@ -9,7 +9,7 @@ public class Scythe : Gun
     private float duration = 0.2f;
 
     protected override void Start(){
-        base.Start();
+        WeaponStart();
         gameObject.name = "Scythe";
     }
 

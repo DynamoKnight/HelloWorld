@@ -27,8 +27,8 @@ public class Enemy : MonoBehaviour
 
     // Drops
     protected GameObject GameManager;
-    protected Inventory inventory;
-    public List<GameObject> drops = new();
+    protected InventoryManager inventoryManager;
+    public List<MissionItem> drops = new();
     // The index of what drops it can drop
     private List<int> availableIndexes;
     // The chance out of 10 to drop an item when killed
@@ -44,22 +44,23 @@ public class Enemy : MonoBehaviour
         if (boxcollider == null){
             boxcollider = GetComponent<BoxCollider2D>();
         }
-
+        // Turns off drops for multiplayer
         GameManager = GameObject.FindGameObjectWithTag("GameManager");
         if (SceneManager.GetActiveScene().name == "Multiplayer"){
             hasDrops = false;
             
         }
+        // Drops are initialzed
         else{
-            inventory = GameManager.GetComponent<Inventory>();
+            inventoryManager = GameManager.GetComponent<InventoryManager>();
             availableIndexes = new List<int>();
-            drops = inventory.missionItemDrops;
+            drops = inventoryManager.missionItems;
         }
         
         // Finds the alien audio by looking through all audios
         List<AudioSource> audios = FindObjectsOfType<AudioSource>().ToList();
         foreach (AudioSource audio in audios){
-            if(audio.tag == "AlienAudio"){
+            if(audio.CompareTag("AlienAudio")){
                 hurt = audio;
             }
         }
@@ -167,29 +168,29 @@ public class Enemy : MonoBehaviour
         UpdateDrops();
         // The drop gameobject
         GameObject final = null;
-        System.Random rnd = new System.Random();
+        System.Random rnd = new();
         // Clears the list
         availableIndexes.Clear();
         // If the player hasn't collected all the mission items, then the enemy can still drop them
-        for (int i = 0; i < inventory.numberOfEachMissionItem.Count; i++){
-            if(inventory.numberOfEachMissionItemCollected[i] < inventory.numberOfEachMissionItem[i]){
+        for (int i = 0; i < inventoryManager.missionItems.Count; i++){
+            if(!inventoryManager.missionItems[i].isCollected){
                 availableIndexes.Add(i);
             }
         }
         // No drops available because all have been collected
         if (availableIndexes.Count == 0){
-            return final;
+            return null;
         }
         // Has a specific chance out of 10 to drop something
         if (rnd.Next(0, 11) <= dropChance){
             // Gets a random drop from the available drops
-            final = drops[availableIndexes[rnd.Next(0,availableIndexes.Count)]];
+            final = drops[availableIndexes[rnd.Next(0,availableIndexes.Count)]].gameObject;
         }
         return final;
     }
     // Sets the possible drops to those from the level's mission items
     public void UpdateDrops(){
-        drops = inventory.missionItemDrops;
+        drops = inventoryManager.missionItems;
     }
 
 }

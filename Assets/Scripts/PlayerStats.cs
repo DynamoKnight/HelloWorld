@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 
+// Keeps track of all saved variables
 public static class PlayerStats
 {
     // Best times of each planet levels
@@ -14,4 +15,5 @@ public static class PlayerStats
     // Global data
     public static string CurrentPlanet {get; set;} = "Pluto";
     public static int PlanetsDiscovered {get; set;} = 0;
+    public static int credits {get; set;} = 0;
 }

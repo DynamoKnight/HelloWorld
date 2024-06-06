@@ -4789,7 +4789,7 @@ GameObject:
   - component: {fileID: 597206328}
   - component: {fileID: 597206325}
   - component: {fileID: 597206327}
-  - component: {fileID: 597206326}
+  - component: {fileID: 597206332}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: GameManager
@@ -4838,33 +4838,6 @@ MonoBehaviour:
   - {fileID: 183974961978017234, guid: 4b66a97c8fecfe34482481116d6b586a, type: 3}
   - {fileID: 1723807216618109080, guid: 9e18a01378f90b54eb3c08e3e1f6e5a9, type: 3}
   pickupDistance: 0.1
---- !u!114 &597206326
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 597206324}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7182778fe5afb545a99b9ce332ea9bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timePlayed: 0
-  enemiesDefeated: 0
-  planetsDiscovered: 0
-  itemsCollected: 0
-  lastDeath: 0
-  gameStart: 0
-  images:
-  - {fileID: 21300000, guid: 28e30055f15e73c4ba14752c56e93caa, type: 3}
-  - {fileID: 21300000, guid: 52e927c8989e2834f956b07ab170611a, type: 3}
-  - {fileID: 21300000, guid: f5790d52e3fd4db4b978d4224a12e645, type: 3}
-  - {fileID: 21300000, guid: 7207b973341017e4e8befa0f2399e956, type: 3}
-  - {fileID: 21300000, guid: 59007f6ba4a6dac4fb5d8abbe90eb69b, type: 3}
-  - {fileID: 21300000, guid: ba0cb6e8ba63f4746982493e1818c937, type: 3}
-  - {fileID: 21300000, guid: 7aa6f1fcff0cb644e991e2703eba3e51, type: 3}
-  - {fileID: 21300000, guid: 1bf9002950bc251418fd7efd99e6d891, type: 3}
 --- !u!114 &597206327
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4948,6 +4921,33 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &597206332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 597206324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7182778fe5afb545a99b9ce332ea9bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timePlayed: 0
+  enemiesDefeated: 0
+  planetsDiscovered: 0
+  itemsCollected: 0
+  lastDeath: 0
+  gameStart: 0
+  images:
+  - {fileID: 1051077837, guid: 3d95ea5e11740af4aa82a14e28b32fd9, type: 3}
+  - {fileID: -2081137162, guid: 3d95ea5e11740af4aa82a14e28b32fd9, type: 3}
+  - {fileID: 233653144, guid: 3d95ea5e11740af4aa82a14e28b32fd9, type: 3}
+  - {fileID: 1938877184, guid: 3d95ea5e11740af4aa82a14e28b32fd9, type: 3}
+  - {fileID: 1931109165, guid: 3d95ea5e11740af4aa82a14e28b32fd9, type: 3}
+  - {fileID: 274713451, guid: 3d95ea5e11740af4aa82a14e28b32fd9, type: 3}
+  - {fileID: -2109800328, guid: 3d95ea5e11740af4aa82a14e28b32fd9, type: 3}
+  - {fileID: -1300809517, guid: 3d95ea5e11740af4aa82a14e28b32fd9, type: 3}
 --- !u!1 &610521102
 GameObject:
   m_ObjectHideFlags: 0

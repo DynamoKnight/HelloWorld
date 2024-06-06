@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Gun : MonoBehaviour
+public class Gun : Weapon
 {
-    // The player
-    [SerializeField] protected GameObject player;
 
     protected Rigidbody2D rb;
 
@@ -17,21 +15,16 @@ public class Gun : MonoBehaviour
     [Range(0.1f, 2f)]
     [SerializeField] protected float fireRate = 0.5f;
     protected float fireTimer;
-    protected SpriteRenderer spriteRenderer;
 
-    public bool beingUsed;
-
-    public AudioSource blast;
 
     protected virtual void Start(){
-        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+        WeaponStart();
         gameObject.name = "Laser Blaster";
     }
 
     // Update is called once per frame
     protected virtual void Update(){
-        blast.volume = GameObject.Find("VolumeManager").GetComponent<VolumeManager>().SFXVolumeMultplier;
-        
+        WeaponUpdate();
         // Only collects input if game is unpaused and functional
         if(!LevelManager.instance.isPaused && LevelManager.instance.isFunctional){
             mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -66,9 +59,8 @@ public class Gun : MonoBehaviour
     }
     // Spawns a bullet
     protected virtual void Shoot(){
-        // Creates a bullet object
-        blast.Play();
-        // Keeps track of the bullet shot
+        attackSound.Play();
+        // Keeps track of the bullet object shot
         Bullet bulletFired = Instantiate(bulletPrefab, firingPoint.position, firingPoint.rotation).GetComponent<Bullet>();
         // Tells the bullet that this is the sender
         bulletFired.SetSender(player, gameObject);

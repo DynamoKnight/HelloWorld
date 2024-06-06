@@ -29,7 +29,7 @@ public class Player : MonoBehaviour
     protected Color spriteColor = Color.white;
 
     protected GameObject gm;
-    protected Inventory inventory;
+    protected InventoryManager inventoryManager;
 
     // Goes toward magnetic field
     protected bool isAttracted;
@@ -47,7 +47,7 @@ public class Player : MonoBehaviour
     protected virtual void Start(){
         // The inventory is within the game manager
         gm = GameObject.Find("GameManager");
-        inventory = gm.GetComponent<Inventory>();
+        inventoryManager = gm.GetComponent<InventoryManager>();
 
         healthPoints = hearts.Length;
         boxcollider = GetComponent<BoxCollider2D>();
