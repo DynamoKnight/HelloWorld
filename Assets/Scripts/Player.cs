@@ -232,7 +232,8 @@ public class Player : MonoBehaviour
 
     // Returns the arrow
     public virtual GameObject GetArrow(){
-        return gameObject.transform.GetChild(2).gameObject;
+        // Must be correct index!
+        return gameObject.transform.GetChild(1).gameObject;
     }
 
     // Sets the position for the player to move towards

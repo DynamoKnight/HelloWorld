@@ -10,6 +10,7 @@ public class Scythe : Gun
 
     protected override void Start(){
         WeaponStart();
+        attackSound = GameObject.Find("Swoosh").GetComponent<AudioSource>();
         gameObject.name = "Scythe";
     }
 

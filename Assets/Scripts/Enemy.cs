@@ -171,11 +171,14 @@ public class Enemy : MonoBehaviour
         System.Random rnd = new();
         // Clears the list
         availableIndexes.Clear();
-        // If the player hasn't collected all the mission items, then the enemy can still drop them
         for (int i = 0; i < inventoryManager.missionItems.Count; i++){
+            // Everything will be dropped regardless if fully collected
+            availableIndexes.Add(i);
+            // the enemy will only be able drop the mission items that haven't all been collected
+            /*
             if(!inventoryManager.missionItems[i].isCollected){
                 availableIndexes.Add(i);
-            }
+            }*/
         }
         // No drops available because all have been collected
         if (availableIndexes.Count == 0){

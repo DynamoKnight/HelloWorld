@@ -19,6 +19,7 @@ public class Gun : Weapon
 
     protected virtual void Start(){
         WeaponStart();
+        attackSound = GameObject.Find("Blaster").GetComponent<AudioSource>();
         gameObject.name = "Laser Blaster";
     }
 

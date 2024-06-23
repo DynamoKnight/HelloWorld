@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3333632921114386113}
   - component: {fileID: 7243475942697243375}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 7959672452434061470}
   - component: {fileID: 2538401320838627336}
   - component: {fileID: 4371881244861340231}
-  m_Layer: 11
+  m_Layer: 10
   m_Name: Uranian Crystal Drop
   m_TagString: Drop
   m_Icon: {fileID: 0}
@@ -200,7 +200,7 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -217,7 +217,7 @@ GameObject:
   - component: {fileID: 584210846472172805}
   - component: {fileID: 6524965608956326260}
   - component: {fileID: 6445194915045238742}
-  m_Layer: 11
+  m_Layer: 10
   m_Name: Glow
   m_TagString: Untagged
   m_Icon: {fileID: 0}

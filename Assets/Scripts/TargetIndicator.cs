@@ -7,7 +7,7 @@ public class TargetIndicator : MonoBehaviour
     public GameObject Target;
     public float hideDistance;
 
-    // orients the arrow to the target
+    // Orients the arrow to the target
     void Update(){
         var direction = Target.transform.position - transform.position;
 

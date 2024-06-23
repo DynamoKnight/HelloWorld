@@ -19,6 +19,8 @@ public class Collectable : Collidable
     // So that it can only be collected once
     protected virtual void OnCollect(){
         collected = true;
+        // Even when level resets, it cant be recollected
+        PlayerStats.Collected.Add(gameObject.name);
     }
 
 }

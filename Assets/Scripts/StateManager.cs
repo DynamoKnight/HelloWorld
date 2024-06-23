@@ -9,7 +9,7 @@ public class StateManager : MonoBehaviour
 {
     // The length of the cutscene
     public float cutsceneTime;
-    private float loadingTime = 10f;
+    public float loadingTime = 10f;
     public string nextScene;
     // Tutorial page
     public GameObject infoScreen;
@@ -65,6 +65,7 @@ public class StateManager : MonoBehaviour
                 }
             }
             // Time until cutscene ends
+            /*
             if (SceneManager.GetActiveScene().name == "Loading"){
                 loadingTime -= Time.deltaTime;
                 // Once the cutscene ends, the scene changes
@@ -72,7 +73,7 @@ public class StateManager : MonoBehaviour
                     loadingTime = 10f;
                     ChangeSceneByName(nextScene);
                 }
-            }
+            }*/
         }
         
     }

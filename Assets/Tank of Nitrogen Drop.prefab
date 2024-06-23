@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6988343899784319710}
   - component: {fileID: 871353393302437495}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 4049389974387181668}
   - component: {fileID: 2337781198680347144}
   - component: {fileID: 2261072601795639661}
-  m_Layer: 11
+  m_Layer: 10
   m_Name: Glow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -192,7 +192,7 @@ GameObject:
   - component: {fileID: 2276379577801077476}
   - component: {fileID: 2071553725351829355}
   - component: {fileID: 1806108195291761217}
-  m_Layer: 11
+  m_Layer: 10
   m_Name: Tank of Nitrogen Drop
   m_TagString: Drop
   m_Icon: {fileID: 0}
@@ -297,7 +297,7 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1295723881348255694}
   - component: {fileID: 4667988605528660583}
   - component: {fileID: 6791765922537877312}
-  m_Layer: 11
+  m_Layer: 10
   m_Name: Glow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -107,7 +107,7 @@ GameObject:
   m_Component:
   - component: {fileID: 187951631262113145}
   - component: {fileID: 1186803301445728862}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -192,7 +192,7 @@ GameObject:
   - component: {fileID: 3436212341303142177}
   - component: {fileID: 3689899968473532757}
   - component: {fileID: 9074485742124595911}
-  m_Layer: 11
+  m_Layer: 10
   m_Name: Platinum Drop
   m_TagString: Drop
   m_Icon: {fileID: 0}
@@ -297,7 +297,7 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}

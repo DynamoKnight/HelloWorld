@@ -15,16 +15,14 @@ public static class Inventory
     public static List<GameObject> Prefabs {get; set;}
     // Currency that saves
     public static int Credits {get; set;} = 0;
-    // List of weapons for the current inventory
-    public static List<GameObject> Weapons {get; set;} = new();
-    // List of resources and the number of them collected
-    public static Dictionary<GameObject, int> Resources {get; set;} = new();
+    // List of items(resources/weapons) and the number of them collected
+    public static Dictionary<GameObject, int> Items {get; set;} = new();
     // Limits the size of the number of resources that can be collected
-    public static int CarryingCapacity {get; set;} = 10;
+    public static int CarryingCapacity {get; set;} = 8;
     
     // All resources are removed
     public static void ClearResources(){
-        Resources = new Dictionary<GameObject, int>();
+        Items = new Dictionary<GameObject, int>();
     }
 
     // Increments the count of the object collected
@@ -34,20 +32,24 @@ public static class Inventory
         string drop = gameObject.name.Replace("(Clone)", "");
         // Checks if already collected
         // Since every game object is different, is has to check by name
-        foreach (GameObject resource in Resources.Keys){
+        foreach (GameObject resource in Items.Keys){
             if (drop == resource.name){
-                Resources[resource] += count;
-                // Indicates item was added
-                GlobalManager.instance.itemsCollected++;
+                // Weapons can only be added once
+                if(!gameObject.CompareTag("Weapon")){
+                    Items[resource] += count;
+                    // Indicates item was added
+                    GlobalManager.instance.itemsCollected++;
+                }
+                // Object was found in Inventory
                 return true;
             }
         }
         // Reached here means the item was not found
         // Only creates if there is space
-        if (Resources.Keys.Count() < CarryingCapacity){
+        if (Items.Keys.Count() < CarryingCapacity){
             // Initializes space
             GameObject resource = GetPrefabFromObject(gameObject);
-            Resources.Add(resource, 1);
+            Items.Add(resource, 1);
             GlobalManager.instance.itemsCollected++;
             return true;
         }
@@ -67,11 +69,11 @@ public static class Inventory
     public static bool LoseItem(GameObject gameObject, int count){
         // Checks if item is in inventory
         // Since every game object is different, is has to check by name
-        foreach (GameObject resource in Resources.Keys){
+        foreach (GameObject resource in Items.Keys){
             if (gameObject.name == resource.name){
                 // Checks if there is enough quantity
-                if (Resources[resource] >= count){
-                    Resources[resource] -= count;
+                if (Items[resource] >= count){
+                    Items[resource] -= count;
                     return true;
                 }
                 else{
@@ -109,13 +111,25 @@ public static class Inventory
     public static GameObject GetPrefabFromObject(GameObject gameObject){
         foreach (GameObject prefab in Prefabs){
             // Must be exactly equal, "(Clone)" is removed
-            string drop = gameObject.name.Replace("(Clone)", "");
-            if (prefab.name == drop){
+            string objectName = gameObject.name.Replace("(Clone)", "");
+            if (prefab.name == objectName){
                 return prefab;
             }
         }
         // No object found
         return null;
+    }
+
+    // Gets weapons from Item list
+    public static List<GameObject> GetWeaponList(){
+        List<GameObject> weapons = new();
+        // Looks only for weapons
+        foreach (GameObject item in Items.Keys){
+            if (item.CompareTag("Weapon")){
+                weapons.Add(item);
+            }
+        }
+        return weapons;
     }
     
 }

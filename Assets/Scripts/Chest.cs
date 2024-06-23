@@ -16,6 +16,12 @@ public class Chest : Collectable
         chestDrop = gameObject.transform.GetChild(0).gameObject;
         // Sets the drop in the chest to the desired drop
         chestDrop.GetComponent<SpriteRenderer>().sprite = drop.GetComponent<SpriteRenderer>().sprite;
+        // Empty at start if previously collected
+        if (PlayerStats.Collected.Contains(gameObject.name)){
+            gameObject.GetComponent<SpriteRenderer>().sprite = emptyChest;
+            chestDrop.SetActive(false);
+            collected = true;
+        }
         base.Start();
     }
 
@@ -32,6 +38,7 @@ public class Chest : Collectable
 
             // Gives the player the drop
             inventoryManager.CollectItem(drop);
+            // Hides drop
             chestDrop.SetActive(false);
         }
         

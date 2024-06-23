@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 // Keeps track of all saved variables
 public static class PlayerStats
@@ -15,5 +16,8 @@ public static class PlayerStats
     // Global data
     public static string CurrentPlanet {get; set;} = "Pluto";
     public static int PlanetsDiscovered {get; set;} = 0;
-    public static int credits {get; set;} = 0;
+    public static int Credits {get; set;} = 0;
+    // Keeps track of all the names of the collectables that have already been collected
+    // Because it is by name, every collectable of the same object has to have a different name.
+    public static List<string> Collected {get; set;} = new();
 }

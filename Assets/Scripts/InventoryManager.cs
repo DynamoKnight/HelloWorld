@@ -9,6 +9,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Image = UnityEngine.UI.Image;
 using UnityEditor;
+using UnityEngine.SceneManagement;
 
 public class InventoryManager : MonoBehaviour
 {
@@ -49,7 +50,7 @@ public class InventoryManager : MonoBehaviour
     private float time;
     [SerializeField] private float pickupDistance = 0.1f;
 
-    // The credits
+    // The credit box
     [SerializeField] private GameObject currencyText;
 
     // Awake is called even before Start
@@ -77,6 +78,20 @@ public class InventoryManager : MonoBehaviour
     }
 
     void Start(){
+        // From the Inventory, previous data
+        foreach (GameObject item in Inventory.Items.Keys){
+            AddToPlayer(item);
+        }
+        // Adds the initial level-specific items to the main inventory and player
+        foreach (GameObject item in items){
+            Inventory.CollectItem(item);
+            AddToPlayer(item);
+        }
+        // Multiplayer inventory is fixed
+        if (SceneManager.GetActiveScene().name == "Multiplayer"){
+            return;
+        }
+
         // Adds a listener to the inventory button
         inventoryButton.onClick.AddListener(ToggleInventory);
         // Stores the objects from the side inventory panel
@@ -89,25 +104,23 @@ public class InventoryManager : MonoBehaviour
         }
 
         // Sets the images for the inventory panel
-        for (int i = 0; i < items.Count; i++){
-            Sprite image = items[i].GetComponent<SpriteRenderer>().sprite;
-            // Gets the image slot (0) at the exact position
-            Image inventorySlot = inventoryPanel.transform.GetChild(i).transform.GetChild(0).gameObject.GetComponent<Image>();
-            // Activates the image with visible properties
-            inventorySlot.sprite = image;
-            inventorySlot.color = new Color(255, 255, 255, 1);
-            inventorySlot.preserveAspect = true;
-        }
-
+        SetInventory();
         // For the next level
         LevelManager.instance.levelComplete = false;
         // Now that the objects are found, the values can be set
         Reset();
         SetMissionItems();
+        // Checks if all items are collected
+        CheckIfDone();
     }
 
     // Update is called once per frame
     void Update(){
+        // Multiplayer inventory is fixed
+        if (SceneManager.GetActiveScene().name == "Multiplayer"){
+            return;
+        }
+
         // Only when game is unpaused and functional
         if (!LevelManager.instance.isPaused && LevelManager.instance.isFunctional){
             // Inventory Key
@@ -154,10 +167,36 @@ public class InventoryManager : MonoBehaviour
 
     }
 
+    // Updates the Inventory panel with the items in the inventory
+    public void SetInventory(){
+        for (int i = 0; i < Inventory.Items.Keys.Count; i++){
+            // Represents a key-value pair of the gameobject and the count
+            var kvItem = Inventory.Items.ElementAt(i);
+            int count = kvItem.Value;
+            // Gets the quantity (3) of the item at the exact position
+            GameObject slotText = inventoryPanel.transform.GetChild(i).transform.GetChild(3).gameObject;
+            // Only shows the count if there is more than 1 quantity
+            if (count > 1){
+                slotText.SetActive(true);
+                slotText.GetComponent<TMP_Text>().text = count.ToString();
+            }
+            else{
+                slotText.SetActive(false);
+            }
+            Sprite image = kvItem.Key.GetComponent<SpriteRenderer>().sprite;
+            // Gets the image slot (0) at the exact position
+            Image inventorySlot = inventoryPanel.transform.GetChild(i).transform.GetChild(0).gameObject.GetComponent<Image>();
+            // Activates the image with visible properties
+            inventorySlot.sprite = image;
+            inventorySlot.color = new Color(255, 255, 255, 1);
+            inventorySlot.preserveAspect = true;
+        }
+    }
+    
     // Everything is reset in terms of what is displayed on the inventory on the screen and replaces them to their defaults 
     public void Reset(){
-        for (int i = 0; i < amountTexts.Count; i++){
-            // Remembers the index
+        for (int i = 0; i < missionItems.Count; i++){
+            // Remembers the index UNUSED
             missionItems[i].SetIndex(i);
             // Sets the text to the name of the mission item
             amountTexts[i].text = "0/" + missionItems[i].gameObject.name + " ";
@@ -167,11 +206,26 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-    // Sets the values for each mission item on the panel
+    // Sets the image and text for each mission item on the panel
     public void SetMissionItems(){
         for(int i = 0; i < missionItems.Count; i++){
             missionItemImages[i].sprite = missionItems[i].gameObject.GetComponent<SpriteRenderer>().sprite;
-            amountTexts[i].text = "0/" + missionItems[i].toCollect.ToString();
+            // Sets the quantity of the mission item collected if already in the inventory
+            try{
+                GameObject item = Inventory.GetPrefabFromObject(missionItems[i].gameObject);
+                // May not exist in the Inventory
+                // Sets done if already collected all required quantities
+                if (Inventory.Items[item] >= missionItems[i].toCollect){
+                        SetAsDone(i);
+                }
+                amountTexts[i].text = Inventory.Items[item].ToString() + "/" + missionItems[i].toCollect.ToString();
+            }
+            catch (KeyNotFoundException){
+                // No quantity of the mission item has been collected
+                amountTexts[i].text = "0/" + missionItems[i].toCollect.ToString();
+                //Debug.Log("The mission item " + missionItems[i].gameObject.name + " was not found in the Inventory!");
+            }
+            
         }
     }
 
@@ -182,8 +236,7 @@ public class InventoryManager : MonoBehaviour
 
         nums[0] = Regex.Replace(nums[0], @"\s+", "");
         nums[1] = Regex.Replace(nums[1], @"\s+", "");
-        amountTexts[id].text = (int.Parse(nums[0]) + 1).ToString() + "/" + nums[1] + "  ";
-        
+        amountTexts[id].text = (int.Parse(nums[0]) + 1).ToString() + "/" + nums[1] + "  ";        
     }
 
     // When all quantities of an item is collected, the inventory spaces turn green to show that it is done 
@@ -218,9 +271,10 @@ public class InventoryManager : MonoBehaviour
                     // Updates the screen
                     AddOneToItemCount(i);
                     GameObject item = Inventory.GetPrefabFromObject(drop);
-                    AddToInventory(item);
+                    SetInventory();
+                    AddToPlayer(item);
                     // Checks if all quantities of that mission item is collected
-                    if (missionItems[i].toCollect == Inventory.Resources[item]){
+                    if (Inventory.Items[item] >= missionItems[i].toCollect){
                         SetAsDone(i);
                     }
                 }
@@ -264,15 +318,6 @@ public class InventoryManager : MonoBehaviour
         SetDone();
     }
 
-    public void AddToInventory(GameObject item){
-
-    }
-
-    // Adds weapon to list UNUSED
-    public void CollectWeapon(GameObject weapon){
-        items.Add(weapon);
-    }
-
     // Finds weapon by name UNUSED
     private bool LookUpWeapon(string name){
         bool found = false;
@@ -290,17 +335,6 @@ public class InventoryManager : MonoBehaviour
         return items;
     }
 
-    // Gets weapons from item list
-    public List<GameObject> GetWeaponList(){
-        List<GameObject> weapons = new();
-        // Looks only for weapons
-        foreach (GameObject item in items){
-            if (item.CompareTag("Weapon")){
-                weapons.Add(item);
-            }
-        }
-        return weapons;
-    }
 
     // Turns off the mission complete text when needed. 
     public void TurnOffMissionHeader(){
@@ -309,7 +343,8 @@ public class InventoryManager : MonoBehaviour
 
     // Shows the border around the currently used item slot, and breifly shows the name
     public void HighlightSlot(int index){
-        string item = items[index].name;
+        // Uses ElementAt in order for index to work, since Dictionary is unordered
+        string item = Inventory.Items.ElementAt(index).Key.name;
         UnHighlightAllSlots();
         GameObject border = inventoryPanel.transform.GetChild(index).GetChild(1).gameObject;
         // Green border is shown
@@ -337,7 +372,7 @@ public class InventoryManager : MonoBehaviour
     // Hides the border around all inventory slots
     private void UnHighlightAllSlots(){
         StopAllCoroutines();
-        for (int i = 0; i < items.Count; i++){
+        for (int i = 0; i < Inventory.Items.Keys.Count; i++){
             // Hides the border
             inventoryPanel.transform.GetChild(i).GetChild(1).gameObject.SetActive(false);
             // Hides the tool name
@@ -362,6 +397,38 @@ public class InventoryManager : MonoBehaviour
             yield return new WaitForSeconds(.1f);
         }
         
+    }
+
+    // Adds the object to the player for them to access
+    public bool AddToPlayer(GameObject gameObject){
+        // Removes the "(Clone)" from the name
+        gameObject.name = gameObject.name.Replace("(Clone)", "");
+        foreach (Transform child in player.transform.GetChild(0)){
+            // If the object is already with the playerInventory, it shouldn't be added
+            if(child.name == gameObject.name){
+                return false;
+            }
+        }
+        // The 0th child of player is the game object where all the inventory items are stored
+        GameObject tool = Instantiate(gameObject, player.transform.GetChild(0));
+        tool.name = tool.name.Replace("(Clone)", "");
+        // Hides object
+        tool.GetComponent<SpriteRenderer>().enabled = false;
+        if (tool.CompareTag("Weapon")){
+            tool.GetComponent<Weapon>().beingUsed = false;
+        }
+        // Ensures that it doesn't act like a drop anymore
+        if (tool.CompareTag("Drop")){
+            tool.tag = "Untagged";
+            // Changes sorting layer so it appears above the actors
+            tool.GetComponent<Renderer>().sortingLayerName = "Tool";
+            // The Glow and Shadow goes away
+            foreach (Transform child in tool.transform){
+                Destroy(child.gameObject);
+            }
+
+        }
+        return true;
     }
 
 }

@@ -16,6 +16,7 @@ public class Weapon : MonoBehaviour
     // Rather than children having to call base.Start(), they just call this
     protected void WeaponStart(){
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+        player = GameObject.Find("Player");
     }
 
     protected void WeaponUpdate(){

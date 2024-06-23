@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6584744027445397147}
   - component: {fileID: 6540339225833310144}
   - component: {fileID: 8989211797891460957}
-  m_Layer: 11
+  m_Layer: 10
   m_Name: Tank of Hydrogen Drop
   m_TagString: Drop
   m_Icon: {fileID: 0}
@@ -116,7 +116,7 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -133,7 +133,7 @@ GameObject:
   - component: {fileID: 6207107438896792558}
   - component: {fileID: 9187048143480679482}
   - component: {fileID: 8096329805283746649}
-  m_Layer: 11
+  m_Layer: 10
   m_Name: Glow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -229,7 +229,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4068734607912149392}
   - component: {fileID: 1134085825064438721}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}

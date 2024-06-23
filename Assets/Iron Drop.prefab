@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 777295863705576087}
   - component: {fileID: 8130709673337236007}
   - component: {fileID: 6702941184923576787}
-  m_Layer: 11
+  m_Layer: 10
   m_Name: Iron Drop
   m_TagString: Drop
   m_Icon: {fileID: 0}
@@ -116,7 +116,7 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -133,7 +133,7 @@ GameObject:
   - component: {fileID: 9205073633207490181}
   - component: {fileID: 4808254681337567894}
   - component: {fileID: 5109102461255977593}
-  m_Layer: 11
+  m_Layer: 10
   m_Name: Glow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -229,7 +229,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6215763875607602383}
   - component: {fileID: 6770528077328737698}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}

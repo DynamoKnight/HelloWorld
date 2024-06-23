@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7074677335795530830}
   - component: {fileID: 122406332070646397}
   - component: {fileID: 362037840563552413}
-  m_Layer: 11
+  m_Layer: 10
   m_Name: Glow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -108,7 +108,7 @@ GameObject:
   - component: {fileID: 6830187696580302425}
   - component: {fileID: 2499442761167295730}
   - component: {fileID: 5227132795259100547}
-  m_Layer: 11
+  m_Layer: 10
   m_Name: Jovian Crystal Drop
   m_TagString: Drop
   m_Icon: {fileID: 0}
@@ -213,7 +213,7 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -229,7 +229,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7523334801293539773}
   - component: {fileID: 9163916018461949447}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7963647872050078270}
   - component: {fileID: 2837282868238598183}
   - component: {fileID: 4223216941944660689}
-  m_Layer: 11
+  m_Layer: 10
   m_Name: Plutonian Crystal Drop
   m_TagString: Drop
   m_Icon: {fileID: 0}
@@ -116,7 +116,7 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -132,7 +132,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7514034217827176823}
   - component: {fileID: 1415009856826188172}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -217,7 +217,7 @@ GameObject:
   - component: {fileID: 6784878703892963213}
   - component: {fileID: 7242641849345189705}
   - component: {fileID: 1365615580495579782}
-  m_Layer: 11
+  m_Layer: 10
   m_Name: Glow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
