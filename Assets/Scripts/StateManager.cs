@@ -25,7 +25,7 @@ public class StateManager : MonoBehaviour
     }
 
     // Loads the Scene by the name
-    public void ChangeSceneByName(string name){
+    public static void ChangeSceneByName(string name){
         if (name != null){
             SceneManager.LoadScene(sceneName: name);
         }
@@ -36,13 +36,37 @@ public class StateManager : MonoBehaviour
         SceneManager.LoadScene("Loading");
     }
 
-    public void LoadInstructions(string planet){
+    public static void LoadInstructions(string planet){
         Debug.Log(planet + "Dialog");
         ChangeSceneByName(planet + "Dialog");
     }
 
     public void LoadNextScene(){
         ChangeSceneByName(nextScene);
+    }
+
+    // Goes back home without saving progress
+    public static void ReturnHome(){
+        PlayerStats.ResetGame();
+        ChangeSceneByName("TitlePage");
+    }
+
+    // Resets current level
+    public static void RestartLevel(){
+        ReloadCurrentScene();
+    }
+
+    // Starts the planet level with cutscenes
+    public static void GoToPlanet(string planet){
+        if (planet == "Pluto"){
+            ChangeSceneByName("Cutscene");
+        }
+        else if (planet == "NeptuneCutscene"){
+            ChangeSceneByName("NeptuneCutscene");
+        }
+        else{
+            LoadInstructions(planet);
+        }
     }
 
     void Update(){

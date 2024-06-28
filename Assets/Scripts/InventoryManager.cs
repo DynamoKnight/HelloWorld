@@ -43,8 +43,10 @@ public class InventoryManager : MonoBehaviour
     // This will usually always be just the Gun and Scythe
     public List<GameObject> items;
 
-    // The mission item objects
-    public List<MissionItem> missionItems;
+    // The mission item objects specific to the planet
+    public List<MissionItem> planetMissionItems;
+    // The actual mission item objects of the game
+    [HideInInspector] public List<MissionItem> missionItems;
 
     private float cooldown;
     private float time;
@@ -208,6 +210,16 @@ public class InventoryManager : MonoBehaviour
 
     // Sets the image and text for each mission item on the panel
     public void SetMissionItems(){
+        // Sets the mission items to the level's
+        missionItems = planetMissionItems;
+        // If the current planet has already been finished, then we ignore the mission items since they were already collected
+        if (LevelManager.instance.GetIdxOfCurrentPlanet() < LevelManager.instance.GetIdxOfBestPlanet()){
+            missionItems = Inventory.MissionItems;
+        }
+        else{
+            // The mission items will be from the planet it is currently on
+            Inventory.MissionItems = missionItems;
+        }
         for(int i = 0; i < missionItems.Count; i++){
             missionItemImages[i].sprite = missionItems[i].gameObject.GetComponent<SpriteRenderer>().sprite;
             // Sets the quantity of the mission item collected if already in the inventory
@@ -216,7 +228,7 @@ public class InventoryManager : MonoBehaviour
                 // May not exist in the Inventory
                 // Sets done if already collected all required quantities
                 if (Inventory.Items[item] >= missionItems[i].toCollect){
-                        SetAsDone(i);
+                    SetAsDone(i);
                 }
                 amountTexts[i].text = Inventory.Items[item].ToString() + "/" + missionItems[i].toCollect.ToString();
             }
@@ -263,16 +275,17 @@ public class InventoryManager : MonoBehaviour
     public void CollectItem(GameObject drop){
         // Adds item to the inventory
         bool collected = Inventory.CollectItem(drop);
+        GameObject item = Inventory.GetPrefabFromObject(drop);
+        // Updates player inventory
+        SetInventory();
+        AddToPlayer(item);
         // Checks if the item is a mission item
         for (int i = 0; i < missionItems.Count; i++){
             // Checks if objects match by name, the name contains "(Clone)"
             if (drop.name.Contains(missionItems[i].gameObject.name)){
                 if (collected){
-                    // Updates the screen
+                    // Updates the mission bar
                     AddOneToItemCount(i);
-                    GameObject item = Inventory.GetPrefabFromObject(drop);
-                    SetInventory();
-                    AddToPlayer(item);
                     // Checks if all quantities of that mission item is collected
                     if (Inventory.Items[item] >= missionItems[i].toCollect){
                         SetAsDone(i);

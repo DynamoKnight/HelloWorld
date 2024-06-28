@@ -100,13 +100,13 @@ public class Player : MonoBehaviour
         hit = Physics2D.BoxCast(rb.position, boxcollider.size, 0, new Vector2(0, movement.y), Math.Abs(movement.y * Time.deltaTime), LayerMask.GetMask("Actor", "Blocking"));
         // If nothing was hit, then move
         // Skips collision with drop cause its not actual collider
-        if (hit.collider == null || hit.collider.tag == "Drop"){
+        if (hit.collider == null || hit.collider.CompareTag("Drop")){
             // Moves player in the y direction
             Move();
         }
         // X
         hit = Physics2D.BoxCast(rb.position, boxcollider.size, 0, new Vector2(movement.x, 0), Math.Abs(movement.x * Time.deltaTime), LayerMask.GetMask("Actor", "Blocking"));
-        if (hit.collider == null || hit.collider.tag == "Drop"){
+        if (hit.collider == null || hit.collider.CompareTag("Drop")){
             // Moves player in the x direction
             Move();
         }

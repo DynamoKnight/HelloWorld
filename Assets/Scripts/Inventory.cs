@@ -19,10 +19,19 @@ public static class Inventory
     public static Dictionary<GameObject, int> Items {get; set;} = new();
     // Limits the size of the number of resources that can be collected
     public static int CarryingCapacity {get; set;} = 8;
+    // The mission items across the entire game
+    public static List<MissionItem> MissionItems {get; set;} = new();
     
     // All resources are removed
     public static void ClearResources(){
         Items = new Dictionary<GameObject, int>();
+    }
+
+    // Resets back to start
+    public static void ResetInventory(){
+        ClearResources();
+        Credits = 0;
+        CarryingCapacity = 0;
     }
 
     // Increments the count of the object collected

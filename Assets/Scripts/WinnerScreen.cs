@@ -33,7 +33,7 @@ public class WinnerScreen : MonoBehaviour
         statsPanel = transform.GetChild(4).gameObject;
 
         // Sets the image to the planet that was completed
-        planetImage.sprite = GlobalManager.instance.GetImages()[GlobalManager.instance.GetIdxOfCurrentPlanet()]; 
+        planetImage.sprite = GlobalManager.instance.GetImages()[LevelManager.instance.GetIdxOfCurrentPlanet()]; 
         menuBtn.onClick.AddListener(LoadMenu);
         nextBtn.onClick.AddListener(NextLevel);
 
@@ -53,7 +53,7 @@ public class WinnerScreen : MonoBehaviour
     // Goes back home
     public void LoadMenu(){
         LevelManager.instance.UpdateStats();
-        stateManager.ChangeSceneByName("LevelSelection");
+        StateManager.ChangeSceneByName("LevelSelection");
         
     }
 

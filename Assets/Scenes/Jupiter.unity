@@ -4349,19 +4349,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 299181961f71fee4497ececbc9c6e80e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &634583127 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2281741980263383464, guid: 74ff68d2cc7d95a45b62933751afd18b, type: 3}
-  m_PrefabInstance: {fileID: 634583125}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &634583128 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1491667290352197978, guid: 74ff68d2cc7d95a45b62933751afd18b, type: 3}
-  m_PrefabInstance: {fileID: 634583125}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &634583129 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8796269317796952011, guid: 74ff68d2cc7d95a45b62933751afd18b, type: 3}
   m_PrefabInstance: {fileID: 634583125}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &634583130 stripped
@@ -6108,8 +6098,8 @@ MonoBehaviour:
   missionText: {fileID: 1665112132}
   coins: 0
   weapons:
-  - {fileID: 634583129}
-  - {fileID: 634583127}
+  - {fileID: 0}
+  - {fileID: 0}
   missionItems:
   - Jovian Crystal
   - Hydrogen
@@ -6175,6 +6165,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cutsceneTime: 0
+  loadingTime: 10
   nextScene: Jupiter
   infoScreen: {fileID: 0}
   timelineManager: {fileID: 0}
@@ -6215,7 +6206,6 @@ MonoBehaviour:
   spawnEnemies: 0
   levels: []
   currentPlanet: 
-  inventory: {fileID: 943796969}
   deathManager: {fileID: 1283217986}
 --- !u!4 &943796975
 Transform:

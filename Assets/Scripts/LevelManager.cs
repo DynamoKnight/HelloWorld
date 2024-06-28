@@ -21,13 +21,17 @@ public class LevelManager : MonoBehaviour
     public bool levelComplete = false;
     // Indicates if enemies can spawn
     public bool spawnEnemies;
-    // Planet level names
+
     public List<string> levels;
+    // Represents the furthest planet that has been reached
+    public string bestPlanet;
+    // Represents the current planet it is on
     public string currentPlanet;
 
     private GameObject gm;
     private InventoryManager inventoryManager;
-    public DeathPanel deathManager;
+    private UIManager uiManager;
+    public DeathPanel deathPanel;
 
     // Gets called when loading 
     private void Awake(){
@@ -38,16 +42,23 @@ public class LevelManager : MonoBehaviour
         else{
             Destroy(gameObject);
         }
-        levels = new List<string> {"Pluto","Neptune","Uranus","Saturn","Jupiter","Mars","The Moon","Earth","Venus","Mercury","Multiplayer"};
-        // if current scene is pluto
-        currentPlanet = PlayerStats.CurrentPlanet;
+        levels = PlayerStats.PlanetInfos.Keys.ToList();
+        bestPlanet = PlayerStats.BestPlanet;
+        currentPlanet = levels[0];
         // Makes sure correct planet
-        string level = SceneManager.GetActiveScene().name;
-        Debug.Log(level);
-        if (level != currentPlanet && levels.Contains(level)){
-            currentPlanet = level;
+        var currentScene = SceneManager.GetActiveScene().name;
+        // Makes sure the scene is a planet
+        if (levels.Contains(currentScene)){
+            currentPlanet = currentScene;
+            PlayerStats.CurrentPlanet = currentPlanet;
+            // Sets the new bestPlanet if its higher index 
+            if (GetIdxOfPlanet(currentScene) > GetIdxOfBestPlanet()){
+                bestPlanet = currentScene;
+                PlayerStats.BestPlanet = bestPlanet;
+            }
         }
-
+        Debug.Log("Current Scene: " + currentScene + "\nCurrent Planet: " + currentPlanet);
+        
         // Initial conditions
         isPaused = false;
         isFunctional = false;
@@ -55,19 +66,21 @@ public class LevelManager : MonoBehaviour
         
         gm = gameObject;
         inventoryManager = gm.GetComponent<InventoryManager>();
+        uiManager = gm.GetComponent<UIManager>();
     }
 
 
-    // Hides the UI of the deathpanel
+    // Stops game and records data
     public void GameOver(){
         isFunctional = false;
         PlayerStats.TotalViolations += 1;
         PlayerStats.EnemiesDefeated += GlobalManager.instance.enemiesDefeated;
-        UIManager _ui = GetComponent<UIManager>();
-        if (_ui){
-            _ui.ToggleDeathPanel();
-            deathManager.Die();
-        }
+        // Everything is lost, except credits
+        Inventory.ClearResources();
+        // Shows death panel
+        uiManager.ToggleDeathPanel();
+        // Writes data onto the stats panel
+        deathPanel.Die();
     }
 
     // Pauses and Unpauses the game
@@ -92,27 +105,31 @@ public class LevelManager : MonoBehaviour
 
     // Returns the next planet in order
     public string NextPlanet(){
-        int idx = levels.IndexOf(currentPlanet); 
+        int idx = levels.IndexOf(bestPlanet); 
         string nextPlanet = levels[idx + 1];
         return nextPlanet;
     }
 
     // Saves data to know before changing scenes
     public void UpdateStats(){
-        PlayerStats.CurrentPlanet = NextPlanet();
+        // Next Planet is unlocked
+        PlayerStats.BestPlanet = NextPlanet();
+        // Stores data
         PlayerStats.PlanetsDiscovered += 1;
         PlayerStats.EnemiesDefeated += GlobalManager.instance.enemiesDefeated;
+    }
 
-        // Gets the best time
-        float bestTime = PlayerStats.BestTimes[GlobalManager.instance.GetIdxOfCurrentPlanet()];
-        float currentTime = GlobalManager.instance.timePlayed;
-        // Changes best time to whichever was fastest
-        if (currentTime < bestTime || bestTime == 0){
-            bestTime = currentTime;
-        }
-        // Sets new best time
-        PlayerStats.BestTimes[GlobalManager.instance.GetIdxOfCurrentPlanet()] = bestTime;
-        Debug.Log(PlayerStats.BestTimes[GlobalManager.instance.GetIdxOfCurrentPlanet()]);
+    // Returns the Index of the Planet
+    public int GetIdxOfPlanet(string planet){
+        return PlayerStats.PlanetInfos.Keys.ToList().IndexOf(planet);
+    }
+    // Returns the Index of the Best Planet
+    public int GetIdxOfBestPlanet(){
+        return GetIdxOfPlanet(bestPlanet);
+    }
+    // Returns the Index of the Current Planet
+    public int GetIdxOfCurrentPlanet(){
+        return GetIdxOfPlanet(currentPlanet);
     }
 
 }

@@ -11,22 +11,20 @@ public class LevelSelector : MonoBehaviour
     [SerializeField] private GameObject leaderboard;
 
     private GameObject gm;
-    private StateManager sm;
 
     // Start is called before the first frame update
     void Start(){
         gm = GameObject.Find("GameManager");
-        sm = gm.GetComponent<StateManager>();
 
-        backBtn.onClick.AddListener(ReturnHome);
+        backBtn.onClick.AddListener(StateManager.ReturnHome);
         statsBtn.onClick.AddListener(ToggleLeaderboard);
     }
 
-    // Update is called once per frame
+
     void LateUpdate(){
-        for (int c = 0; c < transform.childCount; c++){
-            Button planetBtn = transform.GetChild(c).GetComponent<Button>();
-            if (c > GlobalManager.instance.GetIdxOfCurrentPlanet()){
+        for (int i = 0; i < transform.childCount; i++){
+            Button planetBtn = transform.GetChild(i).GetComponent<Button>();
+            if (i > LevelManager.instance.GetIdxOfBestPlanet()){
                 // Disables button
                 planetBtn.onClick.RemoveAllListeners();
                 // Shows lock
@@ -34,12 +32,9 @@ public class LevelSelector : MonoBehaviour
             }
             else{
                 // Lambda function allows parameter to be passed
-                planetBtn.onClick.AddListener(() => GoToPlanet(planetBtn.transform.GetChild(0).GetComponent<TMP_Text>().text));
+                planetBtn.onClick.AddListener(() => StateManager.GoToPlanet(LevelManager.instance.levels[i]));
                 // Hides lock
                 planetBtn.transform.GetChild(2).gameObject.SetActive(false);
-                // Records the time
-                float bestTime =  PlayerStats.BestTimes[c];
-                planetBtn.transform.GetChild(1).GetComponent<TMP_Text>().text = "Best Score: " + GlobalManager.instance.FormatTime(bestTime);
             }
         }
         // Edits leaderboard values
@@ -49,26 +44,9 @@ public class LevelSelector : MonoBehaviour
         enemiesDefeated.GetComponent<TMP_Text>().text = PlayerStats.EnemiesDefeated.ToString();
         totalViolations.GetComponent<TMP_Text>().text = PlayerStats.TotalViolations.ToString();
 
-
     }
 
-    // Starts the planet level
-    private void GoToPlanet(string planet){
-        if (planet == "Pluto"){
-            sm.ChangeSceneByName("Cutscene");
-        }
-        else if (planet == "NeptuneCutscene"){
-            sm.ChangeSceneByName("NeptuneCutscene");
-        }
-        else{
-            sm.LoadInstructions(planet);
-        }
-    }
-
-    // Goes to title page
-    private void ReturnHome(){
-        sm.ChangeSceneByName("TitlePage");
-    }
+    
 
     // Turns on/off leaderboard
     private void ToggleLeaderboard(){

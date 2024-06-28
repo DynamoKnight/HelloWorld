@@ -34,14 +34,15 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject gameTime; 
 
     void Start(){
-        players = GameObject.FindGameObjectsWithTag("Player");
         gm = gameObject;
         stateManager = gm.GetComponent<StateManager>();
-        // To handle multiple players
-        foreach (GameObject player in players){
-            player.SetActive(false);
+        players = GameObject.FindGameObjectsWithTag("Player");
+        if (players != null){
+            // To handle multiple players
+            foreach (GameObject player in players){
+                player.SetActive(false);
+            }
         }
-        
         
         // If the current scene is a planet, it will have escape buttons
         if(LevelManager.instance.levels.Contains(SceneManager.GetActiveScene().name)){
@@ -51,7 +52,7 @@ public class UIManager : MonoBehaviour
             backBtn = pauseMenu.transform.GetChild(2).GetComponent<Button>();
             // Adds functions to it
             quitBtn.onClick.AddListener(LevelManager.instance.QuitGame);
-            homeBtn.onClick.AddListener(ReturnHome);
+            homeBtn.onClick.AddListener(StateManager.ReturnHome);
             backBtn.onClick.AddListener(TogglePauseMenu);
 
             // Shows start screen
@@ -66,7 +67,7 @@ public class UIManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape)){
             TogglePauseMenu();
         }
-        // Game must be unpaused an functional
+        // Game must be unpaused and functional
         if (!LevelManager.instance.isPaused && LevelManager.instance.isFunctional){
             // Changes avatar image breifly
             if(timer >= avatarAnimTime){
@@ -77,7 +78,7 @@ public class UIManager : MonoBehaviour
             }
 
             // Updates the time
-            float i = GlobalManager.instance.timePlayed;
+            float i = PlayerStats.TimeLimit - PlayerStats.TimePlayed;
             int minute = Convert.ToInt32(Math.Floor(i/60f));
             int seconds = Convert.ToInt32(i - minute*60);
             // Adds 0 if needed
@@ -112,7 +113,7 @@ public class UIManager : MonoBehaviour
 
             // Gets the index of the current planet
             string currentPlanet = LevelManager.instance.currentPlanet;
-            int currentPlanetIdx = infos.Keys.ToList().IndexOf(currentPlanet);
+            int currentPlanetIdx = LevelManager.instance.GetIdxOfCurrentPlanet();
             // Sets values based on the planet
             image.sprite = images[currentPlanetIdx];
             planet.text = currentPlanet;
@@ -154,11 +155,6 @@ public class UIManager : MonoBehaviour
         // Restarts time and indicates the start time
         GlobalManager.instance.timePlayed = 0;
         GlobalManager.instance.gameStart = Time.time;
-    }
-
-    // Goes back home without saving progress
-    public void ReturnHome(){
-        stateManager.ChangeSceneByName("TitlePage");
     }
 
     // Shows/hides the pause menu

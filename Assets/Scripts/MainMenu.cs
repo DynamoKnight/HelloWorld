@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public class MainMenu : MonoBehaviour
 {
     private GameObject gm;
-    private StateManager stateManager;
     private Button playBtn;
     private Button mpBtn;
     private Button optionsBtn;
@@ -16,7 +15,6 @@ public class MainMenu : MonoBehaviour
 
     void Start(){
         gm = GameObject.Find("GameManager");
-        stateManager = gm.GetComponent<StateManager>();
         
         // Gets children buttons
         playBtn = gameObject.transform.GetChild(0).GetComponent<Button>();
@@ -31,12 +29,14 @@ public class MainMenu : MonoBehaviour
         quitBtn.onClick.AddListener(QuitGame);
     }
 
+    // Loads the Main game
     public void PlayGame(){
-        stateManager.ChangeSceneByName("LevelSelection");
+        StateManager.ChangeSceneByName("LevelSelection");
     }
 
+    // Loads Multiplayer mode
     public void PlayMultiplayer(){
-        stateManager.ChangeSceneByName("Multiplayer");
+        StateManager.ChangeSceneByName("Multiplayer");
     }
 
     void Update(){

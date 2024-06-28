@@ -17,12 +17,10 @@ public class TextAnim : MonoBehaviour
     [SerializeField] private string nextScene;
 
     private GameObject gm;
-    private StateManager stateManager;
 
     int i = 0;
     void Start(){
         gm = GameObject.Find("GameManager");
-        stateManager = gm.GetComponent<StateManager>();
         
         EndCheck();
     }
@@ -33,7 +31,7 @@ public class TextAnim : MonoBehaviour
             StartCoroutine(TextVisible());
         }
         else{
-            stateManager.ChangeSceneByName(nextScene);
+            StateManager.ChangeSceneByName(nextScene);
         }
     }
 

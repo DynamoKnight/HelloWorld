@@ -9,7 +9,6 @@ using UnityEngine.UI;
 public class DeathPanel : MonoBehaviour
 {
     private GameObject gm;
-    private StateManager stateManager;
 
     private GameObject statsPanel;
     // Options once dead
@@ -18,7 +17,6 @@ public class DeathPanel : MonoBehaviour
 
     void OnEnable(){
         gm = GameObject.Find("GameManager");
-        stateManager = gm.GetComponent<StateManager>();
 
         // Death panel buttons
         backBtn = transform.GetChild(0).GetComponent<Button>();
@@ -26,8 +24,8 @@ public class DeathPanel : MonoBehaviour
         // Make sure order is right
         statsPanel = transform.GetChild(4).gameObject;
         
-        backBtn.onClick.AddListener(BackToMenu);
-        retryBtn.onClick.AddListener(RestartLevel);
+        backBtn.onClick.AddListener(StateManager.ReturnHome);
+        retryBtn.onClick.AddListener(StateManager.RestartLevel);
     }
 
     // Shows the statistics for the level
@@ -36,13 +34,4 @@ public class DeathPanel : MonoBehaviour
         GlobalManager.instance.WriteStats(statsPanel);
     }
 
-    // Returns to the menu screen
-    public void BackToMenu(){
-        stateManager.ChangeSceneByName("TitlePage");
-    }
-
-    // Resets current level
-    public void RestartLevel(){
-        StateManager.ReloadCurrentScene();
-    }
 }

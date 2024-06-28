@@ -1,5 +1,7 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -14,7 +16,8 @@ public class Spawner : MonoBehaviour
 
     private GameObject player;
 
-    public GameObject[] alienPrefabs;
+    // Represents the aliens to spawn and the list of drops they have
+    public List<Dropper> alienPrefabs;
 
     protected virtual void FixedUpdate(){
         // Only collects time if unpaused
@@ -40,9 +43,13 @@ public class Spawner : MonoBehaviour
         Vector2 spawnPos = player.transform.position;
         // The position will be outside the radius of the player
         spawnPos += Random.insideUnitCircle.normalized * spawnRadius;
-        // Spawns a random object
-        var alien = alienPrefabs[Random.Range(0, alienPrefabs.Length)];
+        // hooses a random alien
+        Dropper dropper = alienPrefabs[Random.Range(0, alienPrefabs.Count())];
+        GameObject alien = dropper.alien;
+        GameObject[] drops = dropper.drops;
+        // Spawns an alien with the drops it has
         Instantiate(alien, spawnPos, Quaternion.identity);
+        alien.GetComponent<Enemy>().drops = drops;
         yield return new WaitForSeconds(spawnRate);
         // Allows to spawn again
         enemySpawning = false;

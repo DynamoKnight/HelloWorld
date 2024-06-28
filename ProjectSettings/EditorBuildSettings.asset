@@ -18,7 +18,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Cutscene.unity
     guid: 9920e5d7b41826347b1660e1b4bd26b5
   - enabled: 1
-    path: Assets/Scenes/PlutoDialog.unity
+    path: Assets/Scenes/PlutoMoon.unity
     guid: 2cec5683d50491442a8c3c5d48e3df47
   - enabled: 1
     path: Assets/Scenes/Pluto.unity

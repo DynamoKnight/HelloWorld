@@ -6,10 +6,13 @@ using UnityEngine.UI;
 public class JournalManager : MonoBehaviour
 {
     GameObject gm;
+    UIManager uiManager;
+
     private GameObject journalPanel;
 
     void Start(){
         gm = GameObject.Find("GameManager");
+        uiManager = gm.GetComponent<UIManager>();
     }
 
     void Update(){
@@ -25,10 +28,7 @@ public class JournalManager : MonoBehaviour
     public void ClickJournalBtn(){
         // Stops all time operations
         LevelManager.instance.TogglePause();
-        UIManager _ui = gm.GetComponent<UIManager>();
-        if (_ui){
-            _ui.ToggleJournalPanel();
-        }
+        uiManager.ToggleJournalPanel();
     }
 
 }
