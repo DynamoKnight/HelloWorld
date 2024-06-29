@@ -19,7 +19,9 @@ public class InventoryManager : MonoBehaviour
     public List<Sprite> inventoryImages;
     private int imgIdx = 0;
 
-    [SerializeField] Player player; // Should player be the GameObject or the script?
+    [SerializeField] Player player;
+    private Transform playerInventory;
+
 
     // Displays Weapons & other Collectables
     public GameObject inventoryPanel;
@@ -80,6 +82,7 @@ public class InventoryManager : MonoBehaviour
     }
 
     void Start(){
+        playerInventory = player.transform.GetChild(0);
         // From the Inventory, previous data
         foreach (GameObject item in Inventory.Items.Keys){
             AddToPlayer(item);
@@ -171,27 +174,53 @@ public class InventoryManager : MonoBehaviour
 
     // Updates the Inventory panel with the items in the inventory
     public void SetInventory(){
-        for (int i = 0; i < Inventory.Items.Keys.Count; i++){
-            // Represents a key-value pair of the gameobject and the count
-            var kvItem = Inventory.Items.ElementAt(i);
-            int count = kvItem.Value;
-            // Gets the quantity (3) of the item at the exact position
+        for (int i = 0; i < inventoryPanel.transform.childCount; i++){
+            // Gets the quantity text (3) of the item at the exact position
             GameObject slotText = inventoryPanel.transform.GetChild(i).transform.GetChild(3).gameObject;
-            // Only shows the count if there is more than 1 quantity
-            if (count > 1){
-                slotText.SetActive(true);
-                slotText.GetComponent<TMP_Text>().text = count.ToString();
-            }
-            else{
-                slotText.SetActive(false);
-            }
-            Sprite image = kvItem.Key.GetComponent<SpriteRenderer>().sprite;
             // Gets the image slot (0) at the exact position
             Image inventorySlot = inventoryPanel.transform.GetChild(i).transform.GetChild(0).gameObject.GetComponent<Image>();
-            // Activates the image with visible properties
-            inventorySlot.sprite = image;
-            inventorySlot.color = new Color(255, 255, 255, 1);
-            inventorySlot.preserveAspect = true;
+            try{
+                // Item may not exist at that index
+                // Represents a key-value pair of the gameobject and the count
+                var kvItem = Inventory.Items.ElementAt(i);
+                int count = kvItem.Value;
+                
+                // The image of the inventory item
+                Sprite image = kvItem.Key.GetComponent<SpriteRenderer>().sprite;
+                // Only shows the count if there is more than 1 quantity
+                if (count > 1){
+                    slotText.SetActive(true);
+                    slotText.GetComponent<TMP_Text>().text = count.ToString();
+                }
+                else if (count == 1){
+                    slotText.SetActive(false);
+                }
+                // If it is 0, it will be removed from the inventory
+                else{
+                    slotText.SetActive(false);
+                    Inventory.Items.Remove(kvItem.Key);
+                    RemoveFromPlayer(kvItem.Key);
+                    // Hides image
+                    inventorySlot.sprite = null;
+                    inventorySlot.color = new Color(255, 255, 255, 0);
+                    // Because an element is removed in Items, the list is shifted down
+                    i -= 1;
+                    continue;
+                }
+                // Activates the image with visible properties
+                inventorySlot.sprite = image;
+                inventorySlot.color = new Color(255, 255, 255, 1);
+                inventorySlot.preserveAspect = true;
+            }
+            // Indicates that the entire actual inventory has been iterated through, so the remaining slots should be empty
+            catch(ArgumentOutOfRangeException){
+                // Hides the slot so that nothing is in it
+                inventorySlot.sprite = null;
+                inventorySlot.color = new Color(255, 255, 255, 0);
+                slotText.SetActive(false);
+            }
+            
+           
         }
     }
     
@@ -416,7 +445,7 @@ public class InventoryManager : MonoBehaviour
     public bool AddToPlayer(GameObject gameObject){
         // Removes the "(Clone)" from the name
         gameObject.name = gameObject.name.Replace("(Clone)", "");
-        foreach (Transform child in player.transform.GetChild(0)){
+        foreach (Transform child in playerInventory){
             // If the object is already with the playerInventory, it shouldn't be added
             if(child.name == gameObject.name){
                 return false;
@@ -442,6 +471,20 @@ public class InventoryManager : MonoBehaviour
 
         }
         return true;
+    }
+
+    // Removes the object from the player's inventory
+    public bool RemoveFromPlayer(GameObject gameObject){
+        // Removes the "(Clone)" from the name
+        gameObject.name = gameObject.name.Replace("(Clone)", "");
+        foreach (Transform child in playerInventory){
+            // Removes the object by destroying it
+            if(child.name == gameObject.name){
+                Destroy(child.gameObject);
+                return true;
+            }
+        }
+        return false;
     }
 
 }

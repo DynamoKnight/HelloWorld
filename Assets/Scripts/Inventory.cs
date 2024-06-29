@@ -116,6 +116,21 @@ public static class Inventory
         }
     }
 
+    // Returns whether an object is in the inventory
+    public static bool Contains(GameObject gameObject){
+        GameObject prefab = GetPrefabFromObject(gameObject);
+        if (prefab != null){
+            foreach (GameObject item in Items.Keys){
+                if (prefab.name == item.name){
+                    // Matches by name
+                    return true;
+                }
+            }
+        }
+        // Object could not be found
+        return false;
+    }
+
     // Returns the original game object from a name 
     public static GameObject GetPrefabFromObject(GameObject gameObject){
         foreach (GameObject prefab in Prefabs){

@@ -25,7 +25,7 @@ public class Trader : MonoBehaviour
     // Briefly shows to indicate pickup
     [SerializeField] private GameObject eBtn;
     // Items to Sell will always be the mission items of the planet
-    [HideInInspector] public List<SaleItem> sellItems;
+    [HideInInspector] public List<SaleItem> sellItems = new();
     // Represents the cost
     public List<int> sellCosts;
     // Items to Buy
@@ -45,6 +45,8 @@ public class Trader : MonoBehaviour
         optionButtons = tradePanel.transform.GetChild(6).gameObject;
 
         backBtn.onClick.AddListener(ToggleTradePanel);
+        // Some reason it starts with elements
+        sellItems.Clear();
         // Items to Sell
         // The last child is the label
         for (int c = 0; c < sellPanel.transform.childCount - 1; c++){
@@ -53,11 +55,15 @@ public class Trader : MonoBehaviour
             Button sellButton = sellPanel.transform.GetChild(c).GetChild(1).GetComponent<Button>();
             TMP_Text costText = sellPanel.transform.GetChild(c).GetChild(2).GetChild(0).GetComponent<TMP_Text>();
 
+            // Initializes a list of sale items that are the mission items
+            MissionItem missionItem = inventoryManager.planetMissionItems[c];
+            sellItems.Add(new SaleItem(missionItem.gameObject, sellCosts[c], missionItem.toCollect));
             
             // Sets the sell item to the planets mission item
-            item.GetComponent<Image>().sprite = inventoryManager.planetMissionItems[c].gameObject.GetComponent<SpriteRenderer>().sprite;
-            itemQuantity.text = inventoryManager.planetMissionItems[c].toCollect.ToString();
-            sellButton.onClick.AddListener(() => SellItem());
+            item.GetComponent<Image>().sprite = missionItem.gameObject.GetComponent<SpriteRenderer>().sprite;
+            itemQuantity.text = missionItem.toCollect.ToString();
+            SaleItem saleItem = sellItems[c];
+            sellButton.onClick.AddListener(() => SellItem(saleItem));
             costText.text = sellCosts[c].ToString();
         }
         // Items to Buy
@@ -69,7 +75,8 @@ public class Trader : MonoBehaviour
 
             item.GetComponent<Image>().sprite = buyItems[c].gameObject.GetComponent<SpriteRenderer>().sprite;
             itemQuantity.text = buyItems[c].quantity.ToString();
-            buyButton.onClick.AddListener(() => BuyItem());
+            SaleItem saleItem = buyItems[c];
+            buyButton.onClick.AddListener(() => BuyItem(saleItem));
             costText.text = buyItems[c].cost.ToString();
         }
     }
@@ -102,15 +109,57 @@ public class Trader : MonoBehaviour
     public void ToggleTradePanel(){
         // Toggles the trade panel
         tradePanel.SetActive(!tradePanel.activeSelf);
+        // Always enables the inventory panel when trading
+        if (tradePanel.activeSelf){
+            inventoryManager.inventoryPanel.SetActive(true);
+        }
         // Stops all time operations
         LevelManager.instance.TogglePause();
     }
 
-    public void BuyItem(){
+    // The player recieves an item at the cost of credits
+    public bool BuyItem(SaleItem saleItem){
+        if (Inventory.Credits >= saleItem.cost){
+            bool collected = Inventory.CollectItem(saleItem.gameObject);
+            if (collected){
+                Inventory.LoseCredits(saleItem.cost);
+                inventoryManager.AddToPlayer(saleItem.gameObject);
+                inventoryManager.SetInventory();
+                // Item was bought
+                return true;
+            }
+            else{
+                Debug.Log("Not Enough Space in the Inventory!");
+            }
+        }
+        else{
+            Debug.Log("Not Enough Credits to Buy Item!");
+        }
+        // Item could not be bought
+        return false;
 
     }
 
-    public void SellItem(){
+    // The player recieves credits at the cost of an item
+    public bool SellItem(SaleItem saleItem){
+        if (Inventory.Contains(saleItem.gameObject)){
+            bool lost = Inventory.LoseItem(saleItem.gameObject, saleItem.quantity);
+            if (lost){
+                Inventory.CollectCredits(saleItem.cost);
+                inventoryManager.AddToPlayer(saleItem.gameObject);
+                inventoryManager.SetInventory();
+                // Item was sold
+                return true;
+            }
+            else{
+                Debug.Log("Not Enough items to Sell!");
+            }
+        }
+        else{
+            Debug.Log("Item not found in Inventory!");
+        }
+        // Item could not be sold
+        return false;
 
     }
 
