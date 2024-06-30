@@ -39,6 +39,7 @@ This document provides a guide on how to modify our 2D game in Unity. We'll cove
    - Use spritesheets or individual frames for animations.
      
 ![Sprite Animation](https://media.giphy.com/media/LdJFYVYCb6FtN1dyBr/giphy.gif)
+
 2. **Animator Controller**:
    - Set up Animator Controllers for characters or objects.
    - Define animation states and transitions.
