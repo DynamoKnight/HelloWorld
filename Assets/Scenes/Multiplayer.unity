@@ -3682,7 +3682,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &575913689
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6079,6 +6079,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cutsceneTime: 0
+  loadingTime: 10
   nextScene: 
   infoScreen: {fileID: 0}
   timelineManager: {fileID: 0}
@@ -6118,9 +6119,9 @@ MonoBehaviour:
   levelComplete: 0
   spawnEnemies: 0
   levels: []
+  bestPlanet: 
   currentPlanet: 
-  inventory: {fileID: 0}
-  deathManager: {fileID: 1955295101}
+  deathPanel: {fileID: 0}
 --- !u!4 &901211898
 Transform:
   m_ObjectHideFlags: 0
@@ -6155,14 +6156,16 @@ MonoBehaviour:
   lastDeath: 0
   gameStart: 0
   images:
-  - {fileID: 21300000, guid: 28e30055f15e73c4ba14752c56e93caa, type: 3}
-  - {fileID: 21300000, guid: 52e927c8989e2834f956b07ab170611a, type: 3}
-  - {fileID: 21300000, guid: f5790d52e3fd4db4b978d4224a12e645, type: 3}
-  - {fileID: 21300000, guid: 7207b973341017e4e8befa0f2399e956, type: 3}
-  - {fileID: 21300000, guid: 59007f6ba4a6dac4fb5d8abbe90eb69b, type: 3}
-  - {fileID: 21300000, guid: ba0cb6e8ba63f4746982493e1818c937, type: 3}
-  - {fileID: 21300000, guid: 7aa6f1fcff0cb644e991e2703eba3e51, type: 3}
-  - {fileID: 21300000, guid: 1bf9002950bc251418fd7efd99e6d891, type: 3}
+  - {fileID: 1051077837, guid: 3d95ea5e11740af4aa82a14e28b32fd9, type: 3}
+  - {fileID: -2081137162, guid: 3d95ea5e11740af4aa82a14e28b32fd9, type: 3}
+  - {fileID: 233653144, guid: 3d95ea5e11740af4aa82a14e28b32fd9, type: 3}
+  - {fileID: 1938877184, guid: 3d95ea5e11740af4aa82a14e28b32fd9, type: 3}
+  - {fileID: 1931109165, guid: 3d95ea5e11740af4aa82a14e28b32fd9, type: 3}
+  - {fileID: 274713451, guid: 3d95ea5e11740af4aa82a14e28b32fd9, type: 3}
+  - {fileID: -2109800328, guid: 3d95ea5e11740af4aa82a14e28b32fd9, type: 3}
+  - {fileID: -1300809517, guid: 3d95ea5e11740af4aa82a14e28b32fd9, type: 3}
+  - {fileID: 1761260918, guid: 3d95ea5e11740af4aa82a14e28b32fd9, type: 3}
+  - {fileID: -1326431020, guid: 3d95ea5e11740af4aa82a14e28b32fd9, type: 3}
 --- !u!114 &901211901
 MonoBehaviour:
   m_ObjectHideFlags: 0

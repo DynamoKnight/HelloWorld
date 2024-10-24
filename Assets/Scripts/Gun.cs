@@ -12,7 +12,6 @@ public class Gun : Weapon
     [SerializeField] protected GameObject bulletPrefab;
     // The place where the bullet comes from
     [SerializeField] protected Transform firingPoint;
-    [Range(0.1f, 2f)]
     [SerializeField] protected float fireRate = 0.5f;
     protected float fireTimer;
 

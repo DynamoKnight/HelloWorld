@@ -78,7 +78,7 @@ public class UIManager : MonoBehaviour
             }
 
             // Updates the time
-            float i = PlayerStats.TimeLimit - PlayerStats.TimePlayed;
+            float i = PlayerStats.TimePlayed;
             int minute = Convert.ToInt32(Math.Floor(i/60f));
             int seconds = Convert.ToInt32(i - minute*60);
             // Adds 0 if needed

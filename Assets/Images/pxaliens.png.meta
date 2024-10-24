@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 43fc0613450401a4f972f58432b461fc
+guid: dc3d66885f4bed245a638420fda0e1e7
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -34,7 +34,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -123,34 +123,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: pxalien_pluto_0
+      name: PXaliens_0
       rect:
         serializedVersion: 2
-        x: 32
-        y: 919
-        width: 168
-        height: 233
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 1, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 34af1fc3cf9be9743b4bf8f851b7ba44
-      internalID: -212436119
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: pxalien_neptune_0
-      rect:
-        serializedVersion: 2
-        x: 232
-        y: 920
-        width: 152
-        height: 208
+        x: 4
+        y: 165
+        width: 21
+        height: 29
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -158,20 +137,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f26a4dd7dc9f30141b2540b09689d18f
-      internalID: -1357609390
+      spriteID: 47c1be1ce91119146a908dd6322ee142
+      internalID: -2115963481
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pxalien_uranus_0
+      name: PXaliens_1
       rect:
         serializedVersion: 2
-        x: 416
-        y: 920
-        width: 168
-        height: 248
+        x: 29
+        y: 165
+        width: 19
+        height: 26
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -179,20 +158,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d7daf1a8d550c3745a17a62db2204545
-      internalID: 2123203190
+      spriteID: 2d7d59389a5143447b63c3542b947a5b
+      internalID: -2091514270
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pxalien_saturn_0
+      name: PXaliens_2
       rect:
         serializedVersion: 2
-        x: 632
-        y: 920
-        width: 144
-        height: 224
+        x: 52
+        y: 165
+        width: 21
+        height: 31
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -200,20 +179,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fb1969e01403b6b49862d3dfb8cc1bed
-      internalID: -1347367316
+      spriteID: 608b2003b48113340a1adec63b8c0283
+      internalID: -24610850
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pxalien_jupiter_0
+      name: PXaliens_3
       rect:
         serializedVersion: 2
-        x: 816
-        y: 856
-        width: 264
-        height: 336
+        x: 79
+        y: 165
+        width: 18
+        height: 28
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -221,20 +200,41 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 307f0ef0ebf38064ea599c5395e663a3
-      internalID: -1050205514
+      spriteID: eebfb2dd53e87d248a014d47f53d1ca5
+      internalID: 1844223484
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pxalien_jupiter_2
+      name: PXaliens_4
       rect:
         serializedVersion: 2
-        x: 1120
-        y: 856
-        width: 264
-        height: 336
+        x: 102
+        y: 157
+        width: 34
+        height: 42
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 1, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0e64c79496078d84eab3af1bc2d98a90
+      internalID: -1939079373
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PXaliens_5
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 157
+        width: 33
+        height: 42
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -242,20 +242,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 26dc522d12994dc498b3a2dfe0d1c6aa
-      internalID: -1224510448
+      spriteID: 9947c0447d5fa4640b6e54d14595fd05
+      internalID: -648070330
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pxalien_mars_0
+      name: PXaliens_6
       rect:
         serializedVersion: 2
-        x: 1424
-        y: 920
-        width: 168
-        height: 232
+        x: 178
+        y: 165
+        width: 21
+        height: 29
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -263,20 +263,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9cb51d3bd80b8aa4e899af688cd3d8cc
-      internalID: -738409578
+      spriteID: 66d1580842c8bcd43b404b056bb1f178
+      internalID: -1274137013
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pxalien_mercury_0
+      name: PXaliens_7
       rect:
         serializedVersion: 2
-        x: 1624
-        y: 920
-        width: 168
-        height: 232
+        x: 203
+        y: 165
+        width: 21
+        height: 29
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -284,20 +284,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9b6912ffbc34bdb4ea14a9a958b965b2
-      internalID: 885662749
+      spriteID: 6295b48766f3722499179adc53f11fac
+      internalID: -814651128
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pxalien_venus_0
+      name: PXaliens_8
       rect:
         serializedVersion: 2
-        x: 1824
-        y: 920
-        width: 168
-        height: 264
+        x: 228
+        y: 165
+        width: 21
+        height: 33
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -305,20 +305,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b8fe5ec01e4e9704fb637b517089969b
-      internalID: -1595107950
+      spriteID: 1c2eb48f9ed29a34890ec9824440341f
+      internalID: 332893720
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pxalien_neptune_1
+      name: PXaliens_9
       rect:
         serializedVersion: 2
-        x: 232
-        y: 624
-        width: 152
-        height: 208
+        x: 29
+        y: 128
+        width: 19
+        height: 26
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -326,20 +326,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4aa11c89792be3e40aa9b12b4a3914c9
-      internalID: 268119359
+      spriteID: 328d7dff5045bc043a5f27114caec05d
+      internalID: -912367135
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pxalien_uranus_1
+      name: PXaliens_10
       rect:
         serializedVersion: 2
-        x: 416
-        y: 624
-        width: 168
-        height: 248
+        x: 52
+        y: 128
+        width: 21
+        height: 31
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -347,20 +347,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 695e8ca79751d9041aa9a1360db40e2c
-      internalID: -2105025278
+      spriteID: b7ce972efd3573e4d916261af0338a09
+      internalID: 395221718
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pxalien_saturn_1
+      name: PXaliens_11
       rect:
         serializedVersion: 2
-        x: 632
-        y: 624
-        width: 144
-        height: 224
+        x: 79
+        y: 128
+        width: 18
+        height: 28
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -368,20 +368,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e3c502cf4c4c6f24aa9c737b5f960e78
-      internalID: -1108693915
+      spriteID: 205990c5381aeaf4196de484a28e71c0
+      internalID: -491906834
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pxalien_jupiter_1
+      name: PXaliens_12
       rect:
         serializedVersion: 2
-        x: 816
-        y: 488
-        width: 264
-        height: 336
+        x: 102
+        y: 111
+        width: 33
+        height: 42
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -389,20 +389,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2f961146a42dd294ba16506a8f8ef468
-      internalID: 604712151
+      spriteID: 333ef2c39ffe4244282884dffbd138b4
+      internalID: 1002681403
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pxalien_jupiter_3
+      name: PXaliens_13
       rect:
         serializedVersion: 2
-        x: 1120
-        y: 488
-        width: 264
-        height: 336
+        x: 140
+        y: 111
+        width: 33
+        height: 42
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -410,20 +410,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a873f80f93cc05f48aaf90d4124ae9be
-      internalID: 1038513994
+      spriteID: f714b8d232c194247b6569871ad65e39
+      internalID: 1207580890
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pxalien_mars_1
+      name: PXaliens_14
       rect:
         serializedVersion: 2
-        x: 1424
-        y: 624
-        width: 168
-        height: 232
+        x: 178
+        y: 128
+        width: 21
+        height: 29
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -431,20 +431,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6840eed55fe4bfb469bfedcd41653566
-      internalID: -571389375
+      spriteID: ee4cc8cf10d65fb40af76681c72558bf
+      internalID: 1360078707
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pxalien_mercury_1
+      name: PXaliens_15
       rect:
         serializedVersion: 2
-        x: 1624
-        y: 624
-        width: 168
-        height: 232
+        x: 203
+        y: 128
+        width: 21
+        height: 29
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -452,20 +452,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a51a1d208e8813243a2cd23eaecfccc9
-      internalID: 765198135
+      spriteID: f90b096bd9ad5334daf74bbad5c6eda1
+      internalID: -335772798
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pxalien_venus_1
+      name: PXaliens_16
       rect:
         serializedVersion: 2
-        x: 1824
-        y: 624
-        width: 168
-        height: 264
+        x: 229
+        y: 128
+        width: 21
+        height: 33
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -473,20 +473,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cbbaa27e135dcd94cab188a898600af3
-      internalID: -229412552
+      spriteID: 326efe0514aa9d947a4a1057bf0c310f
+      internalID: 1020414126
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pxalien_uranus_2
+      name: PXaliens_17
       rect:
         serializedVersion: 2
-        x: 418
-        y: 328
-        width: 168
-        height: 248
+        x: 52
+        y: 91
+        width: 21
+        height: 31
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -494,20 +494,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0479039aeb9578d4791ab1429024540b
-      internalID: 1555415604
+      spriteID: 87b8de484561e2a4a93ee7fe47ee342d
+      internalID: 1439233530
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pxalien_saturn_2
+      name: PXaliens_18
       rect:
         serializedVersion: 2
-        x: 632
-        y: 328
-        width: 144
-        height: 224
+        x: 79
+        y: 91
+        width: 18
+        height: 28
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -515,20 +515,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bc74f7e51795ba64f8cfcdd405a57e81
-      internalID: 813907909
+      spriteID: a7832f5e8839ce34593b7c9bef5c382a
+      internalID: -637543739
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pxalien_jupiter_4
+      name: PXaliens_19
       rect:
         serializedVersion: 2
-        x: 1120
-        y: 120
-        width: 272
-        height: 336
+        x: 140
+        y: 65
+        width: 33
+        height: 42
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -536,20 +536,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0b7f945d4af50b741a3cf1aecdcb0e86
-      internalID: -664524547
+      spriteID: 60fcd91409d33b744a265e659597d3d1
+      internalID: 409784355
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pxalien_mars_2
+      name: PXaliens_20
       rect:
         serializedVersion: 2
-        x: 1424
-        y: 328
-        width: 168
-        height: 232
+        x: 178
+        y: 91
+        width: 21
+        height: 29
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -557,20 +557,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7505392406177a646932c1ea097342fa
-      internalID: 515052629
+      spriteID: 51e6b03158f849646bc6597c05ad06a1
+      internalID: -840169894
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pxalien_mercury_2
+      name: PXaliens_21
       rect:
         serializedVersion: 2
-        x: 1626
-        y: 328
-        width: 168
-        height: 232
+        x: 203
+        y: 91
+        width: 21
+        height: 29
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -578,20 +578,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d355e51784ead694c835a77c7af55e35
-      internalID: -271800966
+      spriteID: 1d4184e753d261844bd6dba7013b5ca7
+      internalID: -1179804004
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pxalien_venus_2
+      name: PXaliens_22
       rect:
         serializedVersion: 2
-        x: 1824
-        y: 320
-        width: 168
-        height: 264
+        x: 228
+        y: 90
+        width: 21
+        height: 33
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -599,20 +599,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b7bb6d4d766de494c91a78e69c669c96
-      internalID: -712121891
+      spriteID: 4fee8f8bdbc85014b84cf5062c47a198
+      internalID: -533702284
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pxalien_saturn_3
+      name: PXaliens_23
       rect:
         serializedVersion: 2
-        x: 632
-        y: 32
-        width: 144
-        height: 224
+        x: 79
+        y: 54
+        width: 18
+        height: 28
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -620,20 +620,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9be48762e3f73ea4e98958310f222680
-      internalID: -2116210307
+      spriteID: efdce906e7adbdd4db0420ed502d3ea9
+      internalID: 128437444
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pxalien_mercury_3
+      name: PXaliens_24
       rect:
         serializedVersion: 2
-        x: 1624
-        y: 32
-        width: 168
-        height: 232
+        x: 203
+        y: 54
+        width: 21
+        height: 29
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -641,20 +641,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4403f9a850c71294296deafa484b0b04
-      internalID: -2015942169
+      spriteID: df534d29bb2f40944beacc9830418046
+      internalID: -609357195
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pxalien_venus_3
+      name: PXaliens_25
       rect:
         serializedVersion: 2
-        x: 1824
-        y: 32
-        width: 168
-        height: 264
+        x: 228
+        y: 54
+        width: 21
+        height: 33
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -662,8 +662,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 93b9ee17389ce794da5dc721040511bd
-      internalID: -247379993
+      spriteID: 509f239724e398e42b0b3bcc3ffe1314
+      internalID: -869316638
       vertices: []
       indices: 
       edges: []
@@ -679,32 +679,32 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      pxalien_jupiter_0: -1050205514
-      pxalien_jupiter_1: 604712151
-      pxalien_jupiter_2: -1224510448
-      pxalien_jupiter_3: 1038513994
-      pxalien_jupiter_4: -664524547
-      pxalien_mars_0: -738409578
-      pxalien_mars_1: -571389375
-      pxalien_mars_2: 515052629
-      pxalien_mercury_0: 885662749
-      pxalien_mercury_1: 765198135
-      pxalien_mercury_2: -271800966
-      pxalien_mercury_3: -2015942169
-      pxalien_neptune_0: -1357609390
-      pxalien_neptune_1: 268119359
-      pxalien_pluto_0: -212436119
-      pxalien_saturn_0: -1347367316
-      pxalien_saturn_1: -1108693915
-      pxalien_saturn_2: 813907909
-      pxalien_saturn_3: -2116210307
-      pxalien_uranus_0: 2123203190
-      pxalien_uranus_1: -2105025278
-      pxalien_uranus_2: 1555415604
-      pxalien_venus_0: -1595107950
-      pxalien_venus_1: -229412552
-      pxalien_venus_2: -712121891
-      pxalien_venus_3: -247379993
+      PXaliens_0: -2115963481
+      PXaliens_1: -2091514270
+      PXaliens_10: 395221718
+      PXaliens_11: -491906834
+      PXaliens_12: 1002681403
+      PXaliens_13: 1207580890
+      PXaliens_14: 1360078707
+      PXaliens_15: -335772798
+      PXaliens_16: 1020414126
+      PXaliens_17: 1439233530
+      PXaliens_18: -637543739
+      PXaliens_19: 409784355
+      PXaliens_2: -24610850
+      PXaliens_20: -840169894
+      PXaliens_21: -1179804004
+      PXaliens_22: -533702284
+      PXaliens_23: 128437444
+      PXaliens_24: -609357195
+      PXaliens_25: -869316638
+      PXaliens_3: 1844223484
+      PXaliens_4: -1939079373
+      PXaliens_5: -648070330
+      PXaliens_6: -1274137013
+      PXaliens_7: -814651128
+      PXaliens_8: 332893720
+      PXaliens_9: -912367135
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -18,21 +18,23 @@ public class LevelSelector : MonoBehaviour
 
         backBtn.onClick.AddListener(StateManager.ReturnHome);
         statsBtn.onClick.AddListener(ToggleLeaderboard);
+
+        for (int i = 0; i < transform.childCount; i++){
+            Button planetBtn = transform.GetChild(i).GetComponent<Button>();
+            // Create a local copy of i
+            int idx = i;
+            // Lambda function allows parameter to be passed
+            // a local copy has to be passed because when the lambda executes,
+            // the original variable points to it's final value.
+            planetBtn.onClick.AddListener(() => AttemptGoToPlanet(idx));
+        }
     }
 
 
     void LateUpdate(){
         for (int i = 0; i < transform.childCount; i++){
             Button planetBtn = transform.GetChild(i).GetComponent<Button>();
-            if (i > LevelManager.instance.GetIdxOfBestPlanet()){
-                // Disables button
-                planetBtn.onClick.RemoveAllListeners();
-                // Shows lock
-                planetBtn.transform.GetChild(2).gameObject.SetActive(true);
-            }
-            else{
-                // Lambda function allows parameter to be passed
-                planetBtn.onClick.AddListener(() => StateManager.GoToPlanet(LevelManager.instance.levels[i]));
+            if (i <= LevelManager.instance.GetIdxOfBestPlanet()){
                 // Hides lock
                 planetBtn.transform.GetChild(2).gameObject.SetActive(false);
             }
@@ -46,11 +48,21 @@ public class LevelSelector : MonoBehaviour
 
     }
 
-    
+    // Checks if the planet has been reached before sending player to planet
+    void AttemptGoToPlanet(int idx){
+        Debug.Log(idx + " | " + LevelManager.instance.GetIdxOfBestPlanet());
+        // The planet is a reached level
+        if (idx <= LevelManager.instance.GetIdxOfBestPlanet()){
+            Debug.Log("We outta here");
+            // Goes to planet
+            StateManager.GoToPlanet(LevelManager.instance.levels[idx]);
+        }
+    }
 
     // Turns on/off leaderboard
     private void ToggleLeaderboard(){
-        leaderboard.SetActive(!leaderboard.activeSelf);
+        StateManager.ChangeSceneByName("Statistics");
+        //leaderboard.SetActive(!leaderboard.activeSelf);
     }
 
 }

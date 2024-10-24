@@ -8,6 +8,7 @@ public class MainMenu : MonoBehaviour
 {
     private GameObject gm;
     private Button playBtn;
+    // Multiplayer button
     private Button mpBtn;
     private Button optionsBtn;
     private Button infoBtn;
@@ -16,7 +17,7 @@ public class MainMenu : MonoBehaviour
     void Start(){
         gm = GameObject.Find("GameManager");
         
-        // Gets children buttons
+        // Gets children buttons (Make sure order is correct!)
         playBtn = gameObject.transform.GetChild(0).GetComponent<Button>();
         mpBtn = gameObject.transform.GetChild(1).GetComponent<Button>();
         optionsBtn = gameObject.transform.GetChild(2).GetComponent<Button>();

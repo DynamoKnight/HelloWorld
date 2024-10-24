@@ -57,10 +57,10 @@ public class WinnerScreen : MonoBehaviour
         
     }
 
-    // Goes to the desired planet
+    // Goes to the map to select next planet
     public void NextLevel(){
         LevelManager.instance.UpdateStats();
-        stateManager.LoadNextScene();
+        stateManager.LoadMap();
     }
 
 }

@@ -14,13 +14,16 @@ public static class Inventory
     // A list of every prefab game object
     public static List<GameObject> Prefabs {get; set;}
     // Currency that saves
-    public static int Credits {get; set;} = 0;
+    public static double Credits {get; set;} = 0.00;
     // List of items(resources/weapons) and the number of them collected
     public static Dictionary<GameObject, int> Items {get; set;} = new();
     // Limits the size of the number of resources that can be collected
     public static int CarryingCapacity {get; set;} = 8;
     // The mission items across the entire game
     public static List<MissionItem> MissionItems {get; set;} = new();
+
+    // Based off of the best planet, the inventory of the traders
+    public static Dictionary<GameObject, int> TraderItems {get; set;} = new();
     
     // All resources are removed
     public static void ClearResources(){
@@ -98,14 +101,14 @@ public static class Inventory
 
     // Adds Credits
     // Returns if the credits was gained or not
-    public static bool CollectCredits(int number){
+    public static bool CollectCredits(double number){
         Credits += number;
         return true;
     }
 
     // Removes Credits
     // Returns if the credits was removed or not
-    public static bool LoseCredits(int number){
+    public static bool LoseCredits(double number){
         if (Credits >= number){
             Credits -= number;
             return true;
@@ -154,6 +157,18 @@ public static class Inventory
             }
         }
         return weapons;
+    }
+
+    // Adds an item to the traders inventory
+    public static void TraderCollect(GameObject gameObject, int count){
+        //GameObject prefab = GetPrefabFromObject(gameObject);
+        if (TraderItems.ContainsKey(gameObject)){
+            TraderItems[gameObject] += count;
+        }
+        // Initializes space for the object
+        else{
+            TraderItems[gameObject] = count;
+        }
     }
     
 }

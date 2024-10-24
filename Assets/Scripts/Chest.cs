@@ -5,6 +5,8 @@ using UnityEngine;
 public class Chest : Collectable
 {
     public Sprite emptyChest;
+    public Sprite closedChest;
+    
     // We should make a new class called TreasureChest
     [SerializeField] private int coinsAmount;
 

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 3d95ea5e11740af4aa82a14e28b32fd9
+guid: ad45f3539a5753341bab1d72079cbc81
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -34,7 +34,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -72,7 +72,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -123,13 +123,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: pxsun
+      name: PXplanets_0
       rect:
         serializedVersion: 2
-        x: 15
-        y: 879
-        width: 386
-        height: 386
+        x: 1
+        y: 55
+        width: 24
+        height: 24
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -137,20 +137,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cd9690ecab7003a4cb9af98ec0be42a4
-      internalID: -29521994
+      spriteID: 117ee9c1df1a52948866d7007c233709
+      internalID: -80690097
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pxmercurcy
+      name: PXplanets_1
       rect:
         serializedVersion: 2
-        x: 431
-        y: 879
-        width: 386
-        height: 386
+        x: 27
+        y: 55
+        width: 24
+        height: 24
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -158,20 +158,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 37aba46a27d753c46b7d34ead1713eba
-      internalID: 1761260918
+      spriteID: dbb3218011948c2448b7d21479f679dc
+      internalID: -1144132501
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pxvenus
+      name: PXplanets_2
       rect:
         serializedVersion: 2
-        x: 832
-        y: 879
-        width: 401
-        height: 386
+        x: 52
+        y: 55
+        width: 25
+        height: 24
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -179,20 +179,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 81c00d61d2f0ddd46bd80e7bfaf542da
-      internalID: -1326431020
+      spriteID: 58d47836c3856fb4d991794db49a54c0
+      internalID: -1658885313
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pxearth
+      name: PXplanets_3
       rect:
         serializedVersion: 2
-        x: 1263
-        y: 879
-        width: 386
-        height: 386
+        x: 79
+        y: 55
+        width: 24
+        height: 24
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -200,20 +200,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 272e3eb11d01df14f8b3a34d3c42e225
-      internalID: -1300809517
+      spriteID: fe9f3bca780b09f4ebb05f96ee6217b8
+      internalID: -509628532
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pxmars
+      name: PXplanets_4
       rect:
         serializedVersion: 2
-        x: 1679
-        y: 879
-        width: 386
-        height: 386
+        x: 105
+        y: 55
+        width: 24
+        height: 24
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -221,20 +221,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f8d1d2499fd02ec46a4485f3f25c83ec
-      internalID: 274713451
+      spriteID: 34adef929b89b27439a2256db6066cbd
+      internalID: -929650758
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pxjupiter
+      name: PXplanets_5
       rect:
         serializedVersion: 2
-        x: 15
-        y: 463
-        width: 386
-        height: 386
+        x: 1
+        y: 29
+        width: 24
+        height: 24
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -242,20 +242,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d480cf3657e8b6e41a38850e4cfeb4c1
-      internalID: 1931109165
+      spriteID: 9e7522d4578868c499e1227f8787bea6
+      internalID: -2000926947
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pxsaturn
+      name: PXplanets_6
       rect:
         serializedVersion: 2
-        x: 431
-        y: 463
-        width: 498
-        height: 386
+        x: 27
+        y: 29
+        width: 31
+        height: 24
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -263,20 +263,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7bc0a283732518d409767c53ca5ad332
-      internalID: 1938877184
+      spriteID: 737383ab2054e894c81f06326655539c
+      internalID: 1701441667
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pxuranus
+      name: PXplanets_7
       rect:
         serializedVersion: 2
-        x: 1263
-        y: 463
-        width: 386
-        height: 386
+        x: 79
+        y: 29
+        width: 24
+        height: 24
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -284,20 +284,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f74a077110f22d342a636e4b0588dd45
-      internalID: 233653144
+      spriteID: 3a22141a84aa23c4f8ab9f0d08f12379
+      internalID: -920104100
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pxneptune
+      name: PXplanets_8
       rect:
         serializedVersion: 2
-        x: 1679
-        y: 463
-        width: 386
-        height: 386
+        x: 105
+        y: 29
+        width: 24
+        height: 24
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -305,20 +305,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1ee05134cd5eb8541b712d46a2f1d939
-      internalID: -2081137162
+      spriteID: 4429277eb77b84c43a41da3e185208cf
+      internalID: -897766431
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pxpluto
+      name: PXplanets_9
       rect:
         serializedVersion: 2
-        x: 15
-        y: 47
-        width: 386
-        height: 386
+        x: 1
+        y: 3
+        width: 24
+        height: 24
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -326,20 +326,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3711761a250fd6f428cbb56ca2956ffd
-      internalID: 1051077837
+      spriteID: bc741f5fecd43ea409639ae7bc74fa9e
+      internalID: 1166747698
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pxmoon
+      name: PXplanets_10
       rect:
         serializedVersion: 2
-        x: 431
-        y: 47
-        width: 386
-        height: 386
+        x: 27
+        y: 3
+        width: 24
+        height: 24
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -347,8 +347,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c0d917a7a6e97a548b92f88f67ea824a
-      internalID: -2109800328
+      spriteID: 01c86873f0792864e994c2287aa1a79d
+      internalID: -1233103154
       vertices: []
       indices: 
       edges: []
@@ -364,17 +364,17 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      pxearth: -1300809517
-      pxjupiter: 1931109165
-      pxmars: 274713451
-      pxmercurcy: 1761260918
-      pxmoon: -2109800328
-      pxneptune: -2081137162
-      pxpluto: 1051077837
-      pxsaturn: 1938877184
-      pxsun: -29521994
-      pxuranus: 233653144
-      pxvenus: -1326431020
+      PXplanets_0: -80690097
+      PXplanets_1: -1144132501
+      PXplanets_10: -1233103154
+      PXplanets_2: -1658885313
+      PXplanets_3: -509628532
+      PXplanets_4: -929650758
+      PXplanets_5: -2000926947
+      PXplanets_6: 1701441667
+      PXplanets_7: -920104100
+      PXplanets_8: -897766431
+      PXplanets_9: 1166747698
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

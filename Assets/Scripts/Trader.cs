@@ -16,6 +16,8 @@ public class Trader : MonoBehaviour
     // The trade panel for trading
     [SerializeField] private GameObject tradePanel;
     private Button backBtn;
+    private Image avatarImage;
+    private TMP_Text nameText;
     // Buy/Sell refers to the player not the trader, so the player is buying from the buy panel
     private GameObject sellPanel;
     private GameObject buyPanel;
@@ -39,17 +41,22 @@ public class Trader : MonoBehaviour
 
         // Initializes everything in the trade panel (Make sure all the order is correct!)
         backBtn = tradePanel.transform.GetChild(1).GetComponent<Button>();
+        avatarImage = tradePanel.transform.GetChild(2).GetComponent<Image>();
+        nameText = tradePanel.transform.GetChild(2).GetChild(0).GetComponent<TMP_Text>();
         sellPanel = tradePanel.transform.GetChild(3).gameObject;
         buyPanel = tradePanel.transform.GetChild(4).gameObject;
         dialogueText = tradePanel.transform.GetChild(5).GetChild(0).GetComponent<TMP_Text>();
         optionButtons = tradePanel.transform.GetChild(6).gameObject;
 
         backBtn.onClick.AddListener(ToggleTradePanel);
+        // Sets the avatar to the same as the trader
+        avatarImage.color = gameObject.GetComponent<SpriteRenderer>().color;
+        nameText.text = PlayerStats.CurrentPlanet + " Trader";
+
         // Some reason it starts with elements
         sellItems.Clear();
         // Items to Sell
-        // The last child is the label
-        for (int c = 0; c < sellPanel.transform.childCount - 1; c++){
+        for (int c = 0; c < inventoryManager.missionItems.Count; c++){
             GameObject item = sellPanel.transform.GetChild(c).GetChild(0).gameObject;
             TMP_Text itemQuantity = item.transform.GetChild(0).GetComponent<TMP_Text>();
             Button sellButton = sellPanel.transform.GetChild(c).GetChild(1).GetComponent<Button>();
@@ -64,7 +71,7 @@ public class Trader : MonoBehaviour
             itemQuantity.text = missionItem.toCollect.ToString();
             SaleItem saleItem = sellItems[c];
             sellButton.onClick.AddListener(() => SellItem(saleItem));
-            costText.text = sellCosts[c].ToString();
+            costText.text = string.Format("{0:0.00}", sellCosts[c]);
         }
         // Items to Buy
         for (int c = 0; c < buyPanel.transform.childCount - 1; c++){
@@ -77,7 +84,7 @@ public class Trader : MonoBehaviour
             itemQuantity.text = buyItems[c].quantity.ToString();
             SaleItem saleItem = buyItems[c];
             buyButton.onClick.AddListener(() => BuyItem(saleItem));
-            costText.text = buyItems[c].cost.ToString();
+            costText.text = string.Format("{0:0.00}", buyItems[c].cost);
         }
     }
 
@@ -146,8 +153,22 @@ public class Trader : MonoBehaviour
             bool lost = Inventory.LoseItem(saleItem.gameObject, saleItem.quantity);
             if (lost){
                 Inventory.CollectCredits(saleItem.cost);
-                inventoryManager.AddToPlayer(saleItem.gameObject);
                 inventoryManager.SetInventory();
+                GameObject prefab = Inventory.GetPrefabFromObject(saleItem.gameObject);
+                // Adds the item to the inventory of the target trader
+                Inventory.TraderCollect(prefab, saleItem.quantity);
+                // Checks if the Trader has recieved enough mission items
+                for (int i = 0; i < inventoryManager.missionItems.Count; i++){
+                    // Checks if objects match by name to see if it is a mission item
+                    if (prefab.name.Contains(inventoryManager.missionItems[i].gameObject.name)){
+                        // Checks if all quantities of that mission item is collected
+                        if (Inventory.TraderItems[prefab] >= inventoryManager.missionItems[i].toCollect){
+                            inventoryManager.SetAsDone(i);
+                        }
+                    }
+                }
+                // Checks if all mission items have been sold to the trader
+                inventoryManager.CheckIfDone();
                 // Item was sold
                 return true;
             }

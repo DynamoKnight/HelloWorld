@@ -9,8 +9,11 @@ public class CoopGun : Gun
     private float rotationSpeed = 200f;
 
     protected override void Start(){
-        WeaponStart();
+        // Doesnt use WeaponStart
+        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+
         gameObject.name = "Laser Blaster";
+        attackSound = GameObject.Find("Blaster").GetComponent<AudioSource>();
         rb = gameObject.GetComponent<Rigidbody2D>();
     }
 

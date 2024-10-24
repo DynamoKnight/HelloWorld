@@ -32,7 +32,7 @@ public class Enemy : MonoBehaviour
     // The index of what drops it can drop
     private List<int> availableIndexes;
     // The chance out of 10 to drop an item when killed
-    protected int dropChance = 7;
+    protected int dropChance = 8;
     public bool hasDrops = true;
 
     // Audio
@@ -71,7 +71,7 @@ public class Enemy : MonoBehaviour
                 SetTarget();
             }
         }
-        hurt.volume = GameObject.FindGameObjectWithTag("VolumeManager").GetComponent<VolumeManager>().SFXVolumeMultplier/10;
+        hurt.volume = 0.4f;//GameObject.FindGameObjectWithTag("VolumeManager").GetComponent<VolumeManager>().SFXVolumeMultplier/10;
     }
 
     protected virtual void FixedUpdate(){
@@ -160,7 +160,7 @@ public class Enemy : MonoBehaviour
 
     // Returns a needed drop
     public GameObject GetDrop(){
-        if (hasDrops == false || drops == null){
+        if (hasDrops == false || drops == null || drops.Count() == 0){
             return null;
         }
         // The drop gameobject

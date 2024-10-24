@@ -65,11 +65,13 @@ public class GlobalManager : MonoBehaviour
         GameObject enemiesDefeatedText = statsPanel.transform.GetChild(1).GetChild(0).gameObject;
         GameObject planetsDiscoveredText = statsPanel.transform.GetChild(2).GetChild(0).gameObject;
         GameObject itemsCollectedText = statsPanel.transform.GetChild(3).GetChild(0).gameObject;
+        GameObject debtRemainingText = statsPanel.transform.GetChild(4).GetChild(0).gameObject;
 
         timePlayedText.GetComponent<TMP_Text>().text = FormatTime(timePlayed);
         enemiesDefeatedText.GetComponent<TMP_Text>().text = enemiesDefeated.ToString();
         planetsDiscoveredText.GetComponent<TMP_Text>().text = planetsDiscovered.ToString();
         itemsCollectedText.GetComponent<TMP_Text>().text = itemsCollected.ToString();
+        debtRemainingText.GetComponent<TMP_Text>().text = string.Format("{0:0.00}", PlayerStats.Debt - Inventory.Credits);
     }
 
     // Rewrites for better format

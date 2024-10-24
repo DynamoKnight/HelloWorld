@@ -44,7 +44,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Jupiter.unity
     guid: 5a021b9fdfd985b41852c4222bf6ddc2
-  - enabled: 0
+  - enabled: 1
+    path: Assets/Scenes/Statistics.unity
+    guid: ac10e1db74580c24ca0593082aa121d4
+  - enabled: 1
     path: Assets/Scenes/Loading.unity
     guid: 0c8e50e7ed0146f4280fb1e957463a36
   m_configObjects: {}

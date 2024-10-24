@@ -12,6 +12,9 @@ public static class PlayerStats
     // The totals
     public static int EnemiesDefeated {get; set;} = 0;
     public static int TotalViolations {get; set;} = 0;
+    public static double Debt {get; set;} = 5000000.00;
+
+    public static Dictionary<List<int>, Dictionary<GameObject, int>> CurrentPlanetHash {get; set; }= new();
 
     // Global data
     public static string CurrentPlanet {get; set;} = "Pluto";

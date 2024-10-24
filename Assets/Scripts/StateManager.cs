@@ -8,15 +8,14 @@ using UnityEngine.UI;
 public class StateManager : MonoBehaviour
 {
     // The length of the cutscene
-    public float cutsceneTime;
     public float loadingTime = 10f;
     public string nextScene;
     // Tutorial page
     public GameObject infoScreen;
     private Button startBtn;
 
-    [SerializeField] private TimelineManager timelineManager;
-    private bool cutsceneEnded = false;
+    private CutsceneManager cm;
+    private bool hasEntered = false;
 
     // Loads the Current Scene
     public static void ReloadCurrentScene(){
@@ -45,6 +44,10 @@ public class StateManager : MonoBehaviour
         ChangeSceneByName(nextScene);
     }
 
+    public void LoadMap(){
+        ChangeSceneByName("Loading");
+    }
+
     // Goes back home without saving progress
     public static void ReturnHome(){
         PlayerStats.ResetGame();
@@ -71,35 +74,31 @@ public class StateManager : MonoBehaviour
 
     void Update(){
         if (!LevelManager.instance.isPaused){
-            // Time until cutscene ends
-            if (SceneManager.GetActiveScene().name == "Cutscene"){
-                if (timelineManager.GetTime() >= cutsceneTime && !cutsceneEnded){
-                    cutsceneEnded = true;
-                    // Once the cutscene ends, the scene changes
-                    infoScreen.SetActive(true);
-                    startBtn = infoScreen.transform.GetChild(0).GetComponent<Button>();
-                    startBtn.onClick.AddListener(() => ChangeSceneByName(nextScene));
+            // Cutscenes
+            GameObject cm_obj = GameObject.Find("Cutscene");
+            if (cm_obj){
+                cm = cm_obj.GetComponent<CutsceneManager>();
+                // The first cutscene in the game
+                if (SceneManager.GetActiveScene().name == "Cutscene"){
+                        if (cm.IsCutsceneEnded() && !hasEntered){
+                            // So the if statement wont return here
+                            hasEntered = true;
+                            // Once the cutscene ends, the tutorial screen is shown
+                            infoScreen.SetActive(true);
+                            startBtn = infoScreen.transform.GetChild(0).GetComponent<Button>();
+                            startBtn.onClick.AddListener(() => ChangeSceneByName(nextScene));
+                        }
+                }
+                if (SceneManager.GetActiveScene().name == "NeptuneCutscene"){
+                    if (cm.IsCutsceneEnded()){
+                        // So the if statement wont return here
+                        hasEntered = true;
+                        // Once the cutscene ends, the scene changes
+                        ChangeSceneByName(nextScene);
+                    }
                 }
             }
-            if (SceneManager.GetActiveScene().name == "NeptuneCutscene"){
-                if (timelineManager.GetTime() >= cutsceneTime && !cutsceneEnded){
-                    cutsceneEnded = true;
-                    // Once the cutscene ends, the scene changes
-                    ChangeSceneByName(nextScene);
-                }
-            }
-            // Time until cutscene ends
-            /*
-            if (SceneManager.GetActiveScene().name == "Loading"){
-                loadingTime -= Time.deltaTime;
-                // Once the cutscene ends, the scene changes
-                if(loadingTime <= 0){
-                    loadingTime = 10f;
-                    ChangeSceneByName(nextScene);
-                }
-            }*/
         }
-        
     }
 
 }

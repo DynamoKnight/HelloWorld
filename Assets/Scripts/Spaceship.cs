@@ -50,7 +50,7 @@ public class Spaceship : MonoBehaviour
             float distance = Vector2.Distance(player.GetComponent<Rigidbody2D>().position, gameObject.GetComponent<Rigidbody2D>().position);
 
             // Check if the player is within the activation distance
-            if (distance <= activationDistance && inventoryManager.missionItemsCollected){
+            if (distance <= activationDistance){
                 if(!exited){
                     // Enable the button
                     leaveMenu.SetActive(true);
@@ -65,7 +65,7 @@ public class Spaceship : MonoBehaviour
         }
     }
 
-    // Sets a flag that the user clicked the backBtn
+    // Sets a flag that the user clicked the backBtn on the leave menu
     public void LeaveScreen(){
         leaveMenu.SetActive(false);
         exited = true;

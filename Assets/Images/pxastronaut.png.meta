@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: aa6adf385e67280439fbfee6071a552e
+guid: f7844073e84f5b14dbe2fdb1ba4d68df
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -34,7 +34,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 19
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -123,13 +123,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: pxastronaut_0
+      name: PXastronaut_0
       rect:
         serializedVersion: 2
-        x: 56
-        y: 768
-        width: 152
-        height: 232
+        x: 7
+        y: 96
+        width: 19
+        height: 29
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -137,209 +137,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 74ed1a134c1cb6e479af60bad3462a9c
-      internalID: 78560585
+      spriteID: 96a649eebf744d249a54cb3bebbaf422
+      internalID: 433050061
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pxastronaut_1
-      rect:
-        serializedVersion: 2
-        x: 320
-        y: 768
-        width: 152
-        height: 232
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f3fca6fec99df4147aeb6a311cbf2fc7
-      internalID: 558352309
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: pxastronaut_2
-      rect:
-        serializedVersion: 2
-        x: 584
-        y: 768
-        width: 152
-        height: 232
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 94fc7ea61b79cdc4ba5ca15de6b6a66f
-      internalID: 1738417533
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: pxastronaut_3
-      rect:
-        serializedVersion: 2
-        x: 56
-        y: 504
-        width: 152
-        height: 240
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c9f2f4c78fc8a9e48b30b0e28bebccfe
-      internalID: -1197270732
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: pxastronaut_4
-      rect:
-        serializedVersion: 2
-        x: 320
-        y: 504
-        width: 152
-        height: 232
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3cae6bf55570eae43b0f584103b85421
-      internalID: 1576225621
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: pxastronaut_5
-      rect:
-        serializedVersion: 2
-        x: 584
-        y: 504
-        width: 152
-        height: 232
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f8b4821b45b44ef4c9e56ad0cb317c38
-      internalID: -1767224969
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: pxastronaut_6
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 256
-        width: 192
-        height: 224
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5b4a3f414f324584faf76117d8840218
-      internalID: -2065980837
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: pxastronaut_7
-      rect:
-        serializedVersion: 2
-        x: 320
-        y: 256
-        width: 144
-        height: 232
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 77d84c64d5bd56c45a2c7c71f2c5d202
-      internalID: 668265872
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: pxastronaut_8
-      rect:
-        serializedVersion: 2
-        x: 544
-        y: 256
-        width: 176
-        height: 216
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 840cf657ade01c84795ff6c4658104fa
-      internalID: 1604223087
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: pxastronaut_9
-      rect:
-        serializedVersion: 2
-        x: 834
-        y: 256
-        width: 144
-        height: 224
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0334a1b9ef600854e8d1d12b54889645
-      internalID: 105219869
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: pxastronaut_10
+      name: PXastronaut_1
       rect:
         serializedVersion: 2
         x: 40
-        y: 8
-        width: 144
-        height: 224
+        y: 96
+        width: 19
+        height: 29
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -347,20 +158,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7d1f1bbbc5bbdbd4d9a5912cc0839a7d
-      internalID: -1171059758
+      spriteID: 0beff080780d5b044b74cebbef5e99ea
+      internalID: -670454963
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pxastronaut_11
+      name: PXastronaut_2
       rect:
         serializedVersion: 2
-        x: 298
-        y: 8
-        width: 176
-        height: 224
+        x: 73
+        y: 96
+        width: 19
+        height: 29
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -368,20 +179,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f818cc6e20b077548ab4fc7f6b74d7db
-      internalID: 149511575
+      spriteID: ab25c9ea9ca31744fa963083cd6767e2
+      internalID: 302490316
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pxastronaut_12
+      name: PXastronaut_3
       rect:
         serializedVersion: 2
-        x: 552
-        y: 8
-        width: 144
-        height: 232
+        x: 7
+        y: 63
+        width: 19
+        height: 30
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -389,20 +200,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8ead031f5f3e8024d9ba24934d2fb0a3
-      internalID: 1102551008
+      spriteID: ecd7b521514a8e346b5d2fa1272eac9e
+      internalID: -1334666865
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pxastronaut_13
+      name: PXastronaut_4
       rect:
         serializedVersion: 2
-        x: 792
-        y: 8
-        width: 192
-        height: 224
+        x: 40
+        y: 63
+        width: 19
+        height: 29
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -410,8 +221,197 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3897d1d84fea9e044b5e84c0b4456ab0
-      internalID: 967657324
+      spriteID: 52234fa2b81dab04a9270786202dc5ce
+      internalID: -1279559142
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PXastronaut_5
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 63
+        width: 19
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 717eeffc1979b0d4a9ac2ac8feeb10c1
+      internalID: 351021991
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PXastronaut_6
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 32
+        width: 18
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0068a00fa896e5944b7f687bd5d67670
+      internalID: -1667537565
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PXastronaut_7
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 32
+        width: 24
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1a9ac7612c54a7e4e90d707042749c8d
+      internalID: -1087335619
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PXastronaut_8
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 32
+        width: 18
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0f7d6d48ee41b97438be26d516a19070
+      internalID: 483891168
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PXastronaut_9
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 32
+        width: 22
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fbdb6802792a2b04b8a8c47f5bb1c62f
+      internalID: -305526938
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PXastronaut_10
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 1
+        width: 18
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3693fd4fd19378f41993ef300188532f
+      internalID: 358735863
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PXastronaut_11
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 1
+        width: 22
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4ad15de4f643b824d8b1738056794cfa
+      internalID: 2107468591
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PXastronaut_12
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 1
+        width: 18
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2dd29bd6c1459d740b965f0a34ce702d
+      internalID: 1428009333
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PXastronaut_13
+      rect:
+        serializedVersion: 2
+        x: 99
+        y: 1
+        width: 24
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c5f52191104a99342be3f7668b0a9345
+      internalID: 595213447
       vertices: []
       indices: 
       edges: []
@@ -427,20 +427,20 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      pxastronaut_0: 78560585
-      pxastronaut_1: 558352309
-      pxastronaut_10: -1171059758
-      pxastronaut_11: 149511575
-      pxastronaut_12: 1102551008
-      pxastronaut_13: 967657324
-      pxastronaut_2: 1738417533
-      pxastronaut_3: -1197270732
-      pxastronaut_4: 1576225621
-      pxastronaut_5: -1767224969
-      pxastronaut_6: -2065980837
-      pxastronaut_7: 668265872
-      pxastronaut_8: 1604223087
-      pxastronaut_9: 105219869
+      PXastronaut_0: 433050061
+      PXastronaut_1: -670454963
+      PXastronaut_10: 358735863
+      PXastronaut_11: 2107468591
+      PXastronaut_12: 1428009333
+      PXastronaut_13: 595213447
+      PXastronaut_2: 302490316
+      PXastronaut_3: -1334666865
+      PXastronaut_4: -1279559142
+      PXastronaut_5: 351021991
+      PXastronaut_6: -1667537565
+      PXastronaut_7: -1087335619
+      PXastronaut_8: 483891168
+      PXastronaut_9: -305526938
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

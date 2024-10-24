@@ -63,21 +63,10 @@ public class InventoryManager : MonoBehaviour
         cooldown = 0.2f;
         time = Time.time;
 
-        // Finds all prefabs
-        List<GameObject> prefabs = new();
-        // Gets objects of type prefab
-        string[] guids = AssetDatabase.FindAssets("t:Prefab");
-        // A GUID is an identifier for assets
-        foreach (string guid in guids){
-            // Converts all GUIDS to paths to the assets
-            string path = AssetDatabase.GUIDToAssetPath(guid);
-            GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(path);
-            if (prefab != null){
-                prefabs.Add(prefab);
-            }
-        }
+        // Loads all prefabs from the "Resources/Prefabs" folder and its subfolders
+        GameObject[] loadedPrefabs = Resources.LoadAll<GameObject>("Prefabs");
         // Stores in the Inventory class
-        Inventory.Prefabs = prefabs;
+        Inventory.Prefabs = new List<GameObject>(loadedPrefabs);
 
     }
 
@@ -168,7 +157,7 @@ public class InventoryManager : MonoBehaviour
         }
         // Updates the number of credits seen
         TMP_Text creditsText = currencyText.transform.GetChild(0).GetComponent<TMP_Text>();
-        creditsText.text = Inventory.Credits.ToString();
+        creditsText.text = string.Format("{0:0.00}", Inventory.Credits);
 
     }
 
@@ -226,6 +215,8 @@ public class InventoryManager : MonoBehaviour
     
     // Everything is reset in terms of what is displayed on the inventory on the screen and replaces them to their defaults 
     public void Reset(){
+        // Resets for the new trader
+        Inventory.TraderItems.Clear();
         for (int i = 0; i < missionItems.Count; i++){
             // Remembers the index UNUSED
             missionItems[i].SetIndex(i);
@@ -315,23 +306,21 @@ public class InventoryManager : MonoBehaviour
                 if (collected){
                     // Updates the mission bar
                     AddOneToItemCount(i);
-                    // Checks if all quantities of that mission item is collected
-                    if (Inventory.Items[item] >= missionItems[i].toCollect){
-                        SetAsDone(i);
+                    // Indicates that they should go to the trader
+                    if (missionItems[i].toCollect == Inventory.Items[item]){
+                        //
                     }
                 }
                 // If it could not collect then the inventory is full
             }
             // If the object is not a mission item, it is still collected
         }
-        // Checks if all items are collected
-        CheckIfDone();
     }
 
     // Checks if all mission items are collected by iterating through each mission item. 
     public void CheckIfDone(){
-        foreach(MissionItem missionItem in missionItems){
-            if(!missionItem.isCollected){
+        foreach (MissionItem missionItem in missionItems){
+            if (!missionItem.isCollected){
                 // If one item isn't enough, then not all items are collected
                 return;
             }
@@ -358,6 +347,11 @@ public class InventoryManager : MonoBehaviour
             SetAsDone(i);
         }
         SetDone();
+    }
+
+    [ContextMenu("Get Credits")]
+    public void GetRich(){
+        Inventory.CollectCredits(10000);
     }
 
     // Finds weapon by name UNUSED
